@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Food Decider - Google Places Test</title>
+    <script src ="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjB0z2sG-kIlF4cnQiLwF2q78SE1QjVKQ&libraries=places"></script>
+    <link rel="stylesheet" type="text/css" href="google_places_api_style.css">
+    <script src="google_places_api.js"></script>
+</head>
+<body>
+<nav id = 'navbar' class = "navbar navbar-default navbar-fixed-top">
+    <div class = 'container-fluid'>
+        <div class = 'navbar-header'>
+            <button class = "navbar-toggle" data-toggle = "collapse" data-target = ".navbar-default-collapse">
+                <span class = "icon-bar"></span>
+                <span class = "icon-bar"></span>
+                <span class = "icon-bar"></span>
+            </button>
+            <a class = 'navbar-brand' id = 'brand'>Decider</a>
+        </div>
+        <div class = 'navbar-collapse collapse navbar-default-collapse'>
+            <ul class = 'nav navbar-nav navbar-right'>
+                <li>Login</li>
+                <li>Settings</li>
+            </ul>
+        </div>
+        <div id="location">User Location: </div>
+        <div class="search box">
+            Search Term: <input type="text" id="searchParam" placeholder="Boobs"><br><br>
+            Search Radius (in Meters): <input type="number" id="searchRadius" placeholder="35D"><br>
+            <button type="button" id="bt_submit" onclick="getLocation()">Submit</button><br>
+
+
+        </div>
+        <div class="map" id="map">
+
+        </div>
+    </div>
+</nav>
+<main>
+
+</main>
+</body>
+</html>
