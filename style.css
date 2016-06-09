@@ -6,8 +6,11 @@
     font-family: 'Open Sans'
 }
 
-body {
+html {
     height: 100%;
+}
+
+body {
     background: linear-gradient( red, transparent), linear-gradient( 90deg, #dfc728, transparent), linear-gradient( -90deg, coral, transparent);
     background-blend-mode: screen;
 }
@@ -16,27 +19,38 @@ body {
     font-size: 15vh;
     color: white;
     text-shadow: 0 5px 8px black;
-    padding: 3vh 0 3vh 0;
+    padding: 1vh 0 3vh 0;
     font-family: 'Pacifico';
 }
 
 #description {
     color: white;
-    text-shadow: 0 2px 5px black;
+    text-shadow: 0 1px 1px black;
 }
 
-html {
-    height: 100%;
 
+#image-carousel {
+    border: 1px solid white;
+    height: 50vh;
+    transform: translate(0%, 50%);
+    background-color: rgba(255,255,255,0.5);
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 750px) {
     #lunch_heading {
-        font-size: 10vh;
+        font-size: 5vh;
+        padding: 0;
     }
 
     #description > * {
         font-size: 2.5vh;
+    }
+
+    #image-carousel {
+        border: 1px solid white;
+        height: 25vh;
+        transform: translate(0%, 50%);
+        background-color: rgba(255,255,255,0.5);
     }
 }
 
