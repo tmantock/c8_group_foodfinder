@@ -28,12 +28,17 @@ body {
     text-shadow: 0 1px 1px black;
 }
 
-
 #image-carousel {
-    border: 1px solid white;
     height: 50vh;
     transform: translate(0%, 50%);
     background-color: rgba(255,255,255,0.5);
+}
+
+#result-div{
+    height: 50vh;
+    transform: translate(0%, 50%);
+    background-color: rgba(0,0,0,0.5);
+
 }
 
 @media screen and (max-width: 750px) {
@@ -47,7 +52,6 @@ body {
     }
 
     #image-carousel {
-        border: 1px solid white;
         height: 25vh;
         transform: translate(0%, 50%);
         background-color: rgba(255,255,255,0.5);
