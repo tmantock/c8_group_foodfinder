@@ -1,0 +1,43 @@
+* {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans'
+}
+
+body {
+    height: 100%;
+    background: linear-gradient( red, transparent), linear-gradient( 90deg, #dfc728, transparent), linear-gradient( -90deg, coral, transparent);
+    background-blend-mode: screen;
+}
+
+#lunch_heading {
+    font-size: 15vh;
+    color: white;
+    text-shadow: 0 5px 8px black;
+    padding: 3vh 0 3vh 0;
+    font-family: 'Pacifico';
+}
+
+#description {
+    color: white;
+    text-shadow: 0 2px 5px black;
+}
+
+html {
+    height: 100%;
+
+}
+
+@media screen and (max-width: 1024px) {
+    #lunch_heading {
+        font-size: 10vh;
+    }
+
+    #description > * {
+        font-size: 2.5vh;
+    }
+}
+
+
