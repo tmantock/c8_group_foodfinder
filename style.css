@@ -11,12 +11,13 @@ html {
 }
 
 body {
-    background: linear-gradient( red, transparent), linear-gradient( 90deg, #dfc728, transparent), linear-gradient( -90deg, coral, transparent);
-    background-blend-mode: screen;
+    background-color: #c90000;
+    /*background: linear-gradient( red, transparent), linear-gradient( 90deg, #dfc728, transparent), linear-gradient( -90deg, coral, transparent);*/
+    /*background-blend-mode: screen;*/
 }
 
 #lunch_heading {
-    font-size: 15vh;
+    font-size: 12vh;
     color: white;
     text-shadow: 0 5px 8px black;
     padding: 1vh 0 3vh 0;
@@ -35,10 +36,10 @@ body {
 }
 
 #result-div{
-    height: 50vh;
-    transform: translate(0%, 50%);
-    background-color: rgba(0,0,0,0.5);
-
+    width: 93%;
+    height: 84vh;
+    transform: translate(4%, 13%);
+    background-color: rgba(0,0,0,0.25);
 }
 
 @media screen and (max-width: 750px) {
@@ -55,6 +56,13 @@ body {
         height: 25vh;
         transform: translate(0%, 50%);
         background-color: rgba(255,255,255,0.5);
+    }
+
+    #result-div {
+        width: 93%;
+        height: 84vh;
+        transform: translate(4%, 13%);
+        background-color: rgba(0,0,0,0.25);
     }
 }
 
