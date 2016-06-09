@@ -1,0 +1,45 @@
+#jumbo_header {
+  text-align: center;
+  margin-top: 2vh;
+}
+
+
+.buttonHolder {
+  margin: 0 auto;
+}
+
+.button{
+  background-image: -webkit-linear-gradient(top, #f4f1ee, #fff);
+  background-image: linear-gradient(top, #f4f1ee, #fff);
+  border-radius: 50%;
+  box-shadow: 0px 8px 10px 0px rgba(0, 0, 0, .3), inset 0px 4px 1px 1px white, inset 0px -3px 1px 1px rgba(204,198,197,.5);
+  height: 20vh;
+  margin: 0 auto;
+  position: relative;
+  width: 20vh;
+  -webkit-transition: all .1s linear;
+  transition: all .1s linear;
+}
+
+.button:hover{
+  cursor: pointer;;
+}
+
+.button:active{
+  background-image: -webkit-linear-gradient(top, #efedec, #f7f4f4);
+  background-image: linear-gradient(top, #efedec, #f7f4f4);
+  box-shadow: 0 3px 5px 0 rgba(0,0,0,.4), inset 0px -3px 1px 1px rgba(204,198,197,.5);
+  cursor: pointer;
+}
+
+.btn_svg {
+  color: #bdb5b4;
+  opacity: .3;
+  transform: translate(50%, 55%);
+  width: 50%;
+  height: auto;
+}
+
+.button:active > .btn_svg {
+  opacity: .4;
+}
