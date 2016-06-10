@@ -12,7 +12,7 @@ html {
 
 body {
     background-color: #c90000;
-    /*background: linear-gradient( red, transparent), linear-gradient( 90deg, #dfc728, transparent), linear-gradient( -90deg, coral, transparent);*/
+    /*background: linear-gradient( #81b2c9, transparent), linear-gradient( 90deg, #39d5a3, transparent), linear-gradient( -90deg, #e44c97, transparent);*/
     /*background-blend-mode: screen;*/
 }
 
@@ -36,16 +36,46 @@ body {
 }
 
 #result-div{
-    width: 93%;
-    height: 84vh;
-    transform: translate(4%, 13%);
-    background-color: rgba(0,0,0,0.25);
+    width: 94%;
+    height: 76vh;
+    transform: translate(3%, 25%);
+    background-color: rgba(0,0,0,0.33);
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px  12px rgba(0,0,0,0.22);
+    color: white;
+    text-shadow: 0 1px 3px black;
+}
+.animate {
+    transition: all 0.1s;
+    -webkit-transition: all 0.1s;
 }
 
-@media screen and (max-width: 750px) {
+.action-button {
+    position: relative;
+    padding: 10px 35px;
+    margin: 0px 10px 10px 0px;
+    border-radius: 5px;
+    font-family: 'Pacifico';
+    font-size: 25px;
+    color: #FFF;
+    text-decoration: none;
+}
+.red {
+    background-color: red;
+    border-bottom: 5px solid #ce0010;
+    text-shadow: 0px 2px 3px black;
+}
+.action-button:active {
+    transform: translate(0px,5px);
+    -webkit-transform: translate(0px,5px);
+    border-bottom: 1px solid;
+}
+
+
+@media screen and (max-width: 800px) {
     #lunch_heading {
         font-size: 5vh;
         padding: 0;
+        text-shadow: 0 3px 5px black;
     }
 
     #description > * {
@@ -62,8 +92,53 @@ body {
         width: 93%;
         height: 84vh;
         transform: translate(4%, 13%);
-        background-color: rgba(0,0,0,0.25);
+        background-color: rgba(0,0,0,0.33);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     }
-}
 
+    #image-holder {
+        height: 25%;
+        width: 93%;
+        transform: translate(4%,9%);
+        background-color: rgba(0,0,0,0.50);
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    }
+
+    #info-div {
+        background-color: rgba(0,0,0,0.50);
+        height: 69%;
+        width: 93%;
+        transform: translate(4%,7%);
+    }
+
+    .animate {
+        transition: all 0.1s;
+        -webkit-transition: all 0.1s;
+    }
+
+    .action-button {
+        position: absolute;
+        padding: 10px 35px;
+        margin: 0px 10px 10px 0px;
+        border-radius: 5px;
+        font-family: 'Pacifico';
+        font-size: 25px;
+        color: #FFF;
+        text-decoration: none;
+        bottom: 0;
+        left: 30%;
+    }
+
+    .red {
+        background-color: red;
+        border-bottom: 5px solid #ce0010;
+        text-shadow: 0px 2px 3px #3b3b3b;
+    }
+    .action-button:active {
+        transform: translate(0px,5px);
+        -webkit-transform: translate(0px,5px);
+        border-bottom: 1px solid;
+    }
+
+}
 
