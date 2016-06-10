@@ -11,6 +11,7 @@
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Pacifico">
   <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans">
   <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="test.js"></script>
 </head>
 <h1 id="lunch_heading" class="col-xs-12">What's For Lunch?</h1>
 
@@ -22,19 +23,19 @@
   </div>
   <div id="info-div">
   <!-- Restaurants Name -->
-  <h3>Bob's Burgers</h3>
+  <h3 id="restaurant-name">Bob's Burgers</h3>
   <!-- Short Description of location -->
-  <p>Short Description of location</p>
+  <p>Juicy burgers and great service!</p>
   <!-- Restaurant's ETA and Distance-->
     <div class="restaurant-info">
       <i class="fa fa-car fa-2x" aria-hidden="true"></i>
       <p>Distance</p>
-      <p id="distance">2.3 mi.</p>
+      <p id="distance">2.3 mi</p>
     </div>
     <div class="restaurant-info">
       <i class="fa fa-clock-o fa-2x" aria-hidden="true"></i>
       <p>ETA</p>
-      <p id="eta">14 min.</p>
+      <p id="eta">14 min</p>
     </div>
   <!-- Restaurant's Rating -->
     <div class="restaurant-info">
@@ -48,7 +49,7 @@
       <p>Price</p>
       <p id="price">$$</p>
     </div>
-  <button type="button" class="action-button shadow animate red">More Info</button>
+  <button type="button" id="more-info">More Info</button>
 
   <!-- Let's Go Navigation button -->
   <!--<button type = "button" class="action-button shadow animate red">Let's GO!</button>-->
