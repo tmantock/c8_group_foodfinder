@@ -204,6 +204,7 @@ button:focus {
         border: 1px solid black;
         width: 25%;
         height: 14%;
+        padding: 3px;
     }
 
     .info-aside {
