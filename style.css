@@ -94,9 +94,15 @@ button:focus {
     }
 
     #image-carousel {
-        height: 25vh;
-        transform: translate(0%, 50%);
-        background-color: rgba(255,255,255,0.5);
+        height: 35%;
+        width: 93%;
+        overflow: hidden;
+        transform: translate(4%,-27%);
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    }
+
+    #carousel-images  {
+        height: 100%;
     }
 
     #result-div {
@@ -165,8 +171,8 @@ button:focus {
         font-size: 25px;
         color: #FFF;
         text-decoration: none;
-        bottom: 7px;
-        left: 30%;
+        bottom: 1px;
+        left: 23%;
     }
 
     .red {
