@@ -1,15 +1,19 @@
-var addressFromDB = "9081 Irvine Center Drive, CA";
+var from;
+var to;
+
+var addressFromDB = "9080 Irvine Center Drive, CA";
+
 var userAgent;
 function userAgent() {
     userAgent = "User-agent header sent: " + navigator.userAgent;
     console.log("user-agent = ", userAgent);
 }
 function calculateRoute(from, to) {
-    // Center initialized to fixed location
+    // Center initialized to fixed location - D.C
     var to = addressFromDB;
     var locationOptions = {
         zoom: 10,
-        center: new google.maps.LatLng(38.89, -77.03),
+        center: new google.maps.LatLng(38.89, -77.03),  //WA DC
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     // Draw the map to DOM
@@ -22,8 +26,11 @@ function calculateRoute(from, to) {
         travelMode: google.maps.DirectionsTravelMode.DRIVING,
         unitSystem: google.maps.UnitSystem.IMPERIAL
     };
-    console.log("directionsRequest.origin ",directionsRequest.origin);
-    console.log("directionsRequest.destination ",directionsRequest.destination);
+
+    from = directionsRequest.origin;
+    console.log("directionsRequest.origin = from = ", from);
+    to = directionsRequest.destination;
+    console.log("directionsRequest.destination = to = ",to);
     //use the route method of directionsService to run the request
     directionsService.route(
         directionsRequest,
@@ -40,7 +47,39 @@ function calculateRoute(from, to) {
                 $("#error").append("There is no help for where you are, give it up<br />");
         }
     );
-}
+    var service = new google.maps.DistanceMatrixService();
+    service.getDistanceMatrix(
+        {
+            origins: [from],
+            destinations: [to],
+            travelMode: google.maps.TravelMode.DRIVING,
+            //transitOptions: TransitOptions,
+            //drivingOptions: DrivingOptions,
+            unitSystem: google.maps.UnitSystem.IMPERIAL,
+            avoidHighways: false,
+            avoidTolls: true
+        }, callback);
+
+    function callback(response, status) {
+        if (status == google.maps.DistanceMatrixStatus.OK) {
+            var origins = response.originAddresses;
+            var destinations = response.destinationAddresses;
+            for (var i = 0; i < origins.length; i++) {
+                var results = response.rows[i].elements;
+                for (var j = 0; j < results.length; j++) {
+                    var element = results[j];
+                    var distance = element.distance.text;
+                    var duration = element.duration.text;
+                    var from = origins[i];
+                    var to = destinations[j];
+                    console.log("element.duration.text", duration);
+                    $("#error").append("ETA: " + "element.duration.text" + duration + "<br />");
+                }
+            }
+        }
+    }
+
+}//calculate route()
 
 $(document).ready(function() {
 
@@ -60,8 +99,9 @@ $(document).ready(function() {
                             $("#" + addressId).val(results[0].formatted_address);
                         else
                             $("#error").append("Unable to retrieve your address<br />");
+                        console.log("$(addressId).val(results[0] = ",$("#" + addressId).val(results[0]));
                     });
-            console.log("$(addressId).val(results[0] = ",$("#" + addressId).val(results[0]));
+
             },
             function(positionError){
                 $("#error").append("Error: " + positionError.message + "<br />");
@@ -71,6 +111,8 @@ $(document).ready(function() {
                 timeout: 2 * 1000
             });
     });
+
+
 
     $("#calculate-route").submit(function(event) {
         event.preventDefault();
