@@ -107,10 +107,10 @@ button:focus {
 
     #result-div {
         width: 93%;
-        height: 84vh;
-        transform: translate(4%, 13%);
+        height: 87vh;
+        transform: translate(4%, 12%);
         background-color: white;
-        /*background-color: rgba(0,0,0,0.33);*/
+        /* background-color: rgba(0,0,0,0.33); */
         box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
     }
 
@@ -133,9 +133,9 @@ button:focus {
 
     #info-div {
         background-color: rgba(0,0,0,0.50);
-        height: 56%;
+        height: 60%;
         width: 93%;
-        transform: translate(4%,-20%);
+        transform: translate(4%,-19%);
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }
 
@@ -201,16 +201,33 @@ button:focus {
 
     .restaurant-info-back {
         float: left;
-        /*border: 1px solid black;*/
+        border: 1px solid black;
         width: 25%;
         height: 14%;
     }
 
     .info-aside {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         float: right;
-        /*border: 1px solid black;*/
+        border: 1px solid black;
         width: 75%;
         height: 14%;
+    }
+
+    .small-info-aside {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        float: left;
+        border: 1px solid black;
+        width: 25%;
+        height: 14%;
+    }
+
+    #restaurant-url{
+        color: white;
     }
 }
 
