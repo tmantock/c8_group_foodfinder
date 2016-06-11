@@ -44,7 +44,7 @@
 	$client_secret = FOURSQUARE_SECRET_ID;
   //declare new foursquare class with client key and client secret
 	$foursquare = new FoursquareApi($client_key, $client_secret);
-	// Searching for venues nearby Montreal, Quebec
+	// Searching for venues nearby
 	$endpoint = "venues/explore";
   //Conditionals for determining choice
   if(isset($_POST['user_id'])){
