@@ -2,7 +2,41 @@
 
 require_once('mysql_connect.php');
 print_r($_GET);print('<br>******<br>');
-print_r($_POST);
+if(!empty($_POST)){print_r($_POST);};
+
+$sign = random_int(0,1);
+if($sign == 1) {
+    $randSign = '-';
+}
+$int1 = random_int(0,4);
+$int2 = random_int(0,9);
+$int3 = random_int(0,9);
+$int4 = random_int(0,9);
+$int5 = random_int(0,9);
+$int6 = random_int(0,9);
+$int7 = random_int(0,9);
+$int8 = random_int(0,9);
+$int9 = random_int(0,9);
+$int0 = random_int(0,9);
+
+$random_lat = $randSign.$int9.$int2.$int7.".".$int4.$int8.$int6.$int3.$int5.$int1;
+$random_lon = $randSign.$int4.$int8.$int9.".".$int1.$int2.$int5.$int3.$int2.$int8;
+
+echo "random_lat = "; echo $random_lat;
+print("<br><br>");
+$rand_loc_lat = $random_lat;
+echo "rand_loc_lat = ".$rand_loc_lat;
+print("<br><br>");
+$rand_age = $int1.$int2;
+echo "rand_age = ".$rand_age;
+print("<br><br>");
+$rand_num_logins = $int3.$int6.$int8;
+echo "rand_num_logins = ".$rand_num_logins;
+print("<br><br>");
+$rand_loc_lon = $random_lon;
+echo "rand_loc_lon = ".$rand_loc_lon;
+print("<br><br>");
+$rand_fb_login = random_int(0,1);
 
 $nameArray = ['Micah',
     'David',
@@ -20,7 +54,7 @@ $nameArray = ['Micah',
     'Arnold',
     'Bugs Bunny',
 ];
-$usernameArray = ['MicahRules69',
+$usernameArray = ['Micah Rules',
     'David Rules',
     'John Rules',
     'Thomas Rules',
@@ -31,45 +65,11 @@ $usernameArray = ['MicahRules69',
     'Hildog Rules',
     'Bernie Rules',
     'Damian Rules',
-    'Julius CesarRules',
-    'The RockRules',
+    'Julius Cesar Rules',
+    'The Rock Rules',
     'Arnold Rules',
-    'Bugs BunnyRules',
+    'Bugs Bunny Rules',
 ];
-$ageArray = [ 10,22,33,44,56,66,77,88,99,11,22,43,55,667,77,33,78,99,999,666];
-$loc_latArray = ['39.842286',
-    '222.842286',
-    '111.842286',
-    '666.842286',
-    '122.842286',
-    '226.842286',
-    '39.842286',
-    '54.842286',
-    '55.842286',
-    '225.56588',
-    '253.165466',
-    '25.556645',
-    '224.89542',
-    '225.246',
-    '666.2553',
-];
-$loc_lonArray = ['-107.964846',
-    '-152.25611',
-    '-325.25612',
-    '-555.1115',
-    '-115.5886',
-    '-225.668',
-    '-224.66895',
-    '-112.6556',
-    '-112.2256',
-    '55.4558',
-    '115.2455',
-    '115.25566',
-    '110.556',
-    '78.5664',
-    '55.58956',
-];
-$num_loginsArray = [ 10,22,33,44,56,66,77,88,99,11,22,43,55,667,77,33,78,99,999,666];
 $userAgentArray = ['Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36',
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2227.1 Safari/537.36',
     'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2227.0 Safari/537.36',
@@ -87,39 +87,18 @@ $userAgentArray = ['Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like
     'Mozilla/5.0 (X11; OpenBSD i386) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36',
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1944.0 Safari/537.36',
 ];
-$fb_loginArray = [0,1];
 
-$min = 0;
-$max_nameArrayLength = count($nameArray);
-$max_UserNameArrayLength = count($usernameArray);
-$max_ageArrayLength = count($ageArray);
-$max_loc_latArrayLength = count($loc_latArray);
-$max_loc_lonArrayLength = count($loc_lonArray);
-$max_num_loginsArrayLength = count($num_loginsArray);
-$max_userAgentArrayLength = count($userAgentArray);
-$max_fb_loginArrayLength = count($fb_loginArray);
-
-$random_name_indx = random_int($min,$max_nameArrayLength);
-$random_username_indx = random_int($min,$max_UserNameArrayLength);
-$random_age_indx = random_int($min,$max_ageArrayLength);
-$random_loc_lat_indx = random_int($min,$max_loc_latArrayLength);
-$random_loc_lon_indx = random_int($min,$max_loc_lonArrayLength);
-$random_num_logins_indx = random_int($min,$max_num_loginsArrayLength);
-$random_user_agent_indx = random_int($min,$max_userAgentArrayLength);
-$random_fb_login_indx = random_int($min,$max_fb_loginArrayLength);
-
-$name = $nameArray[$random_name_indx];
-$username = $usernameArray[$random_username_indx];
-$age = $ageArray[$random_age_indx];
-$loc_lat = $loc_latArray[$random_loc_lat_indx];
-$loc_lon = $loc_lonArray[$random_loc_lon_indx];
-$num_logins = $num_loginsArray[$random_num_logins_indx];
-$user_agent = $userAgentArray[$random_user_agent_indx];
-$fb_login = $fb_loginArray[$random_fb_login_indx];
-
-
-$query = "INSERT INTO `users` (`name`, `username`, `id`, `age`, `date_added`, `loc_lat`, `loc_lon`, `num_logins`, `user_agent`, `fb_login`)
-VALUES ('$name','$username','','$age',NOW(),'$loc_lat','$loc_lon','$num_logins','$user_agent','$fb_login')";
+$username = $usernameArray[array_rand($usernameArray)];
+    echo "hello random user: ". $usernameArray[array_rand($usernameArray)];
+    print("<br><br>");
+$name = $nameArray[array_rand($nameArray)];
+    echo "hello random name: ". $name;
+    print("<br><br>");
+$user_agent = $userAgentArray[array_rand($userAgentArray)];
+    echo "hello random userAgent: ".$user_agent;
+    print("<br><br>");
+    $query = "INSERT INTO `users` (`name`, `username`, `id`, `age`, `date_added`, `loc_lat`, `loc_lon`, `num_logins`, `user_agent`, `fb_login`)
+VALUES ('$name','$username','','$rand_age',NOW(),'$rand_loc_lat','$rand_loc_lon','$rand_num_logins','$user_agent','$rand_fb_login')";
 
 print($query);
 $result = mysqli_query($conn, $query);
