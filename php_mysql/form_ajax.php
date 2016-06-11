@@ -1,19 +1,35 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script>
+        var dataObj = {
+            name: "Dude",
+            username: "Dude33",
+            id: "6",
+            age: "33",
+            date_added: "",
+            loc_lat: "133.44",
+            loc_lon: "144.334",
+            num_logins: 6,
+            user_agent: "chrome or something",
+            fb_login: 0
+
+        };
         function submitme(){
-            console.log("inside submitme");
+            console.log("inside submitMe");
             $.ajax({
-                    url: 'index_select.php',
+                    url: 'index_insert.php',
                     method: 'POST',
-                    dataType: 'json',
-                    data: {
-                        name: $("#name").val(),
-                        user_name: $("#user_name").val(),
-                        age: $("#age").val(),
-                        loc_lat: $("#loc_lat").val(),
-                        loc_lon: $("#loc_lon").val()
-                    },
+                    dataType: 'jsonp',
+                      data: dataObj,
+
+
+//                    data: {
+//                        name: $("#name").val(),
+//                        user_name: $("#user_name").val(),
+//                        age: $("#age").val(),
+//                        loc_lat: $("#loc_lat").val(),
+//                        loc_lon: $("#loc_lon").val()
+//                    },
                     success: function(result){
                              console.log("success");
                              console.log(result);
