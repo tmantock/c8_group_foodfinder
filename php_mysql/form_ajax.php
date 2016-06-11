@@ -21,8 +21,6 @@
                     method: 'POST',
                     dataType: 'jsonp',
                       data: dataObj,
-
-
 //                    data: {
 //                        name: $("#name").val(),
 //                        user_name: $("#user_name").val(),
