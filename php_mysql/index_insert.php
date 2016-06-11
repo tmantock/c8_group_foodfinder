@@ -119,7 +119,7 @@ $fb_login = $fb_loginArray[$random_fb_login_indx];
 
 
 $query = "INSERT INTO `users` (`name`, `username`, `id`, `age`, `date_added`, `loc_lat`, `loc_lon`, `num_logins`, `user_agent`, `fb_login`)
-VALUES ('$name','$username','','$age','','$loc_lat','$loc_lon','$num_logins','$user_agent','$fb_login')";
+VALUES ('$name','$username','','$age',NOW(),'$loc_lat','$loc_lon','$num_logins','$user_agent','$fb_login')";
 
 print($query);
 $result = mysqli_query($conn, $query);
