@@ -5,7 +5,7 @@ require_once("credentials.php");
 $client_key = FOURSQUARE_CLIENT_ID;
 $client_secret = FOURSQUARE_SECRET_ID;
 
-$location_id = "4a6f6c91f964a52023d61fe3";
+$location_id = $_POST['location_id'];
 //declare new foursquare class with client key and client secret
 $foursquare = new FoursquareApi($client_key, $client_secret);
 // Searching for images specidic to venue
