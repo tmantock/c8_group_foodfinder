@@ -32,25 +32,57 @@ function error(err) {
 function foursquare_call(crd){
  $.ajax({
    dataType: "JSON",
-  url: "search.php",
-  method: "POST",
-  data: {
-    latitude: crd.latitude,
-    longitude: crd.longitude,
-    radius: 100000,
-    user_id: 555,
-    search_option: {
-      option: "random",
-      category: "sushi"
-    }
-  },
+  url: 'https://api.foursquare.com/v2/venues/explore?client_id= BJ55LPF34FXTMHV4VOW0L0VMAUV4MYG2VK3JC33ELWU2KOXZ&client_secret= KNMJ3JKCNBI4AUWZNHPLZBQZSMEQTURPQW0EGS4AKOO2TM3X&v=20130815&ll=33.64,-117.74&venuePhotos=1&query=bbq',
+  method: "get",
+  // data: {
+  //   latitude: crd.latitude,
+  //   longitude: crd.longitude,
+  //   radius: 100000,
+  //   user_id: 555,
+  //   search_option: {
+  //     option: "random",
+  //     category: "sushi"
+  //   }
+  // },
   success: function (response){
+      four(response);
   console.log(response.response);
   },
   error: function(response){
   console.log(response);
   }
   });
+}
+
+function four(response){
+
+    var restaraunts = [];
+    var fourSquareResponse = response.response.groups[0].items;
+    for(var x = 0; x < fourSquareResponse.length; x++){
+        var fourSquareObj = {};
+        fourSquareObj.name = response.response.groups[0].items[x].venue.name;
+        fourSquareObj.distance = response.response.groups[0].items[x].venue.location.distance;
+        fourSquareObj.photo = response.response.groups[0].items[x].venue.photos.groups[0];
+        fourSquareObj.hours = response.response.groups[0].items[x].venue.hours;
+        fourSquareObj.website =  response.response.groups[0].items[x].venue.url;
+        fourSquareObj.phone = response.response.groups[0].items[x].venue.contact.formattedPhone;
+        fourSquareObj.venueid = response.response.groups[0].items[x].venue.id;
+        fourSquareObj.street =  response.response.groups[0].items[x].venue.location.address;
+        fourSquareObj.city = response.response.groups[0].items[x].venue.location.city;
+        fourSquareObj.state =   response.response.groups[0].items[x].venue.location.state;
+        fourSquareObj.zip = response.response.groups[0].items[x].venue.location.postalCode;
+        fourSquareObj.lat = response.response.groups[0].items[x].venue.location.lat;
+        fourSquareObj.lng = response.response.groups[0].items[x].venue.location.lng;
+        fourSquareObj.price = response.response.groups[0].items[x].venue.price.message;
+        fourSquareObj.rating = response.response.groups[0].items[x].venue.rating;
+       // fourSquareObj.tips = response.response.groups[0].items[x].tips;
+       // fourSquareObj.firstName =  response.response.groups[0].items[x].tips[0].user.firstName;
+       // fourSquareObj.lastName =  response.response.groups[0].items[x].tips[0].user.lastName;
+      //  fourSquareObj.likes = response.response.groups[0].items[x].tips[0].likes[0].count;
+        restaraunts.push(fourSquareObj);
+    }
+    console.log("inside of four",restaraunts);
+    return restaraunts;
 }
 
 // function ajax(){
