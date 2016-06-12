@@ -60,9 +60,10 @@ function four(response){
     var fourSquareResponse = response.response.groups[0].items;
     for(var x = 0; x < fourSquareResponse.length; x++){
         var fourSquareObj = {};
+        if (response.response.groups[0].items[x].venue.photos.count >= 1){
         fourSquareObj.name = response.response.groups[0].items[x].venue.name;
         fourSquareObj.distance = response.response.groups[0].items[x].venue.location.distance;
-        fourSquareObj.photo = response.response.groups[0].items[x].venue.photos.groups[0];
+        fourSquareObj.photo = response.response.groups[0].items[x].venue.photos.groups[0].items[0].prefix + "400X400"+ response.response.groups[0].items[x].venue.photos.groups[0].items[0].suffix;
         fourSquareObj.hours = response.response.groups[0].items[x].venue.hours;
         fourSquareObj.website =  response.response.groups[0].items[x].venue.url;
         fourSquareObj.phone = response.response.groups[0].items[x].venue.contact.formattedPhone;
@@ -75,11 +76,12 @@ function four(response){
         fourSquareObj.lng = response.response.groups[0].items[x].venue.location.lng;
         fourSquareObj.price = response.response.groups[0].items[x].venue.price.message;
         fourSquareObj.rating = response.response.groups[0].items[x].venue.rating;
+        restaraunts.push(fourSquareObj);
+      }
        // fourSquareObj.tips = response.response.groups[0].items[x].tips;
        // fourSquareObj.firstName =  response.response.groups[0].items[x].tips[0].user.firstName;
        // fourSquareObj.lastName =  response.response.groups[0].items[x].tips[0].user.lastName;
       //  fourSquareObj.likes = response.response.groups[0].items[x].tips[0].likes[0].count;
-        restaraunts.push(fourSquareObj);
     }
     console.log("inside of four",restaraunts);
     return restaraunts;
