@@ -24,6 +24,15 @@ body {
     font-family: 'Pacifico';
 }
 
+
+#lunch_heading-landing {
+    font-size: 12vh;
+    color: white;
+    text-shadow: 0 5px 8px black;
+    padding: 1vh 0 3vh 0;
+    font-family: 'Pacifico';
+}
+
 #description {
     color: white;
     text-shadow: 0 1px 1px black;
@@ -168,7 +177,6 @@ button:focus {
         color: #FFF;
         text-decoration: none;
         bottom: 2px;
-        left: 26%;
     }
 
     .red {
@@ -200,6 +208,7 @@ button:focus {
         padding: 0;
         background-color: red;
         margin-bottom: 6px;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }
 
     .info-aside {
@@ -209,19 +218,8 @@ button:focus {
         padding: 0;
         margin-bottom: 6px;
         text-shadow: none;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }
-
-    /*.info-aside-small {*/
-        /*background-color: black;*/
-        /*height: 44px;*/
-        /*padding: 0;*/
-    /*}*/
-
-    /*.restaurant-info-back-small {*/
-        /*height: 44px;*/
-        /*background-color: black;*/
-        /*padding: 0;*/
-    /*}*/
 
 }
 
