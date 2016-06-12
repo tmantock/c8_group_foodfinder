@@ -177,13 +177,11 @@ button:focus {
         color: #FFF;
         text-decoration: none;
         bottom: 2px;
-    }
-
-    .red {
         background-color: red;
         border-bottom: 5px solid #ce0010;
         text-shadow: 0px 2px 3px #3b3b3b;
     }
+
     .action-button:active {
         transform: translate(0px,5px);
         -webkit-transform: translate(0px,5px);
