@@ -1,5 +1,5 @@
 <?php
-/*********************    INSERT FOR categories TABLE  DATA ********************/
+/*********************    INSERT FOR user_interactions TABLE  DATA ********************/
 
 require_once('mysql_connect.php');
 print_r($_GET);print('<br>******<br>');
@@ -43,21 +43,34 @@ $food_catArray = ["Bakery cafes‎",
     "Vegetarian",
 ];
 
-echo "categories = ".$categories;
-print("<br><br>");
-echo "category_id = ".$category_id;
-print("<br><br>");
-echo "food_cat = ".$food_cat;
-print("<br><br>");
+$randomInt = random_int(0,50);
+$randomInt2 = random_int(0,50);
+$randomInt3 = random_int(0,50);
+$randomInt4 = random_int(0,50);
+$randomInt5 = random_int(0,50);
+$randomInt6 = random_int(0,50);
+$randomInt7 = random_int(0,500);
+$random_cat_id = random_int(0,50);
 
-for ($i=0; $i<count($food_catArray); $i++) {
+    $id = '' ;
+    $drop_dwn_select = random_int(0,1);
+    $random_btn_selected = random_int(0,1) ;
+    $num_of_nxt_clicks = $randomInt ;
+    $num_of_prev_clicks = $randomInt2 ;
+    $back_click = random_int(0,1) ;
+    $nav_click = random_int(0,1) ;
+    $random_click_log = $randomInt3 ;
+    $drop_dwn_choice = $food_catArray[array_rand($food_catArray)];
+    $selected_rstaurnt = "Some $drop_dwn_choice-Related Restaurant";
+    $category_id = $random_cat_id ;
+    $restaurant_distance = $randomInt4 ;
+    $radius_selector = $randomInt5 ;
+    $price_selector = $randomInt6 ;
+    $usr_uniq_assigned_id = $randomInt7 ;
+    $prev_selec_made = '' ;
 
-    $food_cat = $food_catArray[$i];
-    $category_id = $i;
-    $categories = random_int(1,20);
-
-    $query = "INSERT INTO `categories` (`categories`, `food_cat`, `category_id`)
-    VALUES ('$categories','$food_cat','$category_id')";
+    $query = "INSERT INTO `user_interaction` (`id`, `search_timestmp`, `drop_dwn_select`, `random_btn_selected`, `num_of_nxt_clicks`, `num_of_prev_clicks`, `drop_dwn_select_timestmp`, `back_click`, `back_timestmp`, `nav_click`, `nav_click_timestmp`, `random_click_log`, `drop_dwn_choice`, `selected_rstaurnt`, `category_id`, `restaurant_distance`, `radius_selector`, `price_selector`, `init_timestmp_for_data_rqust`, `usr_uniq_assigned_id`, `prev_selec_made`)
+VALUES ('', NOW(), '$drop_dwn_select', NOW(), '$num_of_nxt_clicks', '$num_of_prev_clicks', NOW(), '$back_click', NOW(), '$nav_click', NOW(), '$random_click_log', '$drop_dwn_choice', '$selected_rstaurnt', '$category_id', '$restaurant_distance', '$radius_selector', '$price_selector', NOW(), '$usr_uniq_assigned_id', '$prev_selec_made')";
 
     print($query);
     $result = mysqli_query($conn, $query);
@@ -74,9 +87,83 @@ for ($i=0; $i<count($food_catArray); $i++) {
     else {
         print('NO DATA');
     }
-
-
-}
+/*********************    INSERT FOR categories TABLE  DATA ********************/
+//<?php
+//
+//require_once('mysql_connect.php');
+//print_r($_GET);print('<br>******<br>');
+//if(!empty($_POST)){print_r($_POST);};
+//$food_catArray = ["Bakery cafes‎",
+//    "Barbecue",
+//    "Biker bars‎",
+//    "Buffet",
+//    "Cafés",
+//    "Cafés in Singapore",
+//    "Chili con carne",
+//    "Coffeehouses",
+//    "Diners",
+//    "Doughnut",
+//    "Drive-in",
+//    "Ethnic",
+//    "Fast casual",
+//    "Fast-food ",
+//    "Fish and chip",
+//    "Frozen yogurt",
+//    "Gastropubs",
+//    "Gluten-free",
+//    "Hamburger",
+//    "Hot dog",
+//    "Ice cream parlors",
+//    "Juice bars",
+//    "Kosher",
+//    "Lunch counters",
+//    "Noodle",
+//    "Pancake houses",
+//    "Pizzerias",
+//    "Poultry",
+//    "Prison",
+//    "Root beer stands",
+//    "Seafood",
+//    "Steakhouses",
+//    "Submarine sandwich",
+//    "Tea houses",
+//    "Tex-Mex",
+//    "Theme",
+//    "Vegetarian",
+//];
+//
+//echo "categories = ".$categories;
+//print("<br><br>");
+//echo "category_id = ".$category_id;
+//print("<br><br>");
+//echo "food_cat = ".$food_cat;
+//print("<br><br>");
+//
+//for ($i=0; $i<count($food_catArray); $i++) {
+//
+//    $food_cat = $food_catArray[$i];
+//    $category_id = $i;
+//    $categories = random_int(1,20);
+//
+//    $query = "INSERT INTO `categories` (`categories`, `food_cat`, `category_id`)
+//    VALUES ('$categories','$food_cat','$category_id')";
+//
+//    print($query);
+//    $result = mysqli_query($conn, $query);
+//    if(!$result){
+//        print(mysqli_error($conn));
+//    }
+//
+//    if(mysqli_affected_rows($conn)>0){
+//        $new_id = mysqli_insert_id($conn);
+//        print($new_id);
+//        $output['success'] = true;
+//        $output['new_id'] = $new_id;
+//    }
+//    else {
+//        print('NO DATA');
+//    }
+//}
 /*********************    INSERT FOR USERS TABLE  DATA ********************/
 //<?php
 //
