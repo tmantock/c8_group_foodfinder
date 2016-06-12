@@ -135,7 +135,7 @@ button:focus {
         background-color: rgba(0,0,0,0.50);
         height: 60%;
         width: 93%;
-        transform: translate(4%,-19%);
+        transform: translate(0%,-13%);
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }
 
@@ -147,10 +147,6 @@ button:focus {
         background-color: rgba(0,0,0,0.5);
         padding-top: 12px;
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    }
-
-    #restaurant-name {
-        padding-top: 5px;
     }
 
     .restaurant-info > i {
@@ -200,33 +196,32 @@ button:focus {
     }
 
     .restaurant-info-back {
-        float: left;
-        border: 1px solid black;
-        width: 25%;
-        height: 14%;
+        height: 44px;
+        padding: 0;
+        background-color: red;
+        margin-bottom: 6px;
     }
 
     .info-aside {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        float: right;
-        border: 1px solid black;
-        width: 75%;
-        height: 14%;
+        background-color: white;
+        color: black;
+        height: 44px;
+        padding: 0;
+        margin-bottom: 6px;
+        text-shadow: none;
     }
 
-    .small-info-aside {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 1px solid black;
-        width: 25%;
-        height: 14%;
-    }
+    /*.info-aside-small {*/
+        /*background-color: black;*/
+        /*height: 44px;*/
+        /*padding: 0;*/
+    /*}*/
 
-    #restaurant-url{
-        color: white;
-    }
+    /*.restaurant-info-back-small {*/
+        /*height: 44px;*/
+        /*background-color: black;*/
+        /*padding: 0;*/
+    /*}*/
+
 }
 
