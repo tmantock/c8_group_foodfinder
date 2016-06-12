@@ -24,6 +24,15 @@ body {
     font-family: 'Pacifico';
 }
 
+
+#lunch_heading-landing {
+    font-size: 12vh;
+    color: white;
+    text-shadow: 0 5px 8px black;
+    padding: 1vh 0 3vh 0;
+    font-family: 'Pacifico';
+}
+
 #description {
     color: white;
     text-shadow: 0 1px 1px black;
@@ -135,7 +144,7 @@ button:focus {
         background-color: rgba(0,0,0,0.50);
         height: 60%;
         width: 93%;
-        transform: translate(4%,-19%);
+        transform: translate(0%,-13%);
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }
 
@@ -147,10 +156,6 @@ button:focus {
         background-color: rgba(0,0,0,0.5);
         padding-top: 12px;
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    }
-
-    #restaurant-name {
-        padding-top: 5px;
     }
 
     .restaurant-info > i {
@@ -172,14 +177,11 @@ button:focus {
         color: #FFF;
         text-decoration: none;
         bottom: 2px;
-        left: 26%;
-    }
-
-    .red {
         background-color: red;
         border-bottom: 5px solid #ce0010;
         text-shadow: 0px 2px 3px #3b3b3b;
     }
+
     .action-button:active {
         transform: translate(0px,5px);
         -webkit-transform: translate(0px,5px);
@@ -200,33 +202,22 @@ button:focus {
     }
 
     .restaurant-info-back {
-        float: left;
-        border: 1px solid black;
-        width: 25%;
-        height: 14%;
+        height: 44px;
+        padding: 0;
+        background-color: red;
+        margin-bottom: 6px;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }
 
     .info-aside {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        float: right;
-        border: 1px solid black;
-        width: 75%;
-        height: 14%;
+        background-color: white;
+        color: black;
+        height: 44px;
+        padding: 0;
+        margin-bottom: 6px;
+        text-shadow: none;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }
 
-    .small-info-aside {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 1px solid black;
-        width: 25%;
-        height: 14%;
-    }
-
-    #restaurant-url{
-        color: white;
-    }
 }
 
