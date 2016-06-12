@@ -1,7 +1,20 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Food Decider</title>
+  <script src ="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <!--Google Fonts-->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Pacifico">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans">
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<h1 id="lunch_heading" class="col-xs-12">What's For Lunch?</h1>
+
+
 <div class = "app-body">
-  <p>
-    <!-- Application description -->
-  </p>
   <form>
     <select>
       <!--Use ng-repeat to generate list using object from ajax call from server-->
@@ -10,7 +23,10 @@
     <select>
       <!-- ng-repeat for generating price choices -->
       <!-- place holder in version 1 -->
-      <option></option>
+      <option>$</option>
+      <option>$$</option>
+      <option>$$$</option>
+      <option>$$$$</option>
     </select>
     <select>
       <!-- ng-repeat for generating time options -->

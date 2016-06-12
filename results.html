@@ -1,19 +1,58 @@
-<div class = "app-body">
-  <div class = "image-holder">
-    <!-- <img src = ""> -->
-  </div>
-  <!-- Restaurants Name -->
-  <h1></h1>
-  <!-- Restaurant's ETA and Distance-->
-  <p></p>
-  <!-- Restaurant's Rating -->
-  <div></div>
-  <!-- Short Description of location -->
-  <p></p>
-  <!-- Let's Go Navigation button -->
-  <button type = "button">Let's GO!</button>
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Food Decider</title>
+  <script src ="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <!--Google Fonts-->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Pacifico">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="test.js"></script>
+</head>
+<h1 id="lunch_heading" class="col-xs-12">What's For Lunch?</h1>
 
+
+<div class = "app-body" id="result-div">
+  <div id="image-holder">
+     <img src = "https://s3.amazonaws.com/cos-cdn2/Cocos+Menu/m.zipscene+images/cocos-original-burger.jpg" id="food-img"
+          alt="food image">
+  </div>
+  <div id="info-div">
+  <!-- Restaurants Name -->
+  <h3 id="restaurant-name">Bob's Burgers</h3>
+  <!-- Short Description of location -->
+  <p>Juicy burgers and great service!</p>
+  <!-- Restaurant's ETA and Distance-->
+    <div class="restaurant-info">
+      <i class="fa fa-car fa-2x" aria-hidden="true"></i>
+      <p>Distance</p>
+      <p id="distance">2.3 mi</p>
+    </div>
+    <div class="restaurant-info">
+      <i class="fa fa-clock-o fa-2x" aria-hidden="true"></i>
+      <p>ETA</p>
+      <p id="eta">14 min</p>
+    </div>
+  <!-- Restaurant's Rating -->
+    <div class="restaurant-info">
+      <i class="fa fa-star fa-2x" aria-hidden="true"></i>
+      <p>Rating</p>
+      4.2</p>
+    </div>
+  <!-- Price-->
+    <div class="restaurant-info">
+      <i class="fa fa-usd fa-2x" aria-hidden="true"></i>
+      <p>Price</p>
+      <p id="price">$$</p>
+    </div>
+  <button type="button" id="more-info">More Info</button>
+  </div>
   <!-- Buttons for going to next or previous options these do not have to be buttons in fact it's better if they aren't for distinct sty;eing purposes-->
-  <button type = "button"></button>
-  <button type = "button"></button>
+  <!--<button type = "button">PREV</button>-->
+  <!--<button type = "button">NEXT</button>-->
 </div>
+
