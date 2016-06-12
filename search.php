@@ -1,8 +1,16 @@
 <?php
+<<<<<<< HEAD
 require_once("fs_lib/src/FoursquareApi.php");
 require_once("credentials.php");
   //require_once("mysqli_connect.php");
 //
+=======
+  session_start();
+	require_once("fs_lib/src/FoursquareApi.php");
+  require_once("credentials.php");
+ // require_once("mysqli_connect.php");
+
+>>>>>>> 89fd0636756f7724dc6aa46232edb9a26dfeb747
 //  $user_information = [];
 //  $user_category_information = [];
 //  $user_restaurant_information = [];
@@ -46,6 +54,7 @@ require_once("credentials.php");
 	// Searching for venues nearby
 	$endpoint = "venues/explore";
   //Conditionals for determining choice
+<<<<<<< HEAD
 //  if(isset($_POST['user_id'])){
 //    if($search_option === "random"){
 //      if($user_category_information[0]['count_category'] >= 5){
@@ -86,6 +95,47 @@ $params = array(
 
 
 
+=======
+  if(isset($_POST['user_id'])){
+    if($search_option === "random"){
+      if($user_category_information[0]['count_category'] >= 5){
+      // Prepare parameters
+       $params = array(
+        "ll"=> $_POST['latitude'].",".$_POST['longitude'],
+        "intent"=>"browse",
+        "radius"=>$search_radius,
+        "query"=> $user_category_information[0]['food_cat']
+       );
+      }
+      else{
+        // Prepare parameters
+         $params = array(
+          "ll"=> $_POST['latitude'].",".$_POST['longitude'],
+          "intent"=>"browse",
+          "radius"=>$search_radius,
+          "query"=> $_POST['search_option']['category']
+         );
+      }
+    }
+    else if($search_option === "menu"){
+	    // Prepare parameters
+	    $params = array(
+		    "ll"=> $_POST['latitude'].",".$_POST['longitude'],
+		    "intent"=>"browse",
+		    "radius"=>$search_radius,
+		    "query"=> $seacrh_category
+	    );
+    }
+  }
+else{
+    $params = array(
+        "ll"=> $_POST['latitude'].",".$_POST['longitude'],
+        "intent"=>"browse",
+        "radius"=>5000,
+        "query"=> "sushi"
+    );
+}
+>>>>>>> 89fd0636756f7724dc6aa46232edb9a26dfeb747
 	// Perform a request to a public resource
 	$response = $foursquare->GetPublic($endpoint,$params);
 
