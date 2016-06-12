@@ -43,10 +43,6 @@ $food_catArray = ["Bakery cafes‎",
     "Vegetarian",
 ];
 
-$category_id = random_int(1,610);
-$categories = random_int(1,20);
-$food_cat = $food_catArray[array_rand($food_catArray)];
-
 echo "categories = ".$categories;
 print("<br><br>");
 echo "category_id = ".$category_id;
@@ -54,25 +50,33 @@ print("<br><br>");
 echo "food_cat = ".$food_cat;
 print("<br><br>");
 
-$query = "INSERT INTO `categories` (`categories`, `food_cat`, `category_id`)
-VALUES ('$categories','$food_cat','$category_id')";
+for ($i=0; $i<count($food_catArray); $i++) {
 
-print($query);
-$result = mysqli_query($conn, $query);
-if(!$result){
-    print(mysqli_error($conn));
-}
+    $food_cat = $food_catArray[$i];
+    $category_id = $i;
+    $categories = random_int(1,20);
 
-if(mysqli_affected_rows($conn)>0){
-    $new_id = mysqli_insert_id($conn);
-    print($new_id);
-    $output['success'] = true;
-    $output['new_id'] = $new_id;
-}
-else {
-    print('NO DATA');
-}
+    $query = "INSERT INTO `categories` (`categories`, `food_cat`, `category_id`)
+    VALUES ('$categories','$food_cat','$category_id')";
 
+    print($query);
+    $result = mysqli_query($conn, $query);
+    if(!$result){
+        print(mysqli_error($conn));
+    }
+
+    if(mysqli_affected_rows($conn)>0){
+        $new_id = mysqli_insert_id($conn);
+        print($new_id);
+        $output['success'] = true;
+        $output['new_id'] = $new_id;
+    }
+    else {
+        print('NO DATA');
+    }
+
+
+}
 /*********************    INSERT FOR USERS TABLE  DATA ********************/
 //<?php
 //
