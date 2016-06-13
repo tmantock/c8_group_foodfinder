@@ -24,31 +24,29 @@ function error(err) {
 }
 
 function foursquare_call(crd){
-     $.ajax({
-        dataType: "JSON",
-        url: "https://api.foursquare.com/v2/venues/explore?client_id= BJ55LPF34FXTMHV4VOW0L0VMAUV4MYG2VK3JC33ELWU2KOXZ&client_secret= KNMJ3JKCNBI4AUWZNHPLZBQZSMEQTURPQW0EGS4AKOO2TM3X&v=20130815&ll=33.64,-117.74&venuePhotos=1&query=bbq",
-        method: "GET",
-        url: 'https://api.foursquare.com/v2/venues/explore?client_id= BJ55LPF34FXTMHV4VOW0L0VMAUV4MYG2VK3JC33ELWU2KOXZ&client_secret= KNMJ3JKCNBI4AUWZNHPLZBQZSMEQTURPQW0EGS4AKOO2TM3X&v=20130815&ll=33.64,-117.74&venuePhotos=1&query=bbq',
-        method: "get",
-  // data: {
-  //   latitude: crd.latitude,
-  //   longitude: crd.longitude,
-  //   radius: 100000,
-  //   user_id: 555,
-  //   search_option: {
-  //     option: "random",
-  //     category: "sushi"
-  //   }
-
-      success: function (response){
-          fourSquareReturn(response);
-            console.log(response.response);
-      },//success
-      error: function(response){
-            console.log(response);
-      }//erro
-      });//ajax
-} //foursquare_call
+ $.ajax({
+   dataType: "JSON",
+  url: "https://api.foursquare.com/v2/venues/explore?client_id= BJ55LPF34FXTMHV4VOW0L0VMAUV4MYG2VK3JC33ELWU2KOXZ&client_secret= KNMJ3JKCNBI4AUWZNHPLZBQZSMEQTURPQW0EGS4AKOO2TM3X&v=20130815&ll=33.64,-117.74&venuePhotos=1&query=bbq",
+  method: "GET",
+  data: {
+    latitude: crd.latitude,
+    longitude: crd.longitude,
+    radius: 100000,
+    user_id: 555,
+    search_option: {
+      option: "random",
+      category: "sushi"
+    }
+  },
+  success: function (response){
+    fourSquareReturn(response);
+    console.log(response.response);
+  },
+  error: function(response){
+  console.log(response);
+  }
+  })
+}
 
 function fourSquareReturn(response){
     var fourSquareResponse = response.response.groups[0].items;
@@ -75,7 +73,7 @@ function fourSquareReturn(response){
     }//for loop
     results_to_DOM(restauraunts);
     console.log("fourSquareReturn",restauraunts);
-}//fourSquareReturn
+}
 
 function convert_to_miles(meters) {
   return (meters * 0.000621371192).toFixed(2);
@@ -89,7 +87,7 @@ function results_to_DOM (array) {
   for(var i = 0; i<10; i++){
     var div = $("<div>").addClass("result-card").css("background",color_array[i]);
     var img = $("<div>").addClass("result-image").css({
-       background: "url(" + restauraunts[i].photo + ")",
+       background: "url(" + array[i].photo + ")",
       'background-size': 'cover',
       'background-repeat': 'no-repeat',
       'background-position': 'center center'
@@ -99,10 +97,10 @@ function results_to_DOM (array) {
     var i_eta = $("<i>").addClass("fa fa-car");
     var i_rating = $("<i>").addClass("fa fa-star");
     var i_price = $("<i>").addClass("fa fa-usd fa-2x");
-    var distance = $("<p>").text("Distance: " + restauraunts[i].distance);
+    var distance = $("<p>").text("Distance: " + array[i].distance);
     var eta = $("<p>");
-    var rating = $("<p>").text("Rating: " + restauraunts[i].rating);
-    var price = $("<p>").text("Price: " + restauraunts[i].price);
+    var rating = $("<p>").text("Rating: " + array[i].rating);
+    var price = $("<p>").text("Price: " + array[i].price);
     var nav_text = $("<p>").text("Let's Go!");
     var nav_button = $("<div>").addClass("navigation-button");
     nav_button.append(nav_text);
@@ -127,6 +125,59 @@ function stack_up (array, height) {
     target_card.delay(delay).animate({top: (height - current_position) * -1 + "px"},500);
     delay+=300;
   }
+}
+
+function price_replacement(array) {
+    for (var i=0;i<array.length; i++){
+        switch(array[i].price.message.toLocaleLowerCase()){
+            case "cheap":
+                array[i].price.message = "$";
+                break;
+            case "moderate":
+                array[i].price.message = "$$";
+                break;
+            case "expensive":
+                array[i].price.message = "$$$";
+                break;
+            case "very expensive":
+                array[i].price.message = "$$$$";
+                break;
+        }
+    }///end of for loop
+    return array;
+}
+function price_sort(array) {
+    var swapped ;
+    do {
+        swapped = false;
+        for (var i=0;i<array.length-1; i++) {
+            if (array[i].price.message > array[i+1].price.message) {
+                var temp = array[i];
+                array[i] = array[i + 1];
+                array[i + 1] = temp;
+                swapped = true;
+            }
+        }
+   }while (swapped)
+    return array;
+}
+
+
+function distance_sort(array) {
+    var swapped ;
+    do {
+        swapped = false;
+        for (var i=0;i<array.length-1; i++) {
+            if (array[i].distance > array[i+1].distance) {
+                var temp = array[i];
+                array[i] = array[i + 1];
+                array[i + 1] = temp;
+                swapped = true;
+            }
+        }
+    }
+    while (swapped)
+    return array;
 }
 
 $(document).ready(function() {
