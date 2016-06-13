@@ -56,7 +56,7 @@ function fourSquareReturn(response){
         if (response.response.groups[0].items[x].venue.photos.count >= 1){
         fourSquareObj.name = response.response.groups[0].items[x].venue.name;
         fourSquareObj.distance = response.response.groups[0].items[x].venue.location.distance;
-        fourSquareObj.photo = response.response.groups[0].items[x].venue.photos.groups[0].items[0].prefix + "400X400"+ response.response.groups[0].items[x].venue.photos.groups[0].items[0].suffix;
+        fourSquareObj.photo = response.response.groups[0].items[x].venue.photos.groups[0].items[0].prefix + "300x200"+ response.response.groups[0].items[x].venue.photos.groups[0].items[0].suffix;
         fourSquareObj.hours = response.response.groups[0].items[x].venue.hours;
         fourSquareObj.website =  response.response.groups[0].items[x].venue.url;
         fourSquareObj.phone = response.response.groups[0].items[x].venue.contact.formattedPhone;
@@ -76,8 +76,33 @@ function fourSquareReturn(response){
        // fourSquareObj.lastName =  response.response.groups[0].items[x].tips[0].user.lastName;
        // fourSquareObj.likes = response.response.groups[0].items[x].tips[0].likes[0].count;
     }//for loop
+    results_to_DOM(restauraunts);
     console.log("fourSquareReturn",restauraunts);
 }//fourSquareReturn
+
+function convert_to_miles(meters) {
+  return (meters * 0.000621371192).toFixed(2);
+}
+
+function results_to_DOM (array) {
+  incrementer = 1;
+  for(var i = 0; i<10; i++){
+    $("#result"+incrementer+"-img-holder").css({
+      background: "url(" + array[i].photo + ")",
+      'background-size': "cover",
+      'background-repeat': "no-repeat",
+      'background-position': "center center"
+    });
+    $("#result"+incrementer+"-rest-name").text(array[i].name);
+    $("#result"+incrementer+"-rest-description").text("Awesome Restaraunt");
+    $("#result"+incrementer+"-distance").text(convert_to_miles(array[i].distance));
+    $("#result"+incrementer+-"eta").text("25 min");
+    $("#result"+incrementer+"-rating").text(array[0].rating);
+    $("#result"+incrementer+"-price").text(array[0].price);
+    incrementer++;
+  }
+}
+
 
 
 $(document).ready(function() {
