@@ -58,6 +58,11 @@ button:focus {
     outline: 0;
 }
 
+.landing-heading {
+    color: white;
+    text-shadow: 0px 1px 3px black;
+}
+
 .animate {
     transition: all 0.1s;
     -webkit-transition: all 0.1s;
@@ -73,6 +78,7 @@ button:focus {
     color: #FFF;
     text-decoration: none;
 }
+
 .red {
     background-color: red;
     border-bottom: 5px solid #ce0010;
@@ -140,11 +146,19 @@ button:focus {
         transform: translate(13%,2%);
     }
 
-    #info-div {
+    #results-info-div {
         background-color: rgba(0,0,0,0.50);
-        height: 58%;
+        height: 57%;
         width: 93%;
-        transform: translate(4%,-20%);
+        transform: translate(4%,-19%);
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    }
+
+    #selection-info-div {
+        background-color: rgba(0,0,0,0.50);
+        height: 59%;
+        width: 93%;
+        transform: translate(0%,-13%);
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }
 
@@ -162,13 +176,16 @@ button:focus {
         padding-bottom: 5px;
     }
 
+    .landing-heading {
+        font-size: 2vh;
+    }
     .animate {
         transition: all 0.1s;
         -webkit-transition: all 0.1s;
     }
 
     .action-button {
-        position: absolute;
+        position: relative;
         padding: 8px 20px;
         margin: 0px 10px 10px 0px;
         border-radius: 5px;
@@ -176,10 +193,11 @@ button:focus {
         font-size: 20px;
         color: #FFF;
         text-decoration: none;
-        bottom: 2px;
         background-color: red;
         border-bottom: 5px solid #ce0010;
         text-shadow: 0px 2px 3px #3b3b3b;
+        top: 5vh;
+        transform: translate(5%,0%);
     }
 
     .action-button:active {
