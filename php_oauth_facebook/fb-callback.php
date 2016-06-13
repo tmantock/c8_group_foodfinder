@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once ('facebook_info.php');
+require_once ('../credentials.php');
 //then you'll need to include the facebook sdk
 require_once ('libraries/facebook-php-sdk-v4-5.0.0/src/Facebook/autoload.php');
 /*
@@ -71,5 +71,5 @@ print_r($_SESSION['fb_access_token']);
 /*store the token for later use*/
 // User is logged in with a long-lived access token.
 // You can redirect them to a members-only page.
-header('location : show_data.php');
+header('location : SERVER_REDIRECT');
 ?>
