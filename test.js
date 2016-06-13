@@ -14,7 +14,10 @@ $(document).ready(function(){
             'border-radius': 0,
             padding: '5px 5px 5px 5px'
         }, 275).addClass('expanded');
-        $this.css('z-index', 0);
+        $this.css('z-index', -1);
+        setTimeout(function() {
+            window.location.href = "#results";
+        },250);
     });
 });
 

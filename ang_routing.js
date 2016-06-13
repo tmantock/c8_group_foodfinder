@@ -23,7 +23,6 @@ app.config(function($routeProvider){
         });
 });
 
-
 app.controller('mainCtrl', function($scope){
  // $scope.message = ("Hellow from main Crtl");
 });
