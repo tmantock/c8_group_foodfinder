@@ -1,19 +1,12 @@
-/**
- * Created by gkwon on 6/10/16.
- */
-$(document).ready(function(){
-   $("#more-info").click(function(){
-       console.log("#more-info button has been clicked");
-       $("#result-div").addClass("flip-card");
-   })
-});
-$(document).ready(function(){
-  navigator.geolocation.getCurrentPosition(success,error, options);
-});
+/********************* FOURSQUARE AJAX CALLS     *******************************/
+
+var current_location;
+var restauraunts = [];
+var firstRest = restauraunts[0];
 
 var options = {
-  enableHighAccuracy: true,
-  maximumAge: 0
+    enableHighAccuracy: true,
+    maximumAge: 0
 };
 
 function success (pos) {
@@ -30,12 +23,12 @@ function error(err) {
 }
 
 function foursquare_call(crd){
- $.ajax({
-   dataType: "JSON",
-  url: "https://api.foursquare.com/v2/venues/explore?client_id= BJ55LPF34FXTMHV4VOW0L0VMAUV4MYG2VK3JC33ELWU2KOXZ&client_secret= KNMJ3JKCNBI4AUWZNHPLZBQZSMEQTURPQW0EGS4AKOO2TM3X&v=20130815&ll=33.64,-117.74&venuePhotos=1&query=bbq",
-  method: "GET",
-  url: 'https://api.foursquare.com/v2/venues/explore?client_id= BJ55LPF34FXTMHV4VOW0L0VMAUV4MYG2VK3JC33ELWU2KOXZ&client_secret= KNMJ3JKCNBI4AUWZNHPLZBQZSMEQTURPQW0EGS4AKOO2TM3X&v=20130815&ll=33.64,-117.74&venuePhotos=1&query=bbq',
-  method: "get",
+     $.ajax({
+        dataType: "JSON",
+        url: "https://api.foursquare.com/v2/venues/explore?client_id= BJ55LPF34FXTMHV4VOW0L0VMAUV4MYG2VK3JC33ELWU2KOXZ&client_secret= KNMJ3JKCNBI4AUWZNHPLZBQZSMEQTURPQW0EGS4AKOO2TM3X&v=20130815&ll=33.64,-117.74&venuePhotos=1&query=bbq",
+        method: "GET",
+        url: 'https://api.foursquare.com/v2/venues/explore?client_id= BJ55LPF34FXTMHV4VOW0L0VMAUV4MYG2VK3JC33ELWU2KOXZ&client_secret= KNMJ3JKCNBI4AUWZNHPLZBQZSMEQTURPQW0EGS4AKOO2TM3X&v=20130815&ll=33.64,-117.74&venuePhotos=1&query=bbq',
+        method: "get",
   // data: {
   //   latitude: crd.latitude,
   //   longitude: crd.longitude,
@@ -46,21 +39,17 @@ function foursquare_call(crd){
   //     category: "sushi"
   //   }
 
-  // },
+      success: function (response){
+          fourSquareReturn(response);
+            console.log(response.response);
+      },//success
+      error: function(response){
+            console.log(response);
+      }//erro
+      });//ajax
+} //foursquare_call
 
-  success: function (response){
-      four(response);
-  console.log(response.response);
-  },
-  error: function(response){
-  console.log(response);
-  }
-  });
-}
-
-function four(response){
-
-    var restaraunts = [];
+function fourSquareReturn(response){
     var fourSquareResponse = response.response.groups[0].items;
     for(var x = 0; x < fourSquareResponse.length; x++){
         var fourSquareObj = {};
@@ -80,48 +69,23 @@ function four(response){
         fourSquareObj.lng = response.response.groups[0].items[x].venue.location.lng;
         fourSquareObj.price = response.response.groups[0].items[x].venue.price.message;
         fourSquareObj.rating = response.response.groups[0].items[x].venue.rating;
-        restaraunts.push(fourSquareObj);
-      }
+        restauraunts.push(fourSquareObj);
+      }//if
        // fourSquareObj.tips = response.response.groups[0].items[x].tips;
        // fourSquareObj.firstName =  response.response.groups[0].items[x].tips[0].user.firstName;
        // fourSquareObj.lastName =  response.response.groups[0].items[x].tips[0].user.lastName;
-      //  fourSquareObj.likes = response.response.groups[0].items[x].tips[0].likes[0].count;
-    }
-    console.log("inside of four",restaraunts);
-    return restaraunts;
-}
+       // fourSquareObj.likes = response.response.groups[0].items[x].tips[0].likes[0].count;
+    }//for loop
+    console.log("fourSquareReturn",restauraunts);
+}//fourSquareReturn
 
-// function ajax(){
-//    var consumer_secret = 'y1f4JyOmV0aIXTCOY-kACmHphO4';
-//    var token_secret = 'WQgLs4FhHzxpjAhFHMkHsOFqj7s';
-//    $.ajax({
-//        method: 'get',
-//        dataType: 'jsonp',
-//        url: 'http://api.yelp.com/v2/search',
-//        params: {
-//            oauth_consumer_key: 't48KcyimnEPCmVK4r4KbRA',
-//            oauth_token: '5YRqLRsdC5jyNVFCJW9EBZHzNtPJyEGl',
-//            oauth_signature_method: 'HMAC-SHA1',
-//            oauth_signature: 'WQgLs4FhHzxpjAhFHMkHsOFqj7s',
-//            oauth_timestamp: new Date().getTime(),
-//            oauth_nonce: randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'),
-//            callback: "cb",
-//            term: 'food',
-//            location: 'Irvine'
-//        },
-//        cache: true,
-//        jsonpCallback: "cb",
-//        success: function(response){
-//            console.log("AJAX call successful: ",response);
-//        },
-//        error: function(response){
-//          console.warn(response);
-//        }
-//    });
-// }
-//
-// function randomString(length, chars) {
-//    var result = '';
-//    for (var i = length; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))];
-//    return result;
-// }
+
+$(document).ready(function() {
+    // console.log("current_location", current_location);
+    current_location = navigator.geolocation.getCurrentPosition(success, error, options);
+    console.log("current_location", current_location);
+    $("#more-info").click(function () {
+        console.log("#more-info button has been clicked");
+        $("#result-div").addClass("flip-card");
+    });
+});//docready
