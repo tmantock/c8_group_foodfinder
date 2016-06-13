@@ -98,8 +98,8 @@ button:focus {
     #width: 80%;
     #max-height: 80%;
     margin: auto;
-
 }
+
 .carousel-inner {height: 90vh; border: 2px solid orange;}
 .result-img-holder{border: 2px solid green;
     height: 40vh;
@@ -110,7 +110,7 @@ button:focus {
 .more-info-btn {
     position: absolute;
     bottom: 1vh;
-
+    background-color: white;
 }
 
 /**************************************  MEDIA QUERY   **************************************************/
