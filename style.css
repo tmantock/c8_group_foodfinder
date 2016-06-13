@@ -90,6 +90,51 @@ button:focus {
     transform: rotate3D(0,1,0,180deg);
 }
 
+/**TODO ************************************  CAROUSEL   **************************************************/
+
+/*CAROUSEL IMAGE SCALING*/
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+    #width: 80%;
+    #max-height: 80%;
+    margin: auto;
+}
+
+.carousel-inner {
+    height: 90vh;
+    border: 2px solid orange;}
+.result-img-holder{
+    border: 2px solid green;
+    height: 40vh;
+}
+.result-info-div{
+    border: 2px solid yellow;
+    height: 45vh;
+}
+.btn-container{
+    border: 2px solid greenyellow;
+    height: 10vh;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+.more-info-btn,.nav-btn {
+    position: absolute;
+    bottom: 1vh;
+    background-color: white;
+    right: 10vw;
+    width: 30%;
+    height: 8vh;
+    border-radius: 10px;
+}
+.nav-btn {
+    border: 1px solid greenyellow;
+    left: 10vw;
+}
+
+
+
+/**************************************  MEDIA QUERY   **************************************************/
 @media screen and (max-width: 800px) {
 
     #lunch_heading {
@@ -156,6 +201,7 @@ button:focus {
         background-color: rgba(0,0,0,0.5);
         padding-top: 12px;
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        color: white;
     }
 
     .restaurant-info > i {
@@ -177,13 +223,11 @@ button:focus {
         color: #FFF;
         text-decoration: none;
         bottom: 2px;
-    }
-
-    .red {
         background-color: red;
         border-bottom: 5px solid #ce0010;
         text-shadow: 0px 2px 3px #3b3b3b;
     }
+
     .action-button:active {
         transform: translate(0px,5px);
         -webkit-transform: translate(0px,5px);
@@ -222,4 +266,5 @@ button:focus {
     }
 
 }
+
 
