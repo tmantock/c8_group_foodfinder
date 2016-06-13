@@ -11,7 +11,7 @@ html {
 }
 
 body {
-    background-color: #c90000;
+    background-color: #00bcd4;
     /*background: linear-gradient( #81b2c9, transparent), linear-gradient( 90deg, #39d5a3, transparent), linear-gradient( -90deg, #e44c97, transparent);*/
     /*background-blend-mode: screen;*/
 }
@@ -91,10 +91,42 @@ button:focus {
     border-bottom: 1px solid;
 }
 
-.flip-card {
-    background-color: white;
-    transform: rotate3D(0,1,0,180deg);
+#random {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    margin-top: -24px;
+    color: #FFF;
+    text-shadow: 1px 3px 4px black;
+    font-family: 'Pacifico';
 }
+
+.circle {
+    position: absolute;
+    left: 33%;
+    top: 50%;
+    height: 175px;
+    width: 175px;
+    margin: -25px 0 0 -25px;
+    cursor: pointer;
+    border-radius: 999em;
+    z-index: 0;
+    background: #006064;
+    box-shadow: 0 6px 9px 0 rgba(0, 0, 0, 0.75);
+    font-size: 36px;
+}
+
+.circle > #show {
+    display: none;
+}
+
+.circle.expanded > #random {
+    display: none;
+}
+
 
 @media screen and (max-width: 800px) {
 
@@ -177,6 +209,7 @@ button:focus {
     }
 
     .landing-heading {
+        margin-top: 3px;
         font-size: 2vh;
     }
     .animate {

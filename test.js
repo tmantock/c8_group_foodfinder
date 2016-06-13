@@ -2,11 +2,22 @@
  * Created by gkwon on 6/10/16.
  */
 $(document).ready(function(){
-   $("#more-info").click(function(){
-       console.log("#more-info button has been clicked");
-       $("#result-div").addClass("flip-card");
-   })
+    $('.circle').on('click', function() {
+        var $this = $(this);
+        $this.css('z-index', 2).removeClass('expanded').css('z-index', 1);
+        $this.animate({
+            left: 0,
+            top: 0,
+            margin: 0,
+            width: '100%',
+            height: '100%',
+            'border-radius': 0,
+            padding: '5px 5px 5px 5px'
+        }, 275).addClass('expanded');
+        $this.css('z-index', 0);
+    });
 });
+
 $(document).ready(function(){
   navigator.geolocation.getCurrentPosition(success,error, options);
 });
