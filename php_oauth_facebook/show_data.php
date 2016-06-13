@@ -1,8 +1,8 @@
 <?php
 /* session, connect data, yada yada*/
 session_start();
-require_once ('facebook_info.php');
-require_once ('libraries/facebook-php-sdk-v4-5.0.0/src/Facebook/autoload.php');
+require_once('../credentials.php');
+require_once('libraries/facebook-php-sdk-v4-5.0.0/src/Facebook/autoload.php');
 $fb = new Facebook\Facebook([
     'app_id'                => FACEBOOK_APP_ID,
     'app_secret'            => FACEBOOK_SECRET,
