@@ -16,8 +16,10 @@ $(document).ready(function(){
         $this.css('z-index', -1);
         setTimeout(function() {
             window.location.href = "#results";
-        },250);
+            $("body").css('background-color', '#006064');
+        },350);
       $this.css('z-index', 0);
+
     });
 });
 
@@ -201,11 +203,3 @@ function distance_sort(array) {
     while (swapped)
     return array;
 }
-
-$(document).ready(function() {
-    // console.log("current_location", current_location);
-    current_location = navigator.geolocation.getCurrentPosition(success, error, options);
-    console.log("current_location", current_location);
-    
-
-});//docready
