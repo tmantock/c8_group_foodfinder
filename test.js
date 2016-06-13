@@ -105,6 +105,11 @@ function results_to_DOM (array) {
     var price = $("<p>").text("Price: " + restauraunts[i].price);
     var nav_text = $("<p>").text("Let's Go!");
     var nav_button = $("<div>").addClass("navigation-button");
+
+    div.on("swipe",function () {
+      
+    })
+
     nav_button.append(nav_text);
     textDiv.append(i_distance, distance, i_eta, eta, i_rating, rating, i_price, price);
     div.append (img, textDiv, nav_button);
