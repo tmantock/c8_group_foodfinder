@@ -82,9 +82,10 @@ function convert_to_miles(meters) {
 }
 
 function results_to_DOM (array) {
+  var card_array = [];
   var top_position = 0;
   var z_index = 10;
-  var window_height = window.height();
+  var window_height = $('body').height();
   for(var i = 0; i<10; i++){
     var div = $("<div>").addClass("result-card").css("background",color_array[i]);
     var img = $("<div>").addClass("result-image").css({
@@ -107,15 +108,26 @@ function results_to_DOM (array) {
     nav_button.append(nav_text);
     textDiv.append(i_distance, distance, i_eta, eta, i_rating, rating, i_price, price);
     div.append (img, textDiv, nav_button);
-    $("#results-page").append(div.css({
+    $("#results-page").append(div.attr("id","card" + i).css({
       top: 100 + top_position + window_height + "px",
       'z-index': "+"+z_index
     }));
     top_position += 25;
     z_index -= 1;
+    card_array.push("card"+i);
   }
+  stack_up(card_array,window_height);
 }
 
+function stack_up (array, height) {
+  var delay = 500;
+  for(var i=0; i<array.length; i++){
+    var target_card = $("#" + array[i]);
+    var current_position = target_card.position().top;
+    target_card.delay(delay).animate({top: (height - current_position) * -1 + "px"},500);
+    delay+=300;
+  }
+}
 
 $(document).ready(function() {
     // console.log("current_location", current_location);
