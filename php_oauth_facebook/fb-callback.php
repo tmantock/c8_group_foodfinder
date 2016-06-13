@@ -1,8 +1,8 @@
 <?php
 session_start();
-require_once ('../credentials.php');
+require_once('../credentials.php');
 //then you'll need to include the facebook sdk
-require_once ('libraries/facebook-php-sdk-v4-5.0.0/src/Facebook/autoload.php');
+require_once('libraries/facebook-php-sdk-v4-5.0.0/src/Facebook/autoload.php');
 /*
 make your session, load your creds, facebook sdk, and make the facebook object
 */
