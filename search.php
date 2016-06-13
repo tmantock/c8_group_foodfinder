@@ -113,7 +113,7 @@ $params = array(
 		    "ll"=> $_POST['latitude'].",".$_POST['longitude'],
 		    "intent"=>"browse",
 		    "radius"=>$search_radius,
-		    "query"=> $seacrh_category
+		    "query"=> $search_category
 	    );
     }
   }
