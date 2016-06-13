@@ -1,10 +1,32 @@
+$(document).ready(function(){
+  navigator.geolocation.getCurrentPosition(success,error, options);
+
+  $('.circle').on('click', function() {
+      var $this = $(this);
+      $this.css('z-index', 2).removeClass('expanded').css('z-index', 1);
+      $this.animate({
+        left: 0,
+        top: 0,
+        margin: 0,
+        width: '100%',
+        height: '100%',
+        'border-radius': 0,
+        padding: '5px 5px 5px 5px'
+        }, 275).addClass('expanded');
+      $this.css('z-index', 0);
+    });
+});
+
+$(document).ready(function(){
+
+});
+
 /********************* FOURSQUARE AJAX CALLS     *******************************/
 
 var current_location;
 var restauraunts = [];
 var firstRest = restauraunts[0];
-var color_array = ["#E0F7FA","#B2EBF2","#80DEEA","#4DD0E1","#26C6DA","#00BCD4","#00ACC1","#0097A7","#00838F","#006064"]
-
+var color_array = ["#E0F7FA","#B2EBF2","#80DEEA","#4DD0E1","#26C6DA","#00BCD4","#00ACC1","#0097A7","#00838F","#006064"];
 var options = {
     enableHighAccuracy: true,
     maximumAge: 0
