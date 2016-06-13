@@ -39,11 +39,14 @@ function foursquare_call(crd){
     }
   },
   success: function (response){
-  console.log(response.response);
+    fourSquareReturn(response);
+    console.log(response.response);
   },
   error: function(response){
   console.log(response);
-} //foursquare_call
+  }
+  })
+}
 
 function fourSquareReturn(response){
     var fourSquareResponse = response.response.groups[0].items;
@@ -70,7 +73,7 @@ function fourSquareReturn(response){
     }//for loop
     results_to_DOM(restauraunts);
     console.log("fourSquareReturn",restauraunts);
-}//fourSquareReturn
+}
 
 function convert_to_miles(meters) {
   return (meters * 0.000621371192).toFixed(2);
@@ -84,7 +87,7 @@ function results_to_DOM (array) {
   for(var i = 0; i<10; i++){
     var div = $("<div>").addClass("result-card").css("background",color_array[i]);
     var img = $("<div>").addClass("result-image").css({
-       background: "url(" + restauraunts[i].photo + ")",
+       background: "url(" + array[i].photo + ")",
       'background-size': 'cover',
       'background-repeat': 'no-repeat',
       'background-position': 'center center'
@@ -94,10 +97,10 @@ function results_to_DOM (array) {
     var i_eta = $("<i>").addClass("fa fa-car");
     var i_rating = $("<i>").addClass("fa fa-star");
     var i_price = $("<i>").addClass("fa fa-usd fa-2x");
-    var distance = $("<p>").text("Distance: " + restauraunts[i].distance);
+    var distance = $("<p>").text("Distance: " + array[i].distance);
     var eta = $("<p>");
-    var rating = $("<p>").text("Rating: " + restauraunts[i].rating);
-    var price = $("<p>").text("Price: " + restauraunts[i].price);
+    var rating = $("<p>").text("Rating: " + array[i].rating);
+    var price = $("<p>").text("Price: " + array[i].price);
     var nav_text = $("<p>").text("Let's Go!");
     var nav_button = $("<div>").addClass("navigation-button");
     nav_button.append(nav_text);
@@ -172,7 +175,8 @@ function distance_sort(array) {
                 swapped = true;
             }
         }
-    }while (swapped)
+    }
+    while (swapped)
     return array;
 }
 
