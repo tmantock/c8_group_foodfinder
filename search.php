@@ -1,7 +1,7 @@
 <?php
-  session_start();
-	require_once("fs_lib/src/FoursquareApi.php");
-  require_once("credentials.php");
+session_start();
+require_once("fs_lib/src/FoursquareApi.php");
+require_once("credentials.php");
 //  require_once("mysqli_connect.php");
 
 //  $user_information = [];
@@ -11,6 +11,7 @@
 //  //Get search option from POST
 //  $search_option = $_POST['search_option']['option'];
 //  $search_category = $_POST['search_option']['category'];
+
 //  //Get search radius option from POST
 //  $search_radius = $_POST['radius'];
 //  //Get the user ID from SESSION
@@ -39,6 +40,7 @@
 //    }
 //  //  print_r($user_restaurant_information);
 //  }
+
 ////   Set client key and secret
 	$client_key = FOURSQUARE_CLIENT_ID;
 	$client_secret = FOURSQUARE_SECRET_ID;
@@ -47,6 +49,7 @@
 ////	 Searching for venues nearby
 	$endpoint = "venues/explore";
 ////  Conditionals for determining choice
+
 //  if(isset($_POST['user_id'])){
 //    if($search_option === "random"){
 //      if($user_category_information[0]['count_category'] >= 5){
@@ -77,14 +80,23 @@
 //		    "query"=> $seacrh_category
 //	    );
 //    }
+
 //  }else{
-      $params = array(
-          "ll"=> $_POST['latitude'].",".$_POST['longitude'],
-          "intent"=>"browse",
-          "radius"=>5000,
-          "query"=> "sushi"
-      );
+      // $params = array(
+      //     "ll"=> $_POST['latitude'].",".$_POST['longitude'],
+      //     "intent"=>"browse",
+      //     "radius"=>5000,
+      //     "query"=> "sushi"
+      // );
 //      }
+
+    $params = array(
+                "ll"=> $_POST['latitude'].",".$_POST['longitude'],
+                "intent"=>"browse",
+                "radius"=>5000,
+                "query"=> "lunch"
+            );
+
 	// Perform a request to a public resource
 	$response = $foursquare->GetPublic($endpoint,$params);
 

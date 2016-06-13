@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html ng-app="routeApp">
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Food Decider</title>
@@ -12,16 +12,15 @@
   <link rel="stylesheet" type="text/css" href="style.css">
   <script src = "test.js"></script>
     <script src = "script.js"></script>
+    <script src="ang_routing.js"></script>
 </head>
-<body>
-    <main class="container-fluid main_container">
+<body ng-controller="mainCtrl">
+    <h1 id="lunch_heading" class="col-xs-12">What's For Lunch?</h1>
 
-        <h1 id="lunch_heading" class="col-xs-12">What's For Lunch?</h1>
-
-        <div id="description">
-            <h3>Food Search That's Truly Simple</h3>
-            <h4>Find The Best Local Cuisine - Effortlessly</h4>
+    <div id="display_contents">
+        <a href="#results">results</a>
+        <a href="#selection">selection</a>
+        <div ng-view></div>
     </div>
-    </main>
 </body>
 </html>
