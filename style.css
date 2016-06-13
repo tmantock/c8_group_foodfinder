@@ -11,7 +11,10 @@ html {
 }
 
 body {
-    background-color: #c90000;
+    background-color: #00BCD4;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
     /*background: linear-gradient( #81b2c9, transparent), linear-gradient( 90deg, #39d5a3, transparent), linear-gradient( -90deg, #e44c97, transparent);*/
     /*background-blend-mode: screen;*/
 }
@@ -111,6 +114,57 @@ button:focus {
     position: absolute;
     bottom: 1vh;
     background-color: white;
+}
+
+#results-page {
+  height: 100vh;
+  width: 100vw;
+}
+
+.result-card {
+  position: absolute !important;
+  height: 80%;
+  width: 90%;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.result-image {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 2%;
+  margin-bottom: 3%;
+  height: 45%;
+  width: 65%;
+  border: 1px solid black;
+  border-radius: 50%;
+}
+
+.result-text-holder {
+  border: 1px solid black;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 20%;
+  width: 90%;
+}
+
+.navigation-button {
+  margin-top: 6%;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 15%;
+  width: 23%;
+  border-radius: 50%;
+  border: 1px solid black;
+}
+
+.navigation-button p {
+  text-align: center;
+  padding-top: 35%;
 }
 
 /**************************************  MEDIA QUERY   **************************************************/
@@ -245,5 +299,3 @@ button:focus {
     }
 
 }
-
-

@@ -3,6 +3,7 @@
 var current_location;
 var restauraunts = [];
 var firstRest = restauraunts[0];
+var color_array = ["#E0F7FA","#B2EBF2","#80DEEA","#4DD0E1","#26C6DA","#00BCD4","#00ACC1","#0097A7","#00838F","#006064"]
 
 var options = {
     enableHighAccuracy: true,
@@ -70,11 +71,7 @@ function fourSquareReturn(response){
         fourSquareObj.price = response.response.groups[0].items[x].venue.price.message;
         fourSquareObj.rating = response.response.groups[0].items[x].venue.rating;
         restauraunts.push(fourSquareObj);
-      }//if
-       // fourSquareObj.tips = response.response.groups[0].items[x].tips;
-       // fourSquareObj.firstName =  response.response.groups[0].items[x].tips[0].user.firstName;
-       // fourSquareObj.lastName =  response.response.groups[0].items[x].tips[0].user.lastName;
-       // fourSquareObj.likes = response.response.groups[0].items[x].tips[0].likes[0].count;
+      }
     }//for loop
     results_to_DOM(restauraunts);
     console.log("fourSquareReturn",restauraunts);
@@ -85,24 +82,39 @@ function convert_to_miles(meters) {
 }
 
 function results_to_DOM (array) {
-  incrementer = 1;
+  var top_position = 0;
+  var z_index = 10;
+  var window_height = window.height();
   for(var i = 0; i<10; i++){
-    $("#result"+incrementer+"-img-holder").css({
-      background: "url(" + array[i].photo + ")",
-      'background-size': "cover",
-      'background-repeat': "no-repeat",
-      'background-position': "center center"
+    var div = $("<div>").addClass("result-card").css("background",color_array[i]);
+    var img = $("<div>").addClass("result-image").css({
+       background: "url(" + restauraunts[i].photo + ")",
+      'background-size': 'cover',
+      'background-repeat': 'no-repeat',
+      'background-position': 'center center'
     });
-    $("#result"+incrementer+"-rest-name").text(array[i].name);
-    $("#result"+incrementer+"-rest-description").text("Awesome Restaraunt");
-    $("#result"+incrementer+"-distance").text(convert_to_miles(array[i].distance));
-    $("#result"+incrementer+-"eta").text("25 min");
-    $("#result"+incrementer+"-rating").text(array[0].rating);
-    $("#result"+incrementer+"-price").text(array[0].price);
-    incrementer++;
+    var textDiv = $("<div>").addClass("result-text-holder");
+    var i_distance = $("<i>").addClass("fa fa-car");
+    var i_eta = $("<i>").addClass("fa fa-car");
+    var i_rating = $("<i>").addClass("fa fa-star");
+    var i_price = $("<i>").addClass("fa fa-usd fa-2x");
+    var distance = $("<p>").text("Distance: " + restauraunts[i].distance);
+    var eta = $("<p>");
+    var rating = $("<p>").text("Rating: " + restauraunts[i].rating);
+    var price = $("<p>").text("Price: " + restauraunts[i].price);
+    var nav_text = $("<p>").text("Let's Go!");
+    var nav_button = $("<div>").addClass("navigation-button");
+    nav_button.append(nav_text);
+    textDiv.append(i_distance, distance, i_eta, eta, i_rating, rating, i_price, price);
+    div.append (img, textDiv, nav_button);
+    $("#results-page").append(div.css({
+      top: 100 + top_position + window_height + "px",
+      'z-index': "+"+z_index
+    }));
+    top_position += 25;
+    z_index -= 1;
   }
 }
-
 
 
 $(document).ready(function() {
