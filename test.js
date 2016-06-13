@@ -12,7 +12,7 @@ $(document).ready(function(){
         height: '100%',
         'border-radius': 0,
         padding: '5px 5px 5px 5px'
-        }, 275).addClass('expanded');
+        }, 300).addClass('expanded');
         $this.css('z-index', -1);
         setTimeout(function() {
             window.location.href = "#results";
@@ -206,8 +206,6 @@ $(document).ready(function() {
     // console.log("current_location", current_location);
     current_location = navigator.geolocation.getCurrentPosition(success, error, options);
     console.log("current_location", current_location);
-    $("#more-info").click(function () {
-        console.log("#more-info button has been clicked");
-        $("#result-div").addClass("flip-card");
-    });
+    
+
 });//docready
