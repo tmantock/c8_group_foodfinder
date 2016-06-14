@@ -92,7 +92,7 @@ function results_to_DOM (array) {
       'background-position': 'center center'
     });
     var textDiv = $("<div>").addClass("result-text-holder container-fluid");
-    var name = $("<h2>").text(array[i].name);
+    var name = $("<h3>").text(array[i].name);
     var i_distance = $("<i>").addClass("fa fa-car");
     var i_eta = $("<i>").addClass("fa fa-clock-o");
     var i_rating = $("<i>").addClass("fa fa-star");
