@@ -92,11 +92,12 @@ function results_to_DOM (array) {
       'background-position': 'center center'
     });
     var textDiv = $("<div>").addClass("result-text-holder");
+    var name = $("<h4>").text(array[i].name);
     var i_distance = $("<i>").addClass("fa fa-car");
-    var i_eta = $("<i>").addClass("fa fa-car");
+    var i_eta = $("<i>").addClass("fa fa-clock-o");
     var i_rating = $("<i>").addClass("fa fa-star");
     var i_price = $("<i>").addClass("fa fa-usd fa-2x");
-    var distance = $("<p>").text("Distance: " + array[i].distance);
+    var distance = $("<p>").text(convert_to_miles(array[i].distance) + " miles");
     var eta = $("<p>");
     var rating = $("<p>").text("Rating: " + array[i].rating);
     var price = $("<p>").text("Price: " + array[i].price);
@@ -126,13 +127,13 @@ function results_to_DOM (array) {
     next_div.append(next_btn);
     nav_div.append(nav_button);
     btn_div.append(prev_div,nav_div,next_div);
-    textDiv.append(i_distance, distance, i_eta, eta, i_rating, rating, i_price, price);
+    textDiv.append(name, i_distance, distance, i_eta, eta, i_rating, rating, i_price, price);
     div.append (img, textDiv, btn_div);
     $("#results-page").append(div.attr("id","card" + i).css({
       top: 100 + top_position + window_height + "px",
       'z-index': "+"+z_index
     }));
-    top_position += 25;
+    top_position += 15;
     z_index -= 1;
     card_array.push("card"+i);
   }
@@ -247,27 +248,29 @@ function distance_sort(array) {
     return array;
 }
 
-$(document).on("swiperight", ".result-card", function(){
-    $(this).hide();
-  });
-
 $(document).ready(function(){
   navigator.geolocation.getCurrentPosition(success,error, options);
 
-  $('.circle').on('click', function() {
-      var $this = $(this);
-      $this.css('z-index', 2).removeClass('expanded').css('z-index', 1);
-      $this.animate({
-        left: 0,
-        top: 0,
-        margin: 0,
-        width: '100%',
-        height: '100%',
-        'border-radius': 0,
-        padding: '5px 5px 5px 5px'
-        }, 275).addClass('expanded');
-      $this.css('z-index', 0);
-    });
+
+$('.circle').on('click', function() {
+     var $this = $(this);
+     $this.css('z-index', 2).removeClass('expanded').css('z-index', 1);
+     $this.animate({
+       left: 0,
+       top: 0,
+       margin: 0,
+       width: '100%',
+       height: '100%',
+       'border-radius': 0,
+       padding: '5px 5px 5px 5px'
+       }, 300).addClass('expanded');
+       $this.css('z-index', -1);
+       setTimeout(function() {
+           window.location.href = "#results";
+           $("body").css('background-color', '#006064 ');
+       },350);
+     $this.css('z-index', 0);
+   });
 
     $("#more-info").click(function () {
         console.log("#more-info button has been clicked");
