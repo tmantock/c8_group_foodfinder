@@ -27,6 +27,7 @@ app.controller('mainCtrl', function($scope){
  $scope.message = ("Hellow from main Crtl");
 });
 app.controller('landingCtrl', function($scope){
+   click_circle();
    // $scope.message = ("Hellow from landing Crtl");
 });
 

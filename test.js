@@ -252,8 +252,12 @@ function distance_sort(array) {
     return array;
 }
 
-$(document).ready(function(){
+$(document).ready(function() {
   navigator.geolocation.getCurrentPosition(success,error, options);
+});
+
+
+function click_circle() {
 
   $(".circle").on('click', function() {
        var $this = $(this);
@@ -275,8 +279,9 @@ $(document).ready(function(){
        $this.css('z-index', 0);
      });
 
+// we think we need to move this to trigger on landing as well FOR selection
     $("#more-info").click(function () {
         console.log("#more-info button has been clicked");
         $("#result-div").addClass("flip-card");
     });
-});
+}
