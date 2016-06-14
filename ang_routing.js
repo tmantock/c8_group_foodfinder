@@ -24,27 +24,20 @@ app.config(function($routeProvider){
 });
 
 app.controller('mainCtrl', function($scope){
-<<<<<<< HEAD
  // $scope.message = ("Hellow from main Crtl");
-=======
   $scope.message = ("Hellow from main Crtl");
->>>>>>> dev
 });
 app.controller('landingCtrl', function($scope){
     // $scope.message = ("Hellow from landing Crtl");
 });
-
 app.controller('resultsCtrl', function($scope){
-<<<<<<< HEAD
-    // $scope.message = "Hellow from results Crtl";
-=======
-    // $("#image-holder").append(restauraunts.firstRest.photo);
-    $scope.message = "Hellow from results Crtl";
-    // $scope.message = firstRest.photo;
->>>>>>> dev
+  // $scope.message = "Hellow from results Crtl";
+  // $("#image-holder").append(restauraunts.firstRest.photo);
+  $scope.message = "Hellow from results Crtl";
+  // $scope.message = firstRest.photo;
 });
 
 app.controller('selectionCtrl', function($scope){
-    // $scope.message = ("Hellow from selection Crtl");
-    // $scope.message = ("Hellow from selection Crtl");
+  // $scope.message = ("Hellow from selection Crtl");
+  // $scope.message = ("Hellow from selection Crtl");
 });
