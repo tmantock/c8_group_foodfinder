@@ -91,35 +91,47 @@ function results_to_DOM (array) {
       'background-repeat': 'no-repeat',
       'background-position': 'center center'
     });
-    var textDiv = $("<div>").addClass("result-text-holder");
-    var name = $("<h4>").text(array[i].name);
+    var textDiv = $("<div>").addClass("result-text-holder container-fluid");
+    var name = $("<h2>").text(array[i].name);
     var i_distance = $("<i>").addClass("fa fa-car");
     var i_eta = $("<i>").addClass("fa fa-clock-o");
     var i_rating = $("<i>").addClass("fa fa-star");
-    var i_price = $("<i>").addClass("fa fa-usd fa-2x");
-    var distance = $("<p>").text(convert_to_miles(array[i].distance) + " miles");
+    var i_price = $("<i>").addClass("fa fa-usd");
+    var distance_container = $("<div>").addClass("col-xs-3 info-container");
+    var eta_container = $("<div>").addClass("col-xs-3 info-container");
+    var rating_container = $("<div>").addClass("col-xs-3 info-container");
+    var price_container = $("<div>").addClass("col-xs-3 info-container");
+    var distance = $("<p>").text(convert_to_miles(array[i].distance) + " mi.");
     var eta = $("<p>");
-    var rating = $("<p>").text("Rating: " + array[i].rating);
-    var price = $("<p>").text("Price: " + array[i].price);
+    var rating = $("<p>").text(array[i].rating);
+    var price = $("<p>").text(array[i].price);
     var btn_div = $("<div>").addClass("button-holder");
     var i_left = $("<i>").addClass("fa fa-arrow-left");
     var i_right = $("<i>").addClass("fa fa-arrow-right");
     var prev_div = $("<div>").addClass("col-xs-4 result-button");
     var next_div = $("<div>").addClass("col-xs-4 result-button");
     var nav_div = $("<div>").addClass("col-xs-4 result-button");
-    var nav_text = $("<p>").text("Let's Go!");
+    var nav_text = $("<p>").text("More Info");
     var next_btn = $("<div>").addClass("next-button").attr("data-position",i);
     var prev_btn = $("<div>").addClass("prev-button").attr("data-position",i);
     var nav_button = $("<div>").addClass("navigation-button");
 
     next_btn.on("click", function (){
       next_card(this , 1);
-    })
+    });
 
     prev_btn.on("click", function (){
       prev_card(this , 1);
-    })
+    });
 
+    nav_button.on("click", function(){
+      window.location.href = "#selection"
+    });
+
+    distance_container.append(i_distance, distance); 
+    eta_container.append(i_eta, eta);
+    rating_container.append(i_rating, rating);
+    price_container.append(i_price, price);  
     prev_btn.append(i_left);
     next_btn.append(i_right);
     nav_button.append(nav_text);
@@ -127,7 +139,7 @@ function results_to_DOM (array) {
     next_div.append(next_btn);
     nav_div.append(nav_button);
     btn_div.append(prev_div,nav_div,next_div);
-    textDiv.append(name, i_distance, distance, i_eta, eta, i_rating, rating, i_price, price);
+    textDiv.append(name, distance_container, eta_container, rating_container, price_container);
     div.append (img, textDiv, btn_div);
     $("#results-page").append(div.attr("id","card" + i).css({
       top: 100 + top_position + window_height + "px",
@@ -251,26 +263,25 @@ function distance_sort(array) {
 $(document).ready(function(){
   navigator.geolocation.getCurrentPosition(success,error, options);
 
-
-$('.circle').on('click', function() {
-     var $this = $(this);
-     $this.css('z-index', 2).removeClass('expanded').css('z-index', 1);
-     $this.animate({
-       left: 0,
-       top: 0,
-       margin: 0,
-       width: '100%',
-       height: '100%',
-       'border-radius': 0,
-       padding: '5px 5px 5px 5px'
-       }, 300).addClass('expanded');
-       $this.css('z-index', -1);
-       setTimeout(function() {
-           window.location.href = "#results";
-           $("body").css('background-color', '#006064 ');
-       },350);
-     $this.css('z-index', 0);
-   });
+    $('.circle').on('click', function() {
+         var $this = $(this);
+         $this.css('z-index', 2).removeClass('expanded').css('z-index', 1);
+         $this.animate({
+           left: 0,
+           top: 0,
+           margin: 0,
+           width: '100%',
+           height: '100%',
+           'border-radius': 0,
+           padding: '5px 5px 5px 5px'
+           }, 300).addClass('expanded');
+           $this.css('z-index', -1);
+           setTimeout(function() {
+               window.location.href = "#results";
+               $("body").css('background-color', '#006064 ');
+           },350);
+         $this.css('z-index', 0);
+       });
 
     $("#more-info").click(function () {
         console.log("#more-info button has been clicked");

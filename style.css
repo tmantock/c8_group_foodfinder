@@ -15,8 +15,6 @@ body {
     height: 100vh;
     width: 100vw;
     overflow: hidden;
-    /*background: linear-gradient( #81b2c9, transparent), linear-gradient( 90deg, #39d5a3, transparent), linear-gradient( -90deg, #e44c97, transparent);*/
-    /*background-blend-mode: screen;*/
 }
 
 button:focus {
@@ -24,14 +22,6 @@ button:focus {
 }
 
 #lunch_heading {
-    font-size: 12vh;
-    color: white;
-    text-shadow: 0 5px 8px black;
-    padding: 1vh 0 3vh 0;
-    font-family: 'Pacifico';
-}
-
-#lunch_heading-landing {
     font-size: 12vh;
     color: white;
     text-shadow: 0 5px 8px black;
@@ -47,34 +37,6 @@ button:focus {
 .landing-heading {
     color: white;
     text-shadow: 0px 1px 3px black;
-}
-
-.animate {
-    transition: all 0.1s;
-    -webkit-transition: all 0.1s;
-}
-
-.action-button {
-    position: relative;
-    padding: 10px 35px;
-    margin: 0px 10px 10px 0px;
-    border-radius: 5px;
-    font-family: 'Pacifico';
-    font-size: 25px;
-    color: #FFF;
-    text-decoration: none;
-}
-
-.red {
-    background-color: red;
-    border-bottom: 5px solid #ce0010;
-    text-shadow: 0px 2px 3px black;
-}
-
-.action-button:active {
-    transform: translate(0px,5px);
-    -webkit-transform: translate(0px,5px);
-    border-bottom: 1px solid;
 }
 
 #random {
@@ -149,7 +111,7 @@ button:focus {
   position: relative;
   left: 50%;
   transform: translateX(-50%);
-    box-shadow: 0 8px 4px rgba(0,0,0,0.3), 0 12px 12px rgba(0,0,0,0.22);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
 .result-image {
@@ -168,18 +130,18 @@ button:focus {
     position: relative;
     left: 50%;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-    transform: translateX(-50%);
-    height: 20%;
+    transform: translateX(-55%);
+    height: 29%;
     background-color: white;
     width: 90%;
 }
 
 .button-holder {
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  height: 20%;
-  width: 90%;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, -8%);
+    height: 20%;
+    width: 90%;
 }
 
 .result-button {
@@ -210,14 +172,20 @@ button:focus {
   cursor: pointer;
   z-index: 0;
   background: #006064;
-  box-shadow: 0 6px 9px 0 rgba(0, 0, 0, 0.75);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   color: white;
 }
 
+.next-button > i,
+.prev-button > i{
+    color: white;
+}
 
 .navigation-button p {
   text-align: center;
-  padding-top: 35%;
+  padding-top: 22%;
+  font-family: "Pacifico";
+  text-shadow: 0px 1px 1px black;
 }
 
 /**************************************  MEDIA QUERY   **************************************************/
@@ -285,6 +253,23 @@ button:focus {
         width: 93%;
         transform: translate(0%,-13%);
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    }
+
+    .info-container {
+        height: 45px;
+        margin-top: 5px;
+        border: 0.5px solid #f5f5f5;
+        background-color: rgba(0,0,0,0.1);
+        padding: 0;
+    }
+
+    .info-container > p {
+        font-size: 11px;
+    }
+
+    .info-container > i {
+        color: #00bcd4;
+        padding-top: 6px;
     }
 
     .restaurant-info {
