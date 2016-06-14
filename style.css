@@ -11,21 +11,17 @@ html {
 }
 
 body {
-    background-color: #c90000;
-    /*background: linear-gradient( #81b2c9, transparent), linear-gradient( 90deg, #39d5a3, transparent), linear-gradient( -90deg, #e44c97, transparent);*/
-    /*background-blend-mode: screen;*/
+    background-color: #00BCD4;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+button:focus {
+    outline: 0;
 }
 
 #lunch_heading {
-    font-size: 12vh;
-    color: white;
-    text-shadow: 0 5px 8px black;
-    padding: 1vh 0 3vh 0;
-    font-family: 'Pacifico';
-}
-
-
-#lunch_heading-landing {
     font-size: 12vh;
     color: white;
     text-shadow: 0 5px 8px black;
@@ -38,59 +34,83 @@ body {
     text-shadow: 0 1px 1px black;
 }
 
-#image-carousel {
-    height: 50vh;
-    transform: translate(0%, 50%);
-    background-color: rgba(255,255,255,0.5);
-}
-
-#result-div{
-    width: 94%;
-    height: 76vh;
-    transform: translate(3%, 25%);
-    background-color: rgba(0,0,0,0.33);
-    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px  12px rgba(0,0,0,0.22);
+.landing-heading {
     color: white;
-    text-shadow: 0 1px 3px black;
+    text-shadow: 0px 1px 3px black;
 }
 
-button:focus {
-    outline: 0;
-}
-
-.animate {
-    transition: all 0.1s;
-    -webkit-transition: all 0.1s;
-}
-
-.action-button {
-    position: relative;
-    padding: 10px 35px;
-    margin: 0px 10px 10px 0px;
-    border-radius: 5px;
-    font-family: 'Pacifico';
-    font-size: 25px;
+#random {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    margin-top: -43px;
     color: #FFF;
-    text-decoration: none;
-}
-.red {
-    background-color: red;
-    border-bottom: 5px solid #ce0010;
-    text-shadow: 0px 2px 3px black;
+    text-shadow: 1px 3px 4px black;
+    font-family: 'Pacifico';
 }
 
-.action-button:active {
-    transform: translate(0px,5px);
-    -webkit-transform: translate(0px,5px);
-    border-bottom: 1px solid;
+.circle {
+    position: absolute;
+    left: 33%;
+    top: 50%;
+    height: 175px;
+    width: 175px;
+    margin: -25px 0 0 -25px;
+    cursor: pointer;
+    border-radius: 999em;
+    z-index: 0;
+    background: #006064;
+    box-shadow: 0 6px 9px 0 rgba(0, 0, 0, 0.75);
+    font-size: 36px;
 }
 
-.flip-card {
-    background-color: white;
-    transform: rotate3D(0,1,0,180deg);
+.circle > #show {
+    display: none;
 }
 
-/**TODO ************************************  CAROUSEL   **************************************************/
+.circle.expanded > #random {
+    display: none;
+}
+
+#login-button {
+    color: #fff;
+    background-color: #006064;
+    border-color: #46b8da;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.submit {
+    background-color: #33b5e5;
+    color: white;
+    padding: 5px 0 5px 0;
+}
+
+.submit:hover {
+    background-color: #349fd0;
+    cursor: pointer;
+    color: white;
+    padding: 5px 0 5px 0;
+}
+
+.login-fields {
+    border: 1px solid #e9e9e9;
+    margin-bottom: 8px;
+    padding: 5px;
+}
+
+.login-icon {
+    background-color: #55acee;
+    color: white;
+}
+
+.modal-dialog {
+    margin-top: 50%;
+}
+
+/**************************************  CAROUSEL   **************************************************/
 
 /*CAROUSEL IMAGE SCALING*/
 .carousel-inner > .item > img,
@@ -133,6 +153,95 @@ button:focus {
 }
 
 
+#results-page {
+  height: 100vh;
+  width: 100vw;
+}
+
+.result-card {
+  position: absolute !important;
+  height: 80%;
+  width: 90%;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.result-image {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 3%;
+    margin-bottom: 5%;
+    height: 45%;
+    width: 65%;
+    border-radius: 50%;
+    box-shadow: 0 6px 9px 0 rgba(0, 0, 0, 0.75);
+}
+
+.result-text-holder {
+    position: relative;
+    left: 50%;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    transform: translateX(-55%);
+    height: 29%;
+    background-color: white;
+    width: 90%;
+}
+
+.button-holder {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, -8%);
+    height: 20%;
+    width: 90%;
+}
+
+.result-button {
+  height: 100%;
+}
+
+.prev-button i,
+.next-button i {
+  text-align: center;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: black;
+}
+
+.navigation-button,
+.next-button,
+.prev-button {
+  margin-top: 6%;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  height: 70%;
+  width: 100%;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 0;
+  background: #006064;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  color: white;
+}
+
+.next-button > i,
+.prev-button > i{
+    color: white;
+}
+
+.navigation-button p {
+  text-align: center;
+  padding-top: 22%;
+  font-family: "Pacifico";
+  text-shadow: 0px 1px 1px black;
+}
+
 
 /**************************************  MEDIA QUERY   **************************************************/
 @media screen and (max-width: 800px) {
@@ -140,7 +249,7 @@ button:focus {
     #lunch_heading {
         font-size: 5vh;
         padding: 0;
-        text-shadow: 0 3px 5px black;
+        text-shadow: 1px 3px black;
     }
 
     #description > * {
@@ -185,12 +294,38 @@ button:focus {
         transform: translate(13%,2%);
     }
 
-    #info-div {
+    #results-info-div {
         background-color: rgba(0,0,0,0.50);
-        height: 60%;
+        height: 57%;
+        width: 93%;
+        transform: translate(4%,-19%);
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    }
+
+    #selection-info-div {
+        background-color: rgba(0,0,0,0.50);
+        height: 59%;
         width: 93%;
         transform: translate(0%,-13%);
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    }
+
+    .info-container {
+        height: 45px;
+        margin-top: 5px;
+        border: 0.5px solid #f5f5f5;
+        background-color: rgba(0,0,0,0.1);
+        padding: 0;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+    }
+
+    .info-container > p {
+        font-size: 11px;
+    }
+
+    .info-container > i {
+        color: #00bcd4;
+        padding-top: 6px;
     }
 
     .restaurant-info {
@@ -208,13 +343,17 @@ button:focus {
         padding-bottom: 5px;
     }
 
+    .landing-heading {
+        margin-top: 3px;
+        font-size: 2vh;
+    }
     .animate {
         transition: all 0.1s;
         -webkit-transition: all 0.1s;
     }
 
     .action-button {
-        position: absolute;
+        position: relative;
         padding: 8px 20px;
         margin: 0px 10px 10px 0px;
         border-radius: 5px;
@@ -222,10 +361,11 @@ button:focus {
         font-size: 20px;
         color: #FFF;
         text-decoration: none;
-        bottom: 2px;
         background-color: red;
         border-bottom: 5px solid #ce0010;
         text-shadow: 0px 2px 3px #3b3b3b;
+        top: 5vh;
+        transform: translate(5%,0%);
     }
 
     .action-button:active {
@@ -250,7 +390,7 @@ button:focus {
     .restaurant-info-back {
         height: 44px;
         padding: 0;
-        background-color: red;
+        background-color: whitesmoke;
         margin-bottom: 6px;
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }
@@ -266,5 +406,3 @@ button:focus {
     }
 
 }
-
-
