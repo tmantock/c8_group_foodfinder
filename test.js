@@ -1,28 +1,3 @@
-$(document).ready(function(){
-  navigator.geolocation.getCurrentPosition(success,error, options);
-
-  $('.circle').on('click', function() {
-      var $this = $(this);
-      $this.css('z-index', 2).removeClass('expanded').css('z-index', 1);
-      $this.animate({
-        left: 0,
-        top: 0,
-        margin: 0,
-        width: '100%',
-        height: '100%',
-        'border-radius': 0,
-        padding: '5px 5px 5px 5px'
-        }, 300).addClass('expanded');
-        $this.css('z-index', -1);
-        setTimeout(function() {
-            window.location.href = "#results";
-            $("body").css('background-color', '#006064');
-        },350);
-      $this.css('z-index', 0);
-
-    });
-});
-
 /********************* FOURSQUARE AJAX CALLS     *******************************/
 
 var current_location;
@@ -50,7 +25,7 @@ function error(err) {
 function foursquare_call(crd){
  $.ajax({
    dataType: "JSON",
-  url: "https://api.foursquare.com/v2/venues/explore?client_id= BJ55LPF34FXTMHV4VOW0L0VMAUV4MYG2VK3JC33ELWU2KOXZ&client_secret= KNMJ3JKCNBI4AUWZNHPLZBQZSMEQTURPQW0EGS4AKOO2TM3X&v=20130815&ll=33.64,-117.74&venuePhotos=1&query=bbq",
+  url: "https://api.foursquare.com/v2/venues/explore?client_id= BJ55LPF34FXTMHV4VOW0L0VMAUV4MYG2VK3JC33ELWU2KOXZ&client_secret= KNMJ3JKCNBI4AUWZNHPLZBQZSMEQTURPQW0EGS4AKOO2TM3X&v=20130815&ll=33.64,-117.74&venuePhotos=1&query=sushi",
   method: "GET",
   data: {
     latitude: crd.latitude,
@@ -124,13 +99,36 @@ function results_to_DOM (array) {
     var i_price = $("<i>").addClass("fa fa-usd fa-2x");
     var distance = $("<p>").text(convert_to_miles(array[i].distance) + " miles");
     var eta = $("<p>");
-    var rating = $("<p>").text(array[i].rating);
-    var price = $("<p>").text(array[i].price);
+    var rating = $("<p>").text("Rating: " + array[i].rating);
+    var price = $("<p>").text("Price: " + array[i].price);
+    var btn_div = $("<div>").addClass("button-holder");
+    var i_left = $("<i>").addClass("fa fa-arrow-left");
+    var i_right = $("<i>").addClass("fa fa-arrow-right");
+    var prev_div = $("<div>").addClass("col-xs-4 result-button");
+    var next_div = $("<div>").addClass("col-xs-4 result-button");
+    var nav_div = $("<div>").addClass("col-xs-4 result-button");
     var nav_text = $("<p>").text("Let's Go!");
+    var next_btn = $("<div>").addClass("next-button").attr("data-position",i);
+    var prev_btn = $("<div>").addClass("prev-button").attr("data-position",i);
     var nav_button = $("<div>").addClass("navigation-button");
+
+    next_btn.on("click", function (){
+      next_card(this , 1);
+    })
+
+    prev_btn.on("click", function (){
+      prev_card(this , 1);
+    })
+
+    prev_btn.append(i_left);
+    next_btn.append(i_right);
     nav_button.append(nav_text);
+    prev_div.append(prev_btn);
+    next_div.append(next_btn);
+    nav_div.append(nav_button);
+    btn_div.append(prev_div,nav_div,next_div);
     textDiv.append(name, i_distance, distance, i_eta, eta, i_rating, rating, i_price, price);
-    div.append (img, textDiv, nav_button);
+    div.append (img, textDiv, btn_div);
     $("#results-page").append(div.attr("id","card" + i).css({
       top: 100 + top_position + window_height + "px",
       'z-index': "+"+z_index
@@ -149,6 +147,51 @@ function stack_up (array, height) {
     var current_position = target_card.position().top;
     target_card.delay(delay).animate({top: (height - current_position) * -1 + "px"},500);
     delay+=300;
+  }
+}
+
+function next_card (element , direction) {
+  var card = $(element).attr("data-position");
+  if (parseInt(card) !== 9){
+    var parent = $("#card"+card);
+    var current_position = parent.position().top;
+    var next_child_position = $("#card" + (parseInt(card) + 1)).position().top;
+    var distance = 0;
+    var current_width = parent.width();
+    parent.animate({left: current_width * 2 + "px"},300);
+    card = parseInt(card) + 1;
+    var length = 10;
+    for(var i = card; i<=length; i++){
+      var child = $("#card" + i);
+      child.animate({top: (current_position + distance) + "px"},500);
+      distance += 25;
+    }
+  }
+  else {
+    return;
+  }
+}
+
+function prev_card (element , direction) {
+  var card = $(element).attr("data-position");
+  if (parseInt(card) !== 0){
+    var parent = $("#card"+card);
+    var prev_card = $("#card" + (parseInt(card) - 1));
+    var card_width = prev_card.width();
+    var current_position = parent.position();
+    var distance = 25;
+    var current_width = parent.width();
+    prev_card.animate({left: current_position.left + (card_width/2) + "px"},300);
+    card = parseInt(card);
+    var length = 10;
+    for(var i = card; i<=length; i++){
+      var child = $("#card" + i);
+      child.animate({top: (current_position.top) + distance + "px"},500);
+      distance += 25;
+    }
+  }
+  else {
+    return;
   }
 }
 
@@ -204,3 +247,33 @@ function distance_sort(array) {
     while (swapped)
     return array;
 }
+
+$(document).ready(function(){
+  navigator.geolocation.getCurrentPosition(success,error, options);
+
+
+$('.circle').on('click', function() {
+     var $this = $(this);
+     $this.css('z-index', 2).removeClass('expanded').css('z-index', 1);
+     $this.animate({
+       left: 0,
+       top: 0,
+       margin: 0,
+       width: '100%',
+       height: '100%',
+       'border-radius': 0,
+       padding: '5px 5px 5px 5px'
+       }, 300).addClass('expanded');
+       $this.css('z-index', -1);
+       setTimeout(function() {
+           window.location.href = "#results";
+           $("body").css('background-color', '#006064 ');
+       },350);
+     $this.css('z-index', 0);
+   });
+
+    $("#more-info").click(function () {
+        console.log("#more-info button has been clicked");
+        $("#result-div").addClass("flip-card");
+    });
+});
