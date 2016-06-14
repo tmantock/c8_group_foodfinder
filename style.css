@@ -182,8 +182,13 @@ button:focus {
   height: 15%;
   width: 23%;
   border-radius: 50%;
-  border: 1px solid black;
+  cursor: pointer;
+  z-index: 0;
+  background: #006064;
+  box-shadow: 0 6px 9px 0 rgba(0, 0, 0, 0.75);
+  color: white;
 }
+
 
 .navigation-button p {
   text-align: center;
@@ -319,7 +324,7 @@ button:focus {
     .restaurant-info-back {
         height: 44px;
         padding: 0;
-        background-color: red;
+        background-color: whitesmoke;
         margin-bottom: 6px;
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }

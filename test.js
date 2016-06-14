@@ -117,24 +117,25 @@ function results_to_DOM (array) {
       'background-position': 'center center'
     });
     var textDiv = $("<div>").addClass("result-text-holder");
+    var name = $("<h4>").text(array[i].name);
     var i_distance = $("<i>").addClass("fa fa-car");
-    var i_eta = $("<i>").addClass("fa fa-car");
+    var i_eta = $("<i>").addClass("fa fa-clock-o");
     var i_rating = $("<i>").addClass("fa fa-star");
     var i_price = $("<i>").addClass("fa fa-usd fa-2x");
-    var distance = $("<p>").text("Distance: " + array[i].distance);
+    var distance = $("<p>").text(convert_to_miles(array[i].distance) + " miles");
     var eta = $("<p>");
-    var rating = $("<p>").text("Rating: " + array[i].rating);
-    var price = $("<p>").text("Price: " + array[i].price);
+    var rating = $("<p>").text(array[i].rating);
+    var price = $("<p>").text(array[i].price);
     var nav_text = $("<p>").text("Let's Go!");
     var nav_button = $("<div>").addClass("navigation-button");
     nav_button.append(nav_text);
-    textDiv.append(i_distance, distance, i_eta, eta, i_rating, rating, i_price, price);
+    textDiv.append(name, i_distance, distance, i_eta, eta, i_rating, rating, i_price, price);
     div.append (img, textDiv, nav_button);
     $("#results-page").append(div.attr("id","card" + i).css({
       top: 100 + top_position + window_height + "px",
       'z-index': "+"+z_index
     }));
-    top_position += 25;
+    top_position += 15;
     z_index -= 1;
     card_array.push("card"+i);
   }
