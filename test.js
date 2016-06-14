@@ -23,29 +23,33 @@ function error(err) {
 }
 
 function foursquare_call(crd){
- $.ajax({
-   dataType: "JSON",
-  url: "https://api.foursquare.com/v2/venues/explore?client_id= BJ55LPF34FXTMHV4VOW0L0VMAUV4MYG2VK3JC33ELWU2KOXZ&client_secret= KNMJ3JKCNBI4AUWZNHPLZBQZSMEQTURPQW0EGS4AKOO2TM3X&v=20130815&ll=33.64,-117.74&venuePhotos=1&query=sushi",
-  method: "GET",
-  data: {
-    latitude: crd.latitude,
-    longitude: crd.longitude,
-    radius: 100000,
-    user_id: 555,
-    search_option: {
-      option: "random",
-      category: "sushi"
-    }
-  },
-  success: function (response){
-    fourSquareReturn(response);
-    console.log(response.response);
-  },
-  error: function(response){
-  console.log(response);
-  }
-  })
-}
+
+     $.ajax({
+        dataType: "JSON",
+        // url: "https://api.foursquare.com/v2/venues/explore?client_id= BJ55LPF34FXTMHV4VOW0L0VMAUV4MYG2VK3JC33ELWU2KOXZ&client_secret= KNMJ3JKCNBI4AUWZNHPLZBQZSMEQTURPQW0EGS4AKOO2TM3X&v=20130815&ll=33.64,-117.74&venuePhotos=1&query=bbq",
+        // method: "GET",
+        url: 'search.php',
+        method: "get",
+         data: {
+            latitude: crd.latitude,
+            longitude: crd.longitude,
+            radius: 100000,
+            user_id: 555,
+            search_option: {
+                option: "random",
+                category: "sushi"
+                }
+            },
+         success: function (response){
+         fourSquareReturn(response);
+            console.log(response.response);
+          },//success
+          error: function(response){
+                console.log(response);
+          }//error
+      });//ajax
+} //foursquare_call
+
 
 function fourSquareReturn(response){
     var fourSquareResponse = response.response.groups[0].items;
