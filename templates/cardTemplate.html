@@ -1,0 +1,15 @@
+<div class="col-sm-3" id="{{'card'+index}}">
+    <img ng-src="{{ restData.photo}}" alt="{{ restData.name }}">
+    <div class="caption">
+        <h3>{{restData.name}}</h3>
+        <p>Rating: {{restData.rating}}</p>
+        <p>{{restData.hours.status}}</p>
+        <div>
+            <p>Address:</p>
+            <p>{{restData.street}}</p>
+            <p>{{restData.city + " " + restData.state + ", " + restData.zip}}</p>
+        </div>
+        <p>{{restData.phone}}</p>
+        <p><a href="{{restData.website}}">Visit Their Website</a></p>
+    </div>
+</div>
