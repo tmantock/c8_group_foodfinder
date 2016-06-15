@@ -55,7 +55,7 @@ function fourSquareReturn(response){
         fourSquareObj.name = response.response.groups[0].items[x].venue.name;
         fourSquareObj.distance = response.response.groups[0].items[x].venue.location.distance;
         fourSquareObj.photo = response.response.groups[0].items[x].venue.photos.groups[0].items[0].prefix + "300x200"+ response.response.groups[0].items[x].venue.photos.groups[0].items[0].suffix;
-        fourSquareObj.hours = response.response.groups[0].items[x].venue.hours;
+        fourSquareObj.hours = response.response.groups[0].items[x].venue.hours.status;
         fourSquareObj.website =  response.response.groups[0].items[x].venue.url;
         fourSquareObj.phone = response.response.groups[0].items[x].venue.contact.formattedPhone;
         fourSquareObj.venueid = response.response.groups[0].items[x].venue.id;
@@ -91,27 +91,58 @@ function results_to_DOM (array) {
       'background-repeat': 'no-repeat',
       'background-position': 'center center'
     });
-    var textDiv = $("<div>").addClass("result-text-holder container-fluid");
+      
+    var addressDiv = $("<div>").addClass("address-text-holder container-fluid");
+    /** ADDRESS CONTAINER**/
     var name = $("<h3>").text(array[i].name);
+    var street = $('<p>').text(array[i].street);
+    var city_state_zip = $('<p>').text(array[i].city + ", " + array[i].state + " " + array[i].zip);
+    var phone = $('<p>').text(array[i].phone);
+    /** URL **/
+    var i_url_container = $('<div>').addClass("info-container col-xs-3");
+    var i_url = $("<i>").addClass("fa fa-globe");
+    var i_url_tag = $("<p>").text("Web");
+    var url_container = $('<div>').addClass("info-container col-xs-9");
+    var url = $("<p>").text(array[i].website).addClass("info-content");
+    /** CREDIT CARD **/
+    var i_cc_container = $('<div>').addClass("info-container col-xs-3");
+    var i_cc = $("<i>").addClass("fa fa-credit-card");
+    var i_cc_tag = $("<p>").text("Accept CC?");
+    var cc_container = $('<div>').addClass("info-container col-xs-9");
+    var cc = $("<p>").addClass("info-content");
+    /** HOURS **/
+    var i_hours_container = $('<div>').addClass("info-container col-xs-3");
+    var i_hours = $("<i>").addClass("fa fa-clock-o");
+    var i_hours_tag = $("<p>").text("Open?");
+    var hours_container = $('<div>').addClass("info-container col-xs-9");
+    var hours = $("<p>").text(array[i].hours).addClass("info-content");
+    /** DISTANCE **/
+    var distance_container = $('<div>').addClass("info-container col-xs-4");
     var i_distance = $("<i>").addClass("fa fa-car");
-    var i_eta = $("<i>").addClass("fa fa-clock-o");
-    var i_rating = $("<i>").addClass("fa fa-star");
-    var i_price = $("<i>").addClass("fa fa-usd");
-    var distance_container = $("<div>").addClass("col-xs-3 info-container");
-    var eta_container = $("<div>").addClass("col-xs-3 info-container");
-    var rating_container = $("<div>").addClass("col-xs-3 info-container");
-    var price_container = $("<div>").addClass("col-xs-3 info-container");
     var distance = $("<p>").text(convert_to_miles(array[i].distance) + " mi.");
-    var eta = $("<p>");
+    /** RATING **/
+    var rating_container = $('<div>').addClass("info-container col-xs-4");
+    var i_rating = $("<i>").addClass("fa fa-star");
     var rating = $("<p>").text(array[i].rating);
+    /** PRICING **/
+    var price_container = $("<div>").addClass("info-container col-xs-4");
+    var i_price = $("<i>").addClass("fa fa-usd");
     var price = $("<p>").text(array[i].price);
+    // /** ETA **/
+    // var eta_container = $("<div>").addClass("col-xs-3 info-container");
+    // var i_eta = $("<i>").addClass("fa fa-clock-o");
+    // var eta = $("<p>");
+    /** MORE INFO **/
+    var moreInfoDiv = $("<div>").addClass("more-info-holder container-fluid");  
+
+
     var btn_div = $("<div>").addClass("button-holder");
     var i_left = $("<i>").addClass("fa fa-arrow-left");
     var i_right = $("<i>").addClass("fa fa-arrow-right");
     var prev_div = $("<div>").addClass("col-xs-4 result-button");
     var next_div = $("<div>").addClass("col-xs-4 result-button");
     var nav_div = $("<div>").addClass("col-xs-4 result-button");
-    var nav_text = $("<p>").text("Let's Go!");
+    var nav_text = $("<p>").text("Go!");
     var next_btn = $("<div>").addClass("next-button").attr("data-position",i);
     var prev_btn = $("<div>").addClass("prev-button").attr("data-position",i);
     var nav_button = $("<div>").addClass("navigation-button");
@@ -128,10 +159,18 @@ function results_to_DOM (array) {
       window.location.href = "#selection"
     });
 
-    distance_container.append(i_distance, distance); 
-    eta_container.append(i_eta, eta);
+
+    i_cc_container.append(i_cc, i_cc_tag);
+    cc_container.append(cc);
+    i_hours_container.append(i_hours, i_hours_tag);
+    hours_container.append(hours);
+    i_url_container.append(i_url, i_url_tag);
+    url_container.append(url);
+
+    // eta_container.append(i_eta, eta);
+    distance_container.append(i_distance, distance);
     rating_container.append(i_rating, rating);
-    price_container.append(i_price, price);  
+    price_container.append(i_price, price);
     prev_btn.append(i_left);
     next_btn.append(i_right);
     nav_button.append(nav_text);
@@ -139,8 +178,11 @@ function results_to_DOM (array) {
     next_div.append(next_btn);
     nav_div.append(nav_button);
     btn_div.append(prev_div,nav_div,next_div);
-    textDiv.append(distance_container, eta_container, rating_container, price_container);
-    div.append (name, img, textDiv, btn_div);
+    addressDiv.append(street, city_state_zip, phone);
+    
+    moreInfoDiv.append(rating_container, distance_container, price_container, i_hours_container, hours_container, i_cc_container, cc_container, i_url_container, url_container, i_url_container, url_container, i_url_container, url_container);
+      
+    div.append (name, img, addressDiv, moreInfoDiv, btn_div);
     $("#results-page").append(div.attr("id","card" + i).css({
       top: 100 + top_position + window_height + "px",
       'z-index': "+"+z_index
