@@ -48,7 +48,7 @@ function foursquare_call(crd){
   error: function(response){
   console.log(response);
   }
-  })
+});
 }
 
 function fourSquareReturn(response){
