@@ -315,8 +315,6 @@ $(document).ready(function(){
              {
                  step: function(now,fx) {
                      $(this).css('-webkit-transform','scale('+now+')');
-                     //$(this).css('-moz-transform','rotate('+now+'deg)');
-                     //$(this).css('transform','rotate('+now+'deg)');
                  },
                  complete:function() {
                      window.location.href = "#results";
