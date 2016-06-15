@@ -267,20 +267,17 @@ $(document).ready(function(){
          var $this = $(this);
          $this.css('z-index', 2).removeClass('expanded').css('z-index', 1);
          $this.animate({
-           left: 0,
            top: 0,
-           margin: 0,
+           left: 0,
            width: '100%',
            height: '100%',
            'border-radius': 0,
            padding: '5px 5px 5px 5px'
-           }, 300).addClass('expanded');
-           $this.css('z-index', -1);
-           setTimeout(function() {
-               window.location.href = "#results";
-               $("body").css('background-color', '#006064 ');
-           },350);
-         $this.css('z-index', 0);
+           }, 300,function() {
+             alert('done');
+             window.location.href = "#results";
+             $("body").css('background-color', '#006064 ');
+           }).addClass('expanded');
        });
 
     $("#more-info").click(function () {
