@@ -111,7 +111,7 @@ function results_to_DOM (array) {
     var prev_div = $("<div>").addClass("col-xs-4 result-button");
     var next_div = $("<div>").addClass("col-xs-4 result-button");
     var nav_div = $("<div>").addClass("col-xs-4 result-button");
-    var nav_text = $("<p>").text("More Info");
+    var nav_text = $("<p>").text("Let's Go!");
     var next_btn = $("<div>").addClass("next-button").attr("data-position",i);
     var prev_btn = $("<div>").addClass("prev-button").attr("data-position",i);
     var nav_button = $("<div>").addClass("navigation-button");
@@ -139,8 +139,8 @@ function results_to_DOM (array) {
     next_div.append(next_btn);
     nav_div.append(nav_button);
     btn_div.append(prev_div,nav_div,next_div);
-    textDiv.append(name, distance_container, eta_container, rating_container, price_container);
-    div.append (img, textDiv, btn_div);
+    textDiv.append(distance_container, eta_container, rating_container, price_container);
+    div.append (name, img, textDiv, btn_div);
     $("#results-page").append(div.attr("id","card" + i).css({
       top: 100 + top_position + window_height + "px",
       'z-index': "+"+z_index
