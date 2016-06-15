@@ -75,6 +75,7 @@ function fourSquareReturn(response){
       }
     }//for loop
     results_to_DOM(restauraunts);
+    more_info(restauraunts);
     console.log("fourSquareReturn",restauraunts);
 }
 
@@ -114,7 +115,7 @@ function results_to_DOM (array) {
     var nav_text = $("<p>").text("Let's Go!");
     var next_btn = $("<div>").addClass("next-button").attr("data-position",i);
     var prev_btn = $("<div>").addClass("prev-button").attr("data-position",i);
-    var nav_button = $("<div>").addClass("navigation-button");
+    var nav_button = $("<div>").addClass("navigation-button").attr({name: array[i].name});
 
     next_btn.on("click", function (){
       next_card(this , 1);
@@ -156,28 +157,47 @@ function stack_up (array, height) {
 }
 
 function more_info(info){
-    var carousel = $('<div>').addClass('carousel slide').attr('id', 'image-carousel');
-    var carousel_inner = $('<div>').addClass('carousel-inner').attr('role', 'listbox').attr('id', 'carousel-images');
-    var carousel_div = $('<div>').addClass('item active');
-    
-    var selection_info = $('<div>').addClass('container-fluid').attr('id', 'selection-info-div');
-    var rest_name = $('<h1>').attr('id', 'restaurant-name');
-    var rest_add = $('<div>').addClass('restaurant-info-back col-xs-3');
-    var i_rest = $('<i>').addClass('fa fa-map-marker').attr('aria-hidden', 'true');
-    var p_rest = $('<p>').text('Address');
-    var inside_add = $('<div>').addClass('info-aside col-xs-9');
-    var inside_a = $('<p>').attr('id', 'address');
-    var rest_phone = $('<div>').addClass('restaurant-info-back col-xs-3');
-    var i_phone = $('<i>').addClass('fa fa-phone').attr('aria-hidden', 'true');
-    var p_phone = $('<p>').text('Phone');
-    var inside_phone = $('<div>').addClass('info-aside col-xs-9');
-    var inside_p = $('<p>').attr('id', "phone-number");
-    var rest_web = $('<div>').addClass('restaurant-info-back col-xs-3');
-    var i_web = $('<i>').addClass('fa fa-globe').attr('aria-hidden', 'true');
-    var p_web = $('<p>').text('Web');
-    var inside_web = $('<div>').addClass('info-aside col-xs-9');
+    $('.navigation_button').on('click', function() {
 
-    
+        var rest = this.getAttribute('name');
+        for (var key in info) {
+            if(key.name == rest) {
+                var carousel = $('<div>').addClass('carousel slide').attr('id', 'image-carousel');
+                var carousel_inner = $('<div>').addClass('carousel-inner').attr({
+                    role: 'listbox',
+                    id: 'carousel-images'
+                });
+                var carousel_div = $('<div>').addClass('item active');
+                var selection_info = $('<div>').addClass('container-fluid').attr('id', 'selection-info-div');
+                var rest_name = $('<h1>').attr('id', 'restaurant-name').text();
+                var rest_add = $('<div>').addClass('restaurant-info-back col-xs-3');
+                var i_rest = $('<i>').addClass('fa fa-map-marker').attr('aria-hidden', 'true');
+                var p_rest = $('<p>').text('Address');
+                var inside_add = $('<div>').addClass('info-aside col-xs-9');
+                var inside_a = $('<p>').attr('id', 'address');
+                var rest_phone = $('<div>').addClass('restaurant-info-back col-xs-3');
+                var i_phone = $('<i>').addClass('fa fa-phone').attr('aria-hidden', 'true');
+                var p_phone = $('<p>').text('Phone');
+                var inside_phone = $('<div>').addClass('info-aside col-xs-9');
+                var inside_p = $('<p>').attr('id', "phone-number");
+                var rest_web = $('<div>').addClass('restaurant-info-back col-xs-3');
+                var i_web = $('<i>').addClass('fa fa-globe').attr('aria-hidden', 'true');
+                var p_web = $('<p>').text('Web');
+                var inside_web = $('<div>').addClass('info-aside col-xs-9');
+                var inside_link = $('<a>').attr({href: 'www.google.com'});
+
+                carousel.append(carousel_inner, carousel_div);
+
+                var restaurant_name = rest_add.append(i_rest, p_rest);
+                var restaurant_name_data = inside_add.append(inside_a);
+                var restaurant_phone = rest_phone.append(i_phone, p_phone);
+                var restaurant_phone_data = inside_phone.append(inside_p);
+                var restaurant_web = rest_web.append(i_web, p_web);
+                var restaurant_web_data = inside_web.append(inside_link);
+                selection_info.append(rest_name, restaurant_name, restaurant_name_data, restaurant_phone, restaurant_phone_data, restaurant_web, restaurant_web_data);
+            }
+        }
+    })
 }
 
 
