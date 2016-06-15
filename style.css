@@ -11,7 +11,7 @@ html {
 }
 
 body {
-    background-color: #00BCD4;
+    background-color: #00aaff;
     height: 100vh;
     width: 100vw;
     overflow: hidden;
@@ -62,7 +62,7 @@ button:focus {
     cursor: pointer;
     border-radius: 999em;
     z-index: 0;
-    background: #006064;
+    background: #ffaa00;
     box-shadow: 0 6px 9px 0 rgba(0, 0, 0, 0.75);
     font-size: 36px;
 }
@@ -77,8 +77,8 @@ button:focus {
 
 #login-button {
     color: #fff;
-    background-color: #006064;
-    border-color: #46b8da;
+    background-color: #ffaa00;
+    border-color: #ffaa00;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 

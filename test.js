@@ -320,7 +320,7 @@ $(document).ready(function(){
                  },
                  complete:function() {
                      window.location.href = "#results";
-                     $("body").css('background-color', '#006064 ');
+                     $("body").css('background-color', '#ffaa00 ');
                  }
              }, 300).addClass('expanded');
        });
