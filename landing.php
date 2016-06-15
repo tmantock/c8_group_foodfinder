@@ -50,8 +50,15 @@ $loginUrl = $helper->getLoginUrl(SERVER_LANDING, $permissions);
     <h4 class="landing-heading">Find The Best Local Cuisine - Effortlessly</h4>
 
     <div class="container">
-         <?php $url = htmlspecialchars($loginUrl); ?>
-        <button type="button" class="btn btn-lg" id="login-button" > <a  href="<?= $url ?>">Log in with Facebook!</a></button>
+         <?php $url = htmlspecialchars($loginUrl);
+if(empty($_SESSION["name"])){
+
+      echo "<button type='button' class='btn btn-lg' id='login-button' > <a  href='". $url ."'>Log in with Facebook!</a></button>";
+}//if name is empty
+else {
+echo "<div id='welcome_user'>Welcome ".$_SESSION["name"]."</div>";
+}//else to welcome the user
+?>
 
         <div class="modal fade" id="login" role="dialog">
             <div class="modal-dialog">

@@ -30,14 +30,21 @@ $age_range = $nodeData['age_range']['min'];
 
 $query = "SELECT * FROM `users` WHERE `fb_id` = '$id'";
     $result = mysqli_query($conn, $query);
-    print("<br>"."result before if statement");
-    print_r($result);
-    print(mysqli_num_rows($result));
+    //print("<br>"."result before if statement");
+    //print_r($result);
+    //print(mysqli_num_rows($result));
     if(mysqli_num_rows($result)>0){
     while($row = mysqli_fetch_assoc($result)) {
         //echo "printing row require once";
-        print("<br> User already exists");
-	print_r($row);
+$_SESSION["id"] = $row["id"];
+if(!empty ($row["name"])){
+$_SESSION["name"] =$row["name"];
+}
+//        print("<br> User already exists");
+//	print_r($row);
+echo "<br>";
+echo "session:";
+//print_r($_SESSION);
     }//while
     }//if
 
@@ -45,12 +52,29 @@ $query = "SELECT * FROM `users` WHERE `fb_id` = '$id'";
 	$query2 = "INSERT INTO `users` (`name`,`fb_id`,`fb_login`,`age`) VALUES ('$name','$id','true','$age_range')";
 
 	$result2 = mysqli_query($conn, $query2);
+echo "<br>";
 	echo "in the else, new user row = ";
-        print_r($result2);
-    	print(mysqli_num_rows($result2)); 
+        //print_r($result2);
+    	//print(mysqli_num_rows($result2));
+$query3 =  "SELECT * FROM `users` WHERE `fb_id` = '$id'";
+        $result3 = mysqli_query($conn, $query3);
+if(mysqli_num_rows($result3)>0){
+    while($row = mysqli_fetch_assoc($result3)) {
+$_SESSION["id"] = $row["id"];
+if(!empty ($row["name"])){
+$_SESSION["name"] =$row["name"];
+}
+
+        echo "<br>";
+        echo "in the else, new user row after inserted into db = ";
+  //      print_r($row);
+echo "<br> session:";
+//print_r($_SESSION);
+}///while
+} //if
 	}//else
 
 
-
+header('location: ../index.php');
 //print_r($_SESSION);
 ?>
