@@ -3,7 +3,7 @@ var app = angular.module("routeApp", ['ngRoute']);
 app.config(function($routeProvider){
    $routeProvider
        .when('/', {
-           templateUrl: 'landing.html',
+           templateUrl: 'landing.php',
            controller: 'landingCtrl'
        })
        .when('/index',{

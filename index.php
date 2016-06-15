@@ -14,11 +14,11 @@ $fb = new Facebook\Facebook([
 
 //make a redirect helper handler
 
-$helper = $fb->getRedirectLoginHelper();
+//$helper = $fb->getRedirectLoginHelper();
 //specify the permissions this app will need, putting them into an array
-$permissions = ['email','user_posts'];
+//$permissions = ['email','user_posts'];
 //generate the login url
-$loginUrl = $helper->getLoginUrl(SERVER_LANDING, $permissions);
+//$loginUrl = $helper->getLoginUrl(SERVER_LANDING, $permissions);
 //echo '<a href="' . htmlspecialchars($loginUrl) . '">Log in with Facebook!</a>';
 ?>
 <!doctype html>
