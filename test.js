@@ -169,22 +169,22 @@ function more_info(info){
                 });
                 var carousel_div = $('<div>').addClass('item active');
                 var selection_info = $('<div>').addClass('container-fluid').attr('id', 'selection-info-div');
-                var rest_name = $('<h1>').attr('id', 'restaurant-name').text();
+                var rest_name = $('<h1>').attr('id', 'restaurant-name').text(key.name);
                 var rest_add = $('<div>').addClass('restaurant-info-back col-xs-3');
                 var i_rest = $('<i>').addClass('fa fa-map-marker').attr('aria-hidden', 'true');
                 var p_rest = $('<p>').text('Address');
                 var inside_add = $('<div>').addClass('info-aside col-xs-9');
-                var inside_a = $('<p>').attr('id', 'address');
+                var inside_a = $('<p>').attr('id', 'address').text(key.street + key.city + key.state + key.zip);
                 var rest_phone = $('<div>').addClass('restaurant-info-back col-xs-3');
                 var i_phone = $('<i>').addClass('fa fa-phone').attr('aria-hidden', 'true');
                 var p_phone = $('<p>').text('Phone');
                 var inside_phone = $('<div>').addClass('info-aside col-xs-9');
-                var inside_p = $('<p>').attr('id', "phone-number");
+                var inside_p = $('<p>').attr('id', "phone-number").text(key.phone);
                 var rest_web = $('<div>').addClass('restaurant-info-back col-xs-3');
                 var i_web = $('<i>').addClass('fa fa-globe').attr('aria-hidden', 'true');
                 var p_web = $('<p>').text('Web');
                 var inside_web = $('<div>').addClass('info-aside col-xs-9');
-                var inside_link = $('<a>').attr({href: 'www.google.com'});
+                var inside_link = $('<a>').attr({href: key.website}).text(key.website);
 
                 carousel.append(carousel_inner, carousel_div);
 
