@@ -144,6 +144,7 @@ function results_to_DOM (array) {
   stack_up(card_array,window_height);
 }
 
+
 function stack_up (array, height) {
   var delay = 500;
   for(var i=0; i<array.length; i++){
@@ -153,6 +154,32 @@ function stack_up (array, height) {
     delay+=300;
   }
 }
+
+function more_info(info){
+    var carousel = $('<div>').addClass('carousel slide').attr('id', 'image-carousel');
+    var carousel_inner = $('<div>').addClass('carousel-inner').attr('role', 'listbox').attr('id', 'carousel-images');
+    var carousel_div = $('<div>').addClass('item active');
+    
+    var selection_info = $('<div>').addClass('container-fluid').attr('id', 'selection-info-div');
+    var rest_name = $('<h1>').attr('id', 'restaurant-name');
+    var rest_add = $('<div>').addClass('restaurant-info-back col-xs-3');
+    var i_rest = $('<i>').addClass('fa fa-map-marker').attr('aria-hidden', 'true');
+    var p_rest = $('<p>').text('Address');
+    var inside_add = $('<div>').addClass('info-aside col-xs-9');
+    var inside_a = $('<p>').attr('id', 'address');
+    var rest_phone = $('<div>').addClass('restaurant-info-back col-xs-3');
+    var i_phone = $('<i>').addClass('fa fa-phone').attr('aria-hidden', 'true');
+    var p_phone = $('<p>').text('Phone');
+    var inside_phone = $('<div>').addClass('info-aside col-xs-9');
+    var inside_p = $('<p>').attr('id', "phone-number");
+    var rest_web = $('<div>').addClass('restaurant-info-back col-xs-3');
+    var i_web = $('<i>').addClass('fa fa-globe').attr('aria-hidden', 'true');
+    var p_web = $('<p>').text('Web');
+    var inside_web = $('<div>').addClass('info-aside col-xs-9');
+
+    
+}
+
 
 function next_card (element , direction) {
   var card = $(element).attr("data-position");
@@ -252,6 +279,7 @@ function distance_sort(array) {
     return array;
 }
 
+
 $(document).ready(function(){
   navigator.geolocation.getCurrentPosition(success,error, options);
 
@@ -280,3 +308,4 @@ $(document).ready(function(){
         $("#result-div").addClass("flip-card");
     });
 });
+
