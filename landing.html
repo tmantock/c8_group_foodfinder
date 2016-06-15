@@ -27,9 +27,8 @@
     <h4 class="landing-heading">Find The Best Local Cuisine - Effortlessly</h4>
 
     <div class="container">
-
-        <button type="button" class="btn btn-lg" id="login-button" href="<?= htmlspecialchars($loginUrl); ?>">Log
-            In with Facebook</button>
+         <?php $url = htmlspecialchars($loginUrl); ?>
+        <button type="button" class="btn btn-lg" id="login-button" > <a  href="<?php $url ?>">Log in with Facebook!</a></button>
 
         <div class="modal fade" id="login" role="dialog">
             <div class="modal-dialog">

@@ -42,7 +42,7 @@ $query = "SELECT * FROM `users` WHERE `fb_id` = '$id'";
     }//if
 
 	else {
-	$query2 = "INSERT INTO `users` (`name`,`fb_id`,`fb_login`,`age`) VALUES ('$name','$id','1','$age_range')";
+	$query2 = "INSERT INTO `users` (`name`,`fb_id`,`fb_login`,`age`) VALUES ('$name','$id','true','$age_range')";
 
 	$result2 = mysqli_query($conn, $query2);
 	echo "in the else, new user row = ";
