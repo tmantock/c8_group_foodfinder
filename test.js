@@ -107,7 +107,7 @@ function results_to_DOM (array) {
     /** CREDIT CARD **/
     var i_cc_container = $('<div>').addClass("info-container col-xs-3");
     var i_cc = $("<i>").addClass("fa fa-credit-card");
-    var i_cc_tag = $("<p>").text("Accept CC?");
+    var i_cc_tag = $("<p>").text("Accepts CC?");
     var cc_container = $('<div>').addClass("info-container col-xs-9");
     var cc = $("<p>").addClass("info-content");
     /** HOURS **/
