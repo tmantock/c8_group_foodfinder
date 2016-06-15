@@ -266,18 +266,19 @@ $(document).ready(function(){
     $('.circle').on('click', function() {
          var $this = $(this);
          $this.css('z-index', 2).removeClass('expanded').css('z-index', 1);
-         $this.animate({
-           top: 0,
-           left: 0,
-           width: '100%',
-           height: '100%',
-           'border-radius': 0,
-           padding: '5px 5px 5px 5px'
-           }, 300,function() {
-             alert('done');
-             window.location.href = "#results";
-             $("body").css('background-color', '#006064 ');
-           }).addClass('expanded');
+         $this.animate(
+             {expansion: 5 },
+             {
+                 step: function(now,fx) {
+                     $(this).css('-webkit-transform','scale('+now+')');
+                     //$(this).css('-moz-transform','rotate('+now+'deg)');
+                     //$(this).css('transform','rotate('+now+'deg)');
+                 },
+                 complete:function() {
+                     window.location.href = "#results";
+                     $("body").css('background-color', '#006064 ');
+                 }
+             }, 300).addClass('expanded');
        });
 
     $("#more-info").click(function () {
