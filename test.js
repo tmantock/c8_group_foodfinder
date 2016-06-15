@@ -25,7 +25,9 @@ function error(err) {
 function foursquare_call(crd){
  $.ajax({
    dataType: "JSON",
-  url: "https://api.foursquare.com/v2/venues/explore?client_id= BJ55LPF34FXTMHV4VOW0L0VMAUV4MYG2VK3JC33ELWU2KOXZ&client_secret= KNMJ3JKCNBI4AUWZNHPLZBQZSMEQTURPQW0EGS4AKOO2TM3X&v=20130815&ll=33.64,-117.74&venuePhotos=1&query=sushi",
+  url: "https://api.foursquare.com/v2/venues/explore?client_id=" +
+  " BJ55LPF34FXTMHV4VOW0L0VMAUV4MYG2VK3JC33ELWU2KOXZ&client_secret=" +
+  " KNMJ3JKCNBI4AUWZNHPLZBQZSMEQTURPQW0EGS4AKOO2TM3X&v=20130815&ll=33.64,-117.74&venuePhotos=1&query=burgers",
   method: "GET",
   data: {
     latitude: crd.latitude,
@@ -34,7 +36,7 @@ function foursquare_call(crd){
     user_id: 555,
     search_option: {
       option: "random",
-      category: "sushi"
+      category: "burgers"
     }
   },
   success: function (response){
