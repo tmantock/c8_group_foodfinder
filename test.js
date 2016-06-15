@@ -1,7 +1,7 @@
 /********************* FOURSQUARE AJAX CALLS     *******************************/
 
 var current_location;
-var restauraunts = [];
+var restauraunts = []; // an array of restaurant objects from fourSquareReturn
 var firstRest = restauraunts[0];
 var color_array = ["#E0F7FA","#B2EBF2","#80DEEA","#4DD0E1","#26C6DA","#00BCD4","#00ACC1","#0097A7","#00838F","#006064"];
 var options = {
@@ -26,6 +26,7 @@ function error(err) {
   console.warn("Error(" + err.code + "):" + err.message);
 }
 
+// ajax call to foursqaure -- triggered on button click from landing.html ngRoute -- all key restaurant object/DOM functions trigger in a chain off it
 function foursquare_call(){
  $.ajax({
    dataType: "JSON",
@@ -51,10 +52,11 @@ function foursquare_call(){
 });
 }
 
+// creates all restaurant objects from a single foursquare call - push to restaurants global array
 function fourSquareReturn(response){
     var fourSquareResponse = response.response.groups[0].items;
     for(var x = 0; x < fourSquareResponse.length; x++){
-        var fourSquareObj = {};
+        var fourSquareObj = {}; // local variable (scope is the loop) is restaurant object pushed to global restaurants array
         if (response.response.groups[0].items[x].venue.photos.count >= 1){
         fourSquareObj.name = response.response.groups[0].items[x].venue.name;
         fourSquareObj.distance = response.response.groups[0].items[x].venue.location.distance;
@@ -72,11 +74,11 @@ function fourSquareReturn(response){
 
         // THIS IS HARD CODED FOR TESTING - NEED TEVIN TO FIX
         // fourSquareObj.price = response.response.groups[0].items[x].venue.price.message;
-        fourSquareObj.price = response.response.groups[0].items[x].venue.price.message || "unknown";
+        fourSquareObj.price = "unknown";
         fourSquareObj.rating = response.response.groups[0].items[x].venue.rating;
         restauraunts.push(fourSquareObj);
       }
-    }//for loop
+    }// end of for loop
     results_to_DOM(restauraunts);
     console.log("fourSquareReturn",restauraunts);
 }
@@ -85,8 +87,9 @@ function convert_to_miles(meters) {
   return (meters * 0.000621371192).toFixed(2);
 }
 
+// called at end of fourSquareReturn using global restaurants array just populated
 function results_to_DOM (array) {
-  var card_array = [];
+  var card_array = []; // seems this should be a global variable (array) for interaction b/w restuarant objects & these matching DOM elements
   var top_position = 0;
   var z_index = 10;
   var window_height = $('body').height();
@@ -120,10 +123,13 @@ function results_to_DOM (array) {
     var nav_button = $("<div>").addClass("navigation-button");
 
     next_btn.on("click", function (){
+      console.log("this within next is", this);
       next_card(this , 1);
-    })
+    });
+
 
     prev_btn.on("click", function (){
+      console.log("this within prev is", this);
       prev_card(this , 1);
     })
 
@@ -136,15 +142,24 @@ function results_to_DOM (array) {
     btn_div.append(prev_div,nav_div,next_div);
     textDiv.append(name, i_distance, distance, i_eta, eta, i_rating, rating, i_price, price);
     div.append (img, textDiv, btn_div);
-    $("#results-page").append(div.attr("id","card" + i).css({
+    $("#results-page").append(div.attr("id","card" + i).css({ // .result_card  --  #id = of 0-9 matching array
       top: 100 + top_position + window_height + "px",
       'z-index': "+"+z_index
     }));
     top_position += 15;
     z_index -= 1;
+
+      $('div').on('swipeleft', function(e) {
+          console.log('swipeL (prev_card) triggered', i);
+      });
+
+      $('div').on('swiperight', function(e) {
+          console.log('swipeR (next_card) triggered', i);
+      });
+
     card_array.push("card"+i);
   }
-  stack_up(card_array,window_height);
+  stack_up(card_array, window_height);
 }
 
 function stack_up (array, height) {
@@ -264,8 +279,8 @@ $(document).ready(function() {
 
 
 function click_circle() {
-
   $(".circle").on('click', function() {
+      console.log("click circle fxn triggered")
       foursquare_call();
        var $this = $(this);
        $this.css('z-index', 2).removeClass('expanded').css('z-index', 1);
