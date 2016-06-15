@@ -72,7 +72,7 @@ function fourSquareReturn(response){
 
         // THIS IS HARD CODED FOR TESTING - NEED TEVIN TO FIX
         // fourSquareObj.price = response.response.groups[0].items[x].venue.price.message;
-        fourSquareObj.price = "moderate";
+        fourSquareObj.price = response.response.groups[0].items[x].venue.price.message || "unknown";
         fourSquareObj.rating = response.response.groups[0].items[x].venue.rating;
         restauraunts.push(fourSquareObj);
       }
@@ -216,6 +216,9 @@ function price_replacement(array) {
                 break;
             case "very expensive":
                 array[i].price.message = "$$$$";
+                break;
+            case "unknown":
+                array[i].price.message = "?";
                 break;
         }
     }///end of for loop
