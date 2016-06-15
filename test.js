@@ -9,7 +9,7 @@ var options = {
     maximumAge: 0
 };
 var circle;
-var coordinates = {};
+var coordinates = {}; // this contains object defintions longitude and latitude
 
 function success (pos) {
   var crd = pos.coords;
@@ -26,14 +26,14 @@ function error(err) {
   console.warn("Error(" + err.code + "):" + err.message);
 }
 
-function foursquare_call(crd){
+function foursquare_call(){
  $.ajax({
    dataType: "JSON",
   url: "https://api.foursquare.com/v2/venues/explore?client_id= BJ55LPF34FXTMHV4VOW0L0VMAUV4MYG2VK3JC33ELWU2KOXZ&client_secret= KNMJ3JKCNBI4AUWZNHPLZBQZSMEQTURPQW0EGS4AKOO2TM3X&v=20130815&ll=33.64,-117.74&venuePhotos=1&query=sushi",
   method: "GET",
   data: {
-    latitude: crd.latitude,
-    longitude: crd.longitude,
+    latitude: coordinates.latitude,
+    longitude: coordinates.longitude,
     radius: 100000,
     user_id: 555,
     search_option: {
@@ -69,7 +69,10 @@ function fourSquareReturn(response){
         fourSquareObj.zip = response.response.groups[0].items[x].venue.location.postalCode;
         fourSquareObj.lat = response.response.groups[0].items[x].venue.location.lat;
         fourSquareObj.lng = response.response.groups[0].items[x].venue.location.lng;
-        fourSquareObj.price = response.response.groups[0].items[x].venue.price.message;
+
+        // THIS IS HARD CODED FOR TESTING - NEED TEVIN TO FIX
+        // fourSquareObj.price = response.response.groups[0].items[x].venue.price.message;
+        fourSquareObj.price = "moderate";
         fourSquareObj.rating = response.response.groups[0].items[x].venue.rating;
         restauraunts.push(fourSquareObj);
       }
@@ -260,6 +263,7 @@ $(document).ready(function() {
 function click_circle() {
 
   $(".circle").on('click', function() {
+      foursquare_call();
        var $this = $(this);
        $this.css('z-index', 2).removeClass('expanded').css('z-index', 1);
        $this.animate({
