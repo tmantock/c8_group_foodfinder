@@ -135,32 +135,32 @@ button:focus {
 }
 
 #results-page {
-  height: 100vh;
-  width: 100vw;
+    height: 100vh;
+    width: 100vw;
 }
 
 .result-card {
-  position: absolute !important;
-  height: 86%;
-  width: 90%;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  box-shadow: 0 5px 5px rgba(0,0,0,0.19), 0 2px 2px rgba(0,0,0,0.23);
+    position: absolute !important;
+    height: 86%;
+    width: 90%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 5px 5px rgba(0,0,0,0.19), 0 2px 2px rgba(0,0,0,0.23);
 }
 
 .result-image {
-  position: relative;
-  display: inline-block;
-  float: left;
-  left: 26%;
-  transform: translateX(-50%);
-  /* margin-top: 9%; */
-  margin-bottom: 0%;
-  height: 23%;
-  width: 37%;
-  border-radius: 50%;
-  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.75);
+    position: relative;
+    display: inline-block;
+    float: left;
+    left: 26%;
+    transform: translateX(-50%);
+    /* margin-top: 9%; */
+    margin-bottom: 0%;
+    height: 23%;
+    width: 37%;
+    border-radius: 50%;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.75);
 }
 
 .address-text-holder {
@@ -196,35 +196,35 @@ button:focus {
 }
 
 .result-button {
-  height: 100%;
+    height: 100%;
 }
 
 .prev-button i,
 .next-button i {
-  text-align: center;
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 20px;
-  color: black;
+    text-align: center;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: black;
 }
 
 .navigation-button,
 .next-button,
 .prev-button {
-  margin-top: 6%;
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  height: 100%;
-  width: 58%;
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 0;
-  background: #006064;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-  color: white;
+    margin-top: 6%;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    height: 100%;
+    width: 58%;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 0;
+    background: #006064;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    color: white;
 }
 
 .next-button > i,
@@ -233,11 +233,11 @@ button:focus {
 }
 
 .navigation-button p {
-  text-align: center;
-  padding-top: 27%;
-  padding-left: 5%;
-  font-family: "Pacifico";
-  text-shadow: 0px 1px 1px black;
+    text-align: center;
+    padding-top: 27%;
+    padding-left: 5%;
+    font-family: "Pacifico";
+    text-shadow: 0px 1px 1px black;
 }
 
 /**************************************  MEDIA QUERY   **************************************************/
@@ -343,7 +343,7 @@ button:focus {
     }
 
     /*.info-content {*/
-        /*margin-top: 6%;*/
+    /*margin-top: 6%;*/
     /*}*/
 
     .landing-heading {
@@ -409,3 +409,4 @@ button:focus {
     }
 
 }
+
