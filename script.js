@@ -300,10 +300,20 @@ function results_to_DOM (array) {
         //the z-index is set for each card is set beginning at 10, so the the top most card will display on top of the other cards and so on for the subsequent cards
         'z-index': "+"+z_index
       }));
+
+      // adding swipe on each result-card div
+      $('body').on('swipeleft', function(e){
+          console.log('swipeL (prev_card) triggered', i);
+      });
+      $('body').on('swiperight', function(e){
+          console.log('swipeR (next_card) triggered', i);
+      });
+
       //top_position is incrementend to lower each card
       top_position += 15;
       //z_index is decremented so later cards to not show above cards that were created first
       z_index -= 1;
+
       //the unique id for each card is pushed to an array for later use
       card_array.push("card"+i);
     }
@@ -421,16 +431,16 @@ function click_circle() {
       //below key can be any name, insignificant to code. The number 10 does have direct correlation to the animation of the expansion of the circle
       {expansion: 10 },
       {
-        //step is a callback function that is to be called after each step of the animation. The parameter 'now contains the value being animated.    
+        //step is a callback function that is to be called after each step of the animation. The parameter 'now contains the value being animated.
         step: function(now) {
-          //adds css styling 'webkit-transform: scale and passes in the value 10 from above. 
+          //adds css styling 'webkit-transform: scale and passes in the value 10 from above.
           $(this).css('-webkit-transform','scale('+now+')');
         },
-        //the below function is executed once the animation is complete.  
+        //the below function is executed once the animation is complete.
         complete:function() {
-        //page is routed to the results page via Angular routing.    
+        //page is routed to the results page via Angular routing.
             window.location.href = "#results";
-        //the below jquery method applies 'background-color' to the entire body of the HTML        
+        //the below jquery method applies 'background-color' to the entire body of the HTML
             $("body").css('background-color', '#ffaa00 ');
         }
       //The 'expanded' class is added after 300 milliseconds.
