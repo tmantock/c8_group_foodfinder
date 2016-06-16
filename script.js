@@ -1,6 +1,4 @@
 var current_location;
-var firstRest = restauraunts[0];
-// var color_array = ["#00AAFF", "#009EF5", "#0095EB", "#008BE1", "#0083D7", "#0079CD", "#0070C3", "#0066B9", "#005DAF", "#0053A5","#004E9B"];
 var options = {
     enableHighAccuracy: true,
     maximumAge: 0

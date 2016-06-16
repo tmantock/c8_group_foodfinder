@@ -3,7 +3,6 @@ session_start();
  require_once("fs_lib/src/FoursquareApi.php");
  require_once("credentials.php");
 
-/////////////Pearl/////////////
 if (empty($_SESSION["id"])) {
    $insert_query = "INSERT INTO `users` (`fb_login`) VALUES ('false')";
    $resultOfInsert = mysqli_query($conn, $insert_query);
