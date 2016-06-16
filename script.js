@@ -37,6 +37,7 @@ function foursquare_call(options){
         },
         success: function (response){
           //call the fourSquareReturn function with the response as a parameter to grab key object values for later use
+          console.log("fav after success: ",response.favorite_restaurants);
           fourSquareReturn(response.fourSquare_search_results, response.favorite_restaurants);
         },
         error: function(response){
@@ -47,6 +48,7 @@ function foursquare_call(options){
 //function for stripping the foursquare object and adding them to a more compact object for easier use later on
 //this function also serves to validate data that may not be present in each object in the foursquare return
 function fourSquareReturn(response,fav){
+  console.log("fav inside ajax call: ", fav);
   //local variable declared for holding the truncated foursquare objects
   var restauraunts = [];
   //loop through each object in the response array of venues
@@ -170,7 +172,8 @@ function price_sort(array,fav) {
 //function for creating and appending elements to the dom for dynamic creation of display cards
 function results_to_DOM (array,fav) {
     //an array of colors for changing the color of each card
-    var color_array = ["#E0F7FA","#B2EBF2","#80DEEA","#4DD0E1","#26C6DA","#00BCD4","#00ACC1","#0097A7","#00838F","#006064"];
+    // var color_array = ["#E0F7FA","#B2EBF2","#80DEEA","#4DD0E1","#26C6DA","#00BCD4","#00ACC1","#0097A7","#00838F","#006064"];
+    var color_array = ["#E1F5FE","#B3E5FC","#81D4FA","#4FC3F7","#29B6F6","#03A9F4","#039BE5","#0288D1","#0277BD","#01579B"];
     //declare card_array for later use
     var card_array = [];
     //declare the the top_position value for setting the top key / value of the position object for each card
@@ -221,7 +224,7 @@ function results_to_DOM (array,fav) {
       var i_url_tag = $("<p>").text("Web");
       var url_container = $('<div>').addClass("info-container col-xs-9");
       var url = $("<a>").text(array[i].website).addClass("info-content");
-      // var url = $("<a>").attr("href", "array[i].website").addClass("info-content");
+      // var url = $("<a>").attr("href", '"' + array[i].website + '"').addClass("info-content");
       /** POPULARITY **/
       var i_popularity_container = $('<div>').addClass("info-container col-xs-3");
       var i_popularity = $("<i>").addClass("fa fa-foursquare");
@@ -240,34 +243,37 @@ function results_to_DOM (array,fav) {
       var i_category_tag= $("<p>").text("Category");
       var category_container = $('<div>').addClass("info-container col-xs-9");
       var category = $("<p>").text(array[i].category_1 + ", " + array[i].category_2).addClass("info-content");
-      // /** ETA **/
+      /** ETA **/
       // var eta_container = $("<div>").addClass("col-xs-3 info-container");
-      // var i_eta = $("<i>").addClass("fa fa-clock-o");
+      // var i_eta = $("<i>").addClass("fa fa-dot-circle-o");
       // var eta = $("<p>");
       /** MORE INFO **/
       var moreInfoDiv = $("<div>").addClass("more-info-holder container-fluid");
       var btn_div = $("<div>").addClass("button-holder");
-      var i_left = $("<i>").addClass("fa fa-arrow-left");
-      var i_right = $("<i>").addClass("fa fa-arrow-right");
-      var prev_div = $("<div>").addClass("col-xs-4 result-button");
-      var next_div = $("<div>").addClass("col-xs-4 result-button");
-      var nav_div = $("<div>").addClass("col-xs-4 result-button");
-      var nav_text = $("<p>").text("Go!");
-      var next_btn = $("<div>").addClass("next-button").attr("data-position",i);
-      var prev_btn = $("<div>").addClass("prev-button").attr("data-position",i);
+      // var i_left = $("<i>").addClass("fa fa-arrow-left");
+      // var i_right = $("<i>").addClass("fa fa-arrow-right");
+      // var prev_div = $("<div>").addClass("col-xs-4 result-button");
+      // var next_div = $("<div>").addClass("col-xs-4 result-button");
+      var nav_div = $("<div>").addClass("col-xs-12 result-button");
+      var nav_text = $("<p>").text("Let's Go!");
+      // var next_btn = $("<div>").addClass("next-button").attr("data-position",i);
+      // var prev_btn = $("<div>").addClass("prev-button").attr("data-position",i);
       var nav_button = $("<div>").addClass("navigation-button");
       //closure for the next button to call the next_card function for moving to the next card
-      next_btn.on("click", function (){
-        next_card(this , 1);
-      });
+      // next_btn.on("click", function (){
+      //   next_card(this , 1);
+      // });
       //closure for the prev button to call the prev_card function for moving back to the previous card
-      prev_btn.on("click", function (){
-        prev_card(this , 1);
-      });
+      // prev_btn.on("click", function (){
+      //   prev_card(this , 1);
+      // });
       //closure for making the navigation button link to the maps application
-      nav_button.on("click", function(){
-        window.location.href = "#selection"
-      });
+      (function(){
+          var inner_i = i;
+          nav_button.on("click", function(){
+              window.open("https://www.google.com/maps/place/" + array[inner_i].name + "/@" + array[inner_i].lat + ',' + array[inner_i].lng + ',14z');
+            });
+      })();
       //appending various elements to their parent elements
       i_hours_container.append(i_hours, i_hours_tag);
       hours_container.append(hours);
@@ -283,13 +289,13 @@ function results_to_DOM (array,fav) {
       distance_container.append(i_distance, distance);
       rating_container.append(i_rating, rating);
       price_container.append(i_price, price);
-      prev_btn.append(i_left);
-      next_btn.append(i_right);
+      // prev_btn.append(i_left);
+      // next_btn.append(i_right);
       nav_button.append(nav_text);
-      prev_div.append(prev_btn);
-      next_div.append(next_btn);
+      // prev_div.append(prev_btn);
+      // next_div.append(next_btn);
       nav_div.append(nav_button);
-      btn_div.append(prev_div,nav_div,next_div);
+      btn_div.append(nav_div);
       addressDiv.append(street, city_state_zip, phone);
       moreInfoDiv.append(rating_container, distance_container, price_container, i_hours_container, hours_container, i_category_container, category_container, i_tips_container, tips_container, i_popularity_container, popularity_container, i_url_container, url_container);
       //appending all elements to the card
@@ -353,7 +359,7 @@ function next_card (element , direction) {
     });
     //card is then incremented
     card = parseInt(card) + 1;
-    //lenght is set to ten for the amount of cards in the stack
+    //length is set to ten for the amount of cards in the stack
     var length = 10;
     //for loop for iterating throught each card in the stack
     for(var i = card; i<=length; i++){
@@ -374,9 +380,9 @@ function next_card (element , direction) {
 function prev_card (element , direction) {
   //The current index of cards is found via an attribute that was appended to the button during it's creation
     var card = $(element).attr("data-position");
-    //condition for determing if the top of the stack has been reached
+    //condition for determining if the top of the stack has been reached
     if (parseInt(card) !== 0){
-      //Conditional for determing if there are no more cards in the stack
+      //Conditional for determining if there are no more cards in the stack
       var parent = $("#card"+card);
       //prev_child_position is set to the jQuery selector for the previous card in the stack
       var prev_card = $("#card" + (parseInt(card) - 1));
@@ -410,25 +416,33 @@ function prev_card (element , direction) {
 }
 
 function click_circle() {
+
+  //click handler that triggers the expanding circle animation on the landing page
   $('.circle').on('click', function() {
+    //foursquare_call function is called and random is inserted into the query
     foursquare_call("random");
     var $this = $(this);
+    //applies css 'z-index: 2', removes the class 'expanded', and also applies css 'z-index: 1'
     $this.css('z-index', 2).removeClass('expanded').css('z-index', 1);
+    //jQuerty animation method
     $this.animate(
- 
-
-
-
-     {expansion: 10 },
+      //below key can be any name, insignificant to code. The number 10 does have direct correlation to the animation of the expansion of the circle
+      {expansion: 10 },
       {
-        step: function(now,fx) {
+        //step is a callback function that is to be called after each step of the animation. The parameter 'now contains the value being animated.    
+        step: function(now) {
+          //adds css styling 'webkit-transform: scale and passes in the value 10 from above. 
           $(this).css('-webkit-transform','scale('+now+')');
         },
+        //the below function is executed once the animation is complete.  
         complete:function() {
-    window.location.href = "#results";
-    $("body").css('background-color', '#ffaa00 ');
-  }
-  }, 300).addClass('expanded');
+        //page is routed to the results page via Angular routing.    
+            window.location.href = "#results";
+        //the below jquery method applies 'background-color' to the entire body of the HTML        
+            $("body").css('background-color', '#ffaa00 ');
+        }
+      //The 'expanded' class is added after 300 milliseconds.
+      }, 300).addClass('expanded');
   });
 }//end click_cirlcle
 

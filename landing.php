@@ -28,11 +28,13 @@ $loginUrl = $helper->getLoginUrl(SERVER_LANDING, $permissions);
     <h3 class="landing-heading">Food Search That's Truly Simple</h3>
     <h4 class="landing-heading">Find The Best Local Cuisine - Effortlessly</h4>
 
-    <div class="container">
+    <div class="container landing-container">
          <?php $url = htmlspecialchars($loginUrl);
 if(empty($_SESSION["name"])){
 
-      echo "<button type='button' class='btn btn-lg' id='login-button' > <a  href='". $url ."'>Log in with Facebook!</a></button>";
+      echo "<button type='button' class='btn btn-lg' id='login-button' > <i 
+class='fa fa-facebook-official fa-lg facebook-icon' aria-hidden='true'></i>
+<a  href='". $url ."'  class='login-link'>   Log in with Facebook </a></button>";
 }//if name is empty
 else {
 echo "<div id='welcome_user'>Welcome ".$_SESSION["name"]."</div>";
