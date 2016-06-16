@@ -43,7 +43,6 @@ $fb = new Facebook\Facebook([
   <link rel="stylesheet" type="text/css" href="style.css">
   <!--Javascript-->
   <script src = "script.js"></script>
-  <script src="test.js"></script>
   <script src="ang_routing.js"></script>
 </head>
 <body ng-controller="mainCtrl">

@@ -1,7 +1,6 @@
 <?php
 session_start();
-require_once("mysqli_connect.php");
-
+require_once("credentials.php");
 $category = [];
 $categories = $db -> query("SELECT * FROM `categories`");
 if($categories->num_rows>0){
