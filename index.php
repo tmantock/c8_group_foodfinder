@@ -47,6 +47,7 @@ $fb = new Facebook\Facebook([
   <script src = "script.js"></script>
   <script src="ang_routing.js"></script>
 </head>
+
 <!--Angular controller binds data to the scope of the view. -->
 <body ng-controller="mainCtrl">
     <div id="display_contents">
