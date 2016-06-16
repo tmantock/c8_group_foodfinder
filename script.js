@@ -346,7 +346,9 @@ function next_card (element , direction) {
     //current_width is set to the parent card's width px value
     var current_width = parent.width();
     //parent card animates of the screen by taking its width value and multiplying it by 2 with an animation speed pf 300 miliseconds
-    parent.animate({left: current_width * 2 + "px"},300);
+    parent.animate({left: current_width * 2 + "px"},400, function(){
+      parent.hide();
+    });
     //card is then incremented
     card = parseInt(card) + 1;
     //lenght is set to ten for the amount of cards in the stack
@@ -384,7 +386,7 @@ function prev_card (element , direction) {
       //distance is set to 25. This is the distance each card will have to move down the stack
       var distance = 25;
       //prev_card animates to the current card in view's left position value plus the card out view's width (this is divided by two to overcome the transform translate CSS property for each card).
-      prev_card.animate({left: current_position.left + (card_width/2) + "px"},300);
+      prev_card.show().animate({left: current_position.left + (card_width/2) + "px"},400);
       //card is set to the number value of the button's data-position value
       card = parseInt(card);
       //length is set to the number of cards in the stack
