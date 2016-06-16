@@ -69,6 +69,9 @@ function fourSquareReturn(response){
         fourSquareObj.lng = response.response.groups[0].items[x].venue.location.lng;
         fourSquareObj.price = response.response.groups[0].items[x].venue.price.message;
         fourSquareObj.rating = response.response.groups[0].items[x].venue.rating;
+        fourSquareObj.tips = response.response.groups[0].items[x].tips[0].text;
+        fourSquareObj.user_first_name = response.response.groups[0].items[x].tips[0].user.firstName;
+        fourSquareObj.user_last_name = response.response.groups[0].items[x].tips[0].user.lastName;
         restauraunts.push(fourSquareObj);
       }
     }//for loop
@@ -106,12 +109,12 @@ function results_to_DOM (array) {
     var i_url_tag = $("<p>").text("Web");
     var url_container = $('<div>').addClass("info-container col-xs-9");
     var url = $("<p>").text(array[i].website).addClass("info-content");
-    /** CREDIT CARD **/
-    var i_cc_container = $('<div>').addClass("info-container col-xs-3");
-    var i_cc = $("<i>").addClass("fa fa-credit-card");
-    var i_cc_tag = $("<p>").text("Accepts CC?");
-    var cc_container = $('<div>').addClass("info-container col-xs-9");
-    var cc = $("<p>").addClass("info-content");
+    /** TIPS **/
+    var i_tips_container = $('<div>').addClass("info-container col-xs-3");
+    var i_tips = $("<i>").addClass("fa fa-thumbs-o-up");
+    var i_tips_tag = $("<p>").text("Tip");
+    var tips_container = $('<div>').addClass("info-container col-xs-9");
+    var tips = $("<p>").text("'" + array[i].tips + "'" + " - " + array[i].user_first_name + " " + array[i].user_last_name).addClass("info-content");
     /** HOURS **/
     var i_hours_container = $('<div>').addClass("info-container col-xs-3");
     var i_hours = $("<i>").addClass("fa fa-clock-o");
@@ -137,7 +140,6 @@ function results_to_DOM (array) {
     /** MORE INFO **/
     var moreInfoDiv = $("<div>").addClass("more-info-holder container-fluid");  
 
-
     var btn_div = $("<div>").addClass("button-holder");
     var i_left = $("<i>").addClass("fa fa-arrow-left");
     var i_right = $("<i>").addClass("fa fa-arrow-right");
@@ -162,12 +164,12 @@ function results_to_DOM (array) {
     });
 
 
-    i_cc_container.append(i_cc, i_cc_tag);
-    cc_container.append(cc);
     i_hours_container.append(i_hours, i_hours_tag);
     hours_container.append(hours);
     i_url_container.append(i_url, i_url_tag);
     url_container.append(url);
+    i_tips_container.append(i_tips, i_tips_tag);
+    tips_container.append(tips);
 
     // eta_container.append(i_eta, eta);
     distance_container.append(i_distance, distance);
@@ -182,11 +184,11 @@ function results_to_DOM (array) {
     btn_div.append(prev_div,nav_div,next_div);
     addressDiv.append(street, city_state_zip, phone);
     
-    moreInfoDiv.append(rating_container, distance_container, price_container, i_hours_container, hours_container, i_cc_container, cc_container, i_url_container, url_container, i_url_container, url_container, i_url_container, url_container);
+    moreInfoDiv.append(rating_container, distance_container, price_container, i_hours_container, hours_container, i_tips_container, tips_container, i_url_container, url_container, i_url_container, url_container, i_url_container, url_container);
       
     div.append (name, img, addressDiv, moreInfoDiv, btn_div);
     $("#results-page").append(div.attr("id","card" + i).css({
-      top: 100 + top_position + window_height + "px",
+      top: 70 + top_position + window_height + "px",
       'z-index': "+"+z_index
     }));
     top_position += 15;
@@ -311,7 +313,7 @@ $(document).ready(function(){
          var $this = $(this);
          $this.css('z-index', 2).removeClass('expanded').css('z-index', 1);
          $this.animate(
-             {expansion: 5 },
+             {expansion: 10 },
              {
                  step: function(now,fx) {
                      $(this).css('-webkit-transform','scale('+now+')');
