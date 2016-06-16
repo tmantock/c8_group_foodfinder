@@ -8,11 +8,7 @@ if (empty($_SESSION["id"])) {
    $insert_query = "INSERT INTO `users` (`fb_login`) VALUES ('false')";
    $resultOfInsert = mysqli_query($conn, $insert_query);
    $guest_id = mysqli_insert_id($conn);
-   echo "<br>guest id: ";
-   echo $guest_id;
    $_SESSION["id"] = $guest_id;
-   echo "<br>session with guest id : ";
-   var_dump($_SESSION);
 }
 $_POST['search_option']['option'] = 'random';
 $_POST['search_option']['category'] = 'sushi';
@@ -34,14 +30,15 @@ $id = $_SESSION['id'];
 
        "ll"=> $_POST['latitude'].",".$_POST['longitude'],
        "intent"=>"browse",
-       "radius"=>$search_radius
+       "radius"=>$search_radius,
+       "venuePhotos"=>1
    ];
 /////////random search
    if (isset($_POST['search_option']['option']) && $_POST['search_option']['option'] == 'random'){
 	$params["query"]="food";
    }
    else {
-	$params["query"]= $_POST['search_option']['category']; 
+	$params["query"]= $_POST['search_option']['category'];
    }
    $response = $foursquare->GetPublic($endpoint , $params);
    $venues = $foursquare->GetPublic($endpoint , $params, $POST=false);

@@ -41,23 +41,3 @@ app.controller('selectionCtrl', function($scope){
    // $scope.message = ("Hellow from selection Crtl");
    // $scope.message = ("Hellow from selection Crtl");
 });
-
-function click_circle() {
-
-$('.circle').on('click', function() {
-  foursquare_call();
-  var $this = $(this);
-  $this.css('z-index', 2).removeClass('expanded').css('z-index', 1);
-  $this.animate(
-  {expansion: 10 },
-  {
-    step: function(now,fx) {
-    $(this).css('-webkit-transform','scale('+now+')');
-  },
-  complete:function() {
-    window.location.href = "#results";
-    $("body").css('background-color', '#ffaa00 ');
-  }
-  }, 300).addClass('expanded');
-  });
-}//end click_cirlcle

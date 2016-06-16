@@ -25,27 +25,23 @@ function error(err) {
     console.warn("Error(" + err.code + "):" + err.message);
 }
 
-function foursquare_call(crd){
-
+function foursquare_call(options){
     $.ajax({
         dataType: "JSON",
-        url: "https://api.foursquare.com/v2/venues/explore?client_id=" +
-        " BJ55LPF34FXTMHV4VOW0L0VMAUV4MYG2VK3JC33ELWU2KOXZ&client_secret=" +
-        " KNMJ3JKCNBI4AUWZNHPLZBQZSMEQTURPQW0EGS4AKOO2TM3X&v=20130815&ll=33.64,-117.74&venuePhotos=1&query=burgers",
-        method: "GET",
+        url: "search.php",
+        method: "POST",
         data: {
             latitude: coordinates.latitude,
             longitude: coordinates.longitude,
             radius: 100000,
-            user_id: 555,
             search_option: {
-                option: "random",
-                category: "burgers"
+                option: options,
+                category: null
             }
         },
         success: function (response){
-            fourSquareReturn(response);
-            console.log(response.response);
+            console.log(response.fourSquare_search_results);
+            fourSquareReturn(response.fourSquare_search_results);
         },
         error: function(response){
             console.log(response);
@@ -53,44 +49,48 @@ function foursquare_call(crd){
     })
 }
 
-
 function fourSquareReturn(response){
-    var fourSquareResponse = response.response.groups[0].items;
-    for(var x = 0; x < fourSquareResponse.length; x++){
+    for(var x = 0; x < response.length; x++){
         var fourSquareObj = {};
-        if (response.response.groups[0].items[x].venue.photos.count >= 1){
-            fourSquareObj.name = response.response.groups[0].items[x].venue.name;
-            fourSquareObj.distance = response.response.groups[0].items[x].venue.location.distance;
-            fourSquareObj.photo = response.response.groups[0].items[x].venue.photos.groups[0].items[0].prefix + "300x200"+ response.response.groups[0].items[x].venue.photos.groups[0].items[0].suffix;
-            fourSquareObj.hours = response.response.groups[0].items[x].venue.hours.status;
-            fourSquareObj.website =  response.response.groups[0].items[x].venue.url;
-            fourSquareObj.phone = response.response.groups[0].items[x].venue.contact.formattedPhone;
-            fourSquareObj.venueid = response.response.groups[0].items[x].venue.id;
-            fourSquareObj.street =  response.response.groups[0].items[x].venue.location.address;
-            fourSquareObj.city = response.response.groups[0].items[x].venue.location.city;
-            fourSquareObj.state =   response.response.groups[0].items[x].venue.location.state;
-            fourSquareObj.zip = response.response.groups[0].items[x].venue.location.postalCode;
-            fourSquareObj.lat = response.response.groups[0].items[x].venue.location.lat;
-            fourSquareObj.lng = response.response.groups[0].items[x].venue.location.lng;
-		          if(response.response.groups[0].items[x].venue.price.message.hasOwnProperty('message')){
-			          fourSquareObj.price = response.response.groups[0].items[x].venue.price.message;
+        var fourSquareResponse = response[x];
+        if (fourSquareResponse.venue.photos.count >= 1){
+            fourSquareObj.name = fourSquareResponse.venue.name;
+            fourSquareObj.distance = fourSquareResponse.venue.location.distance;
+            fourSquareObj.photo = fourSquareResponse.venue.photos.groups[0].items[0].prefix + "300x200"+ fourSquareResponse.venue.photos.groups[0].items[0].suffix;
+            if(fourSquareResponse.venue.hasOwnProperty('hours')){
+            fourSquareObj.hours = fourSquareResponse.venue.hours.status;
+          }
+          else{
+            fourSquareObj.hours = "Time Unknown"
+          }
+            fourSquareObj.website = fourSquareResponse.venue.url;
+            fourSquareObj.phone = fourSquareResponse.venue.contact.formattedPhone;
+            fourSquareObj.venueid = fourSquareResponse.venue.id;
+            fourSquareObj.street = fourSquareResponse.venue.location.address;
+            fourSquareObj.city = fourSquareResponse.venue.location.city;
+            fourSquareObj.state = fourSquareResponse.venue.location.state;
+            fourSquareObj.zip = fourSquareResponse.venue.location.postalCode;
+            fourSquareObj.lat = fourSquareResponse.venue.location.lat;
+            fourSquareObj.lng = fourSquareResponse.venue.location.lng;
+		          if(fourSquareResponse.venue.hasOwnProperty('price')){
+			          fourSquareObj.price = fourSquareResponse.venue.price.message;
 			        }
               else {
-				        fourSquareObj.price = " Not Found";
+				        fourSquareObj.price = "not found";
 				      }
             //fourSquareObj.price = response.response.groups[0].items[x].venue.price.message;
-            fourSquareObj.rating = response.response.groups[0].items[x].venue.rating;
-            fourSquareObj.tips = response.response.groups[0].items[x].tips[0].text;
-            fourSquareObj.user_first_name = response.response.groups[0].items[x].tips[0].user.firstName;
-            fourSquareObj.user_last_name = response.response.groups[0].items[x].tips[0].user.lastName;
-            fourSquareObj.popularity = response.response.groups[0].items[x].reasons.items[0].summary;
-            fourSquareObj.checkins = response.response.groups[0].items[x].venue.stats.checkinsCount;
-            fourSquareObj.category_1 = response.response.groups[0].items[x].venue.categories[0].shortName;
-            fourSquareObj.category_2 = response.response.groups[0].items[x].venue.categories[0].pluralName;
+            fourSquareObj.rating = fourSquareResponse.venue.rating;
+            fourSquareObj.tips = fourSquareResponse.tips[0].text;
+            fourSquareObj.user_first_name = fourSquareResponse.tips[0].user.firstName;
+            fourSquareObj.user_last_name = fourSquareResponse.tips[0].user.lastName;
+            fourSquareObj.popularity = fourSquareResponse.reasons.items[0].summary;
+            fourSquareObj.checkins = fourSquareResponse.venue.stats.checkinsCount;
+            fourSquareObj.category_1 = fourSquareResponse.venue.categories[0].shortName;
+            fourSquareObj.category_2 = fourSquareResponse.venue.categories[0].pluralName;
             restauraunts.push(fourSquareObj);
         }
     }//for loop
-    results_to_DOM(restauraunts);
+    distance_sort(restauraunts);
     console.log("fourSquareReturn",restauraunts);
 }
 
@@ -288,42 +288,6 @@ function prev_card (element , direction) {
     }
 }
 
-function price_replacement(array) {
-    for (var i=0;i<array.length; i++){
-        switch(array[i].price.message.toLocaleLowerCase()){
-            case "cheap":
-                array[i].price.message = "$";
-                break;
-            case "moderate":
-                array[i].price.message = "$$";
-                break;
-            case "expensive":
-                array[i].price.message = "$$$";
-                break;
-            case "very expensive":
-                array[i].price.message = "$$$$";
-                break;
-        }
-    }///end of for loop
-    return array;
-}
-function price_sort(array) {
-    var swapped ;
-    do {
-        swapped = false;
-        for (var i=0;i<array.length-1; i++) {
-            if (array[i].price.message > array[i+1].price.message) {
-                var temp = array[i];
-                array[i] = array[i + 1];
-                array[i + 1] = temp;
-                swapped = true;
-            }
-        }
-    }while (swapped)
-    return array;
-}
-
-
 function distance_sort(array) {
     var swapped ;
     do {
@@ -338,8 +302,74 @@ function distance_sort(array) {
         }
     }
     while (swapped)
+    price_replacement(array);
     return array;
 }
+
+function price_replacement(array) {
+    for (var i=0;i<array.length; i++){
+        switch(array[i].price.toLocaleLowerCase()){
+            case "cheap":
+                array[i].price = "$";
+                break;
+            case "moderate":
+                array[i].price = "$$";
+                break;
+            case "expensive":
+                array[i].price = "$$$";
+                break;
+            case "very expensive":
+                array[i].price = "$$$$";
+                break;
+            case "not found":
+              array[i].price = "Not Found";
+              break;
+        }
+    }///end of for loop
+    price_sort(array);
+    return array;
+}
+function price_sort(array) {
+    var swapped ;
+    do {
+        swapped = false;
+        for (var i=0;i<array.length-1; i++) {
+          if(array[i].price.message == "not found"){
+            array.splice(array[i],1);
+          }
+          else{
+            if (array[i].price.message > array[i+1].price.message) {
+                var temp = array[i];
+                array[i] = array[i + 1];
+                array[i + 1] = temp;
+                swapped = true;
+            }
+          }
+        }
+    }while (swapped)
+    results_to_DOM(array);
+    return array;
+}
+
+function click_circle() {
+
+$('.circle').on('click', function() {
+  foursquare_call("random");
+  var $this = $(this);
+  $this.css('z-index', 2).removeClass('expanded').css('z-index', 1);
+  $this.animate(
+  {expansion: 10 },
+  {
+    step: function(now,fx) {
+    $(this).css('-webkit-transform','scale('+now+')');
+  },
+  complete:function() {
+    window.location.href = "#results";
+    $("body").css('background-color', '#ffaa00 ');
+  }
+  }, 300).addClass('expanded');
+  });
+}//end click_cirlcle
 
 $(document).ready(function(){
     navigator.geolocation.getCurrentPosition(success,error, options);
