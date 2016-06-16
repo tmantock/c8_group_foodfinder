@@ -351,7 +351,7 @@ function next_card (element , direction) {
     });
     //card is then incremented
     card = parseInt(card) + 1;
-    //lenght is set to ten for the amount of cards in the stack
+    //length is set to ten for the amount of cards in the stack
     var length = 10;
     //for loop for iterating throught each card in the stack
     for(var i = card; i<=length; i++){
@@ -408,21 +408,33 @@ function prev_card (element , direction) {
 }
 
 function click_circle() {
+
+  //click handler that triggers the expanding circle animation on the landing page
   $('.circle').on('click', function() {
+    //foursquare_call function is called and random is inserted into the query
     foursquare_call("random");
     var $this = $(this);
+    //applies css 'z-index: 2', removes the class 'expanded', and also applies css 'z-index: 1'
     $this.css('z-index', 2).removeClass('expanded').css('z-index', 1);
+    //jQuerty animation method
     $this.animate(
+      //below key can be any name, insignificant to code. The number 10 does have direct correlation to the animation of the expansion of the circle
       {expansion: 10 },
       {
-        step: function(now,fx) {
+        //step is a callback function that is to be called after each step of the animation. The parameter 'now contains the value being animated.    
+        step: function(now) {
+          //adds css styling 'webkit-transform: scale and passes in the value 10 from above. 
           $(this).css('-webkit-transform','scale('+now+')');
         },
+        //the below function is executed once the animation is complete.  
         complete:function() {
-    window.location.href = "#results";
-    $("body").css('background-color', '#ffaa00 ');
-  }
-  }, 300).addClass('expanded');
+        //page is routed to the results page via Angular routing.    
+            window.location.href = "#results";
+        //the below jquery method applies 'background-color' to the entire body of the HTML        
+            $("body").css('background-color', '#ffaa00 ');
+        }
+      //The 'expanded' class is added after 300 milliseconds.
+      }, 300).addClass('expanded');
   });
 }//end click_cirlcle
 
