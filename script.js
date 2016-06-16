@@ -96,6 +96,7 @@ function fourSquareReturn(response){
     }
   }//for loop
   //call distance_sort with the array as the parameter to sort all locations b distance
+  console.log("restaurants array: ",restauraunts);
   distance_sort(restauraunts);
 }
 //function for converting meters to miles
@@ -154,7 +155,7 @@ function price_sort(array) {
             array.splice(array[i],1);
           }
           else{
-            if (array[i].price.message > array[i+1].price.message) {
+            if (array[i].price.message < array[i+1].price.message) {
                 var temp = array[i];
                 array[i] = array[i + 1];
                 array[i + 1] = temp;
