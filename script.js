@@ -37,7 +37,8 @@ function foursquare_call(options){
         },
         success: function (response){
           //call the fourSquareReturn function with the response as a parameter to grab key object values for later use
-          fourSquareReturn(response.fourSquare_search_results);
+        console.log(response);
+        fourSquareReturn(response.fourSquare_search_results);
         },
         error: function(response){
             console.log(response);
@@ -145,6 +146,7 @@ function price_replacement(array) {
     price_sort(array);
     return array;
 }
+
 function price_sort(array) {
     var swapped ;
     do {
@@ -166,6 +168,7 @@ function price_sort(array) {
     results_to_DOM(array);
     return array;
 }
+
 //function for creating and appending elements to the dom for dynamic creation of display cards
 function results_to_DOM (array) {
     //an array of colors for changing the color of each card
@@ -267,7 +270,7 @@ function results_to_DOM (array) {
       (function(){
           var inner_i = i;
           nav_button.on("click", function(){
-              window.open("https://www.google.com/maps/place/" + array[inner_i].name + "/@" + array[inner_i].lat + ',' + array[inner_i].lng + ',14z');
+              window.open("https://www.google.com/maps/dir/"+ 'Current+Location/' + array[inner_i].name + ",+" + array[inner_i].street + "+" + array[inner_i].city);
             });
       })();
       //appending various elements to their parent elements

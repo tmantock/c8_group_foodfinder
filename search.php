@@ -10,7 +10,7 @@ if (empty($_SESSION["id"])) {
    $_SESSION["id"] = $guest_id;
 }
 $_POST['search_option']['option'] = 'random';
-$_POST['search_option']['category'] = 'sushi';
+$_POST['search_option']['category'] = 'burgers';
 $_POST["latitude"] = 33.532029;
 $_POST["longitude"] = -117.702148;
 $_POST['radius'] = '5000';
