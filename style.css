@@ -222,9 +222,21 @@ button:focus {
     border-radius: 50%;
     cursor: pointer;
     z-index: 0;
-    background: #006064;
+    background: #00cbff;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     color: white;
+}
+
+.navigation-button:hover,
+.next-button:hover,
+.prev-button:hover{
+    background: #0084b3;
+}
+
+.navigation-button:active,
+.next-button:active,
+.prev-button:active{
+    background: #048eff;
 }
 
 .next-button > i,

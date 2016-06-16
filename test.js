@@ -3,6 +3,7 @@
 var current_location;
 var restauraunts = [];
 var firstRest = restauraunts[0];
+// var color_array = ["#00AAFF", "#009EF5", "#0095EB", "#008BE1", "#0083D7", "#0079CD", "#0070C3", "#0066B9", "#005DAF", "#0053A5","#004E9B"];
 var color_array = ["#E0F7FA","#B2EBF2","#80DEEA","#4DD0E1","#26C6DA","#00BCD4","#00ACC1","#0097A7","#00838F","#006064"];
 var options = {
     enableHighAccuracy: true,
@@ -131,7 +132,8 @@ function results_to_DOM (array) {
         var i_url = $("<i>").addClass("fa fa-globe");
         var i_url_tag = $("<p>").text("Web");
         var url_container = $('<div>').addClass("info-container col-xs-9");
-        var url = $("<p>").text(array[i].website).addClass("info-content");
+        var url = $("<a>").text(array[i].website).addClass("info-content");
+        // var url = $("<a>").attr("href", "array[i].website").addClass("info-content");
         /** POPULARITY **/
         var i_popularity_container = $('<div>').addClass("info-container col-xs-3");
         var i_popularity = $("<i>").addClass("fa fa-foursquare");
@@ -150,7 +152,7 @@ function results_to_DOM (array) {
         var i_category = $("<i>").addClass("fa fa-tags");
         var i_category_tag= $("<p>").text("Category");
         var category_container = $('<div>').addClass("info-container col-xs-9");
-        var category = $("<p>").text(array[i].category_1 + "," + array[i].category_2).addClass("info-content");
+        var category = $("<p>").text(array[i].category_1 + ", " + array[i].category_2).addClass("info-content");
 
         // /** ETA **/
         // var eta_container = $("<div>").addClass("col-xs-3 info-container");
