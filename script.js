@@ -169,7 +169,8 @@ function price_sort(array) {
 //function for creating and appending elements to the dom for dynamic creation of display cards
 function results_to_DOM (array) {
     //an array of colors for changing the color of each card
-    var color_array = ["#E0F7FA","#B2EBF2","#80DEEA","#4DD0E1","#26C6DA","#00BCD4","#00ACC1","#0097A7","#00838F","#006064"];
+    // var color_array = ["#E0F7FA","#B2EBF2","#80DEEA","#4DD0E1","#26C6DA","#00BCD4","#00ACC1","#0097A7","#00838F","#006064"];
+    var color_array = ["#E1F5FE","#B3E5FC","#81D4FA","#4FC3F7","#29B6F6","#03A9F4","#039BE5","#0288D1","#0277BD","#01579B"];
     //declare card_array for later use
     var card_array = [];
     //declare the the top_position value for setting the top key / value of the position object for each card
@@ -196,15 +197,15 @@ function results_to_DOM (array) {
       var city_state_zip = $('<p>').text(array[i].city + ", " + array[i].state + " " + array[i].zip);
       var phone = $('<p>').text(array[i].phone);
       /** RATING **/
-      var rating_container = $('<div>').addClass("info-container col-xs-4");
+      var rating_container = $('<div>').addClass("info-container col-xs-3");
       var i_rating = $("<i>").addClass("fa fa-star");
       var rating = $("<p>").text(array[i].rating);
       /** DISTANCE **/
-      var distance_container = $('<div>').addClass("info-container col-xs-4");
+      var distance_container = $('<div>').addClass("info-container col-xs-3");
       var i_distance = $("<i>").addClass("fa fa-car");
       var distance = $("<p>").text(convert_to_miles(array[i].distance) + " mi.");
       /** PRICING **/
-      var price_container = $("<div>").addClass("info-container col-xs-4");
+      var price_container = $("<div>").addClass("info-container col-xs-3");
       var i_price = $("<i>").addClass("fa fa-usd");
       var price = $("<p>").text(array[i].price);
       /** HOURS **/
@@ -238,9 +239,9 @@ function results_to_DOM (array) {
       var i_category_tag= $("<p>").text("Category");
       var category_container = $('<div>').addClass("info-container col-xs-9");
       var category = $("<p>").text(array[i].category_1 + ", " + array[i].category_2).addClass("info-content");
-      // /** ETA **/
+      /** ETA **/
       // var eta_container = $("<div>").addClass("col-xs-3 info-container");
-      // var i_eta = $("<i>").addClass("fa fa-clock-o");
+      // var i_eta = $("<i>").addClass("fa fa-dot-circle-o");
       // var eta = $("<p>");
       /** MORE INFO **/
       var moreInfoDiv = $("<div>").addClass("more-info-holder container-fluid");
