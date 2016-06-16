@@ -15,19 +15,20 @@ if (empty($_SESSION["id"])) {   //   session id = facebook id , if not in sessio
 echo "session after checking for empty id: ";
 print_r($_SESSION);
 
-        $_POST['search_option']['option'] = 'chinese';
-        $_POST['search_option']['category'] = 'category';
-        $_POST['radius'] = '5000';
-        $_SESSION['id'] = '484';
+    //    $_POST['search_option']['option'] = 'chinese';
+      //  $_POST['search_option']['category'] = 'category';
+        //$_POST['radius'] = '5000';
+        //$_SESSION['id'] = '484';
 
   $user_information = [];
   $user_category_information = [];
   $user_restaurant_information = [];
 
             //Get search option from POST
-  $search_option = $_POST['search_option']['option'];  //$SESSION
-  $search_category = $_POST['search_option']['category'];
-            //Get search radius option from POST
+  $search_option = $_POST['search_option']['random'];  //$SESSION
+  //$search_category = $_POST['search_option']['category'];
+        
+    //Get search radius option from POST
   $search_radius = $_POST['radius'];
             //Get the user ID from SESSION
   $user_id = $_SESSION['id'];
@@ -39,6 +40,11 @@ print_r($_SESSION);
     $radius_selector;
     $price_selector;
     $usr_uniq_assigned_id;
+
+		// if random is set, no category should be set, 
+                if(isset($_POST['search_option']['random']) {
+	
+}
 
             //Get the user's information (all user interactions) from database @ table = `user_interaction`
 
