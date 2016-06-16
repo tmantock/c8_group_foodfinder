@@ -48,9 +48,13 @@ button:focus {
 }
 
 .login-link:hover{
-    color: #03a4ff;
+    color: white;
     text-decoration: none;
     text-shadow: 0 1px 3px black;
+}
+
+.facebook-icon {
+    color: #3b5998;
 }
 
 #random {
