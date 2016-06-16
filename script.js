@@ -9,13 +9,15 @@ var options = {
     enableHighAccuracy: true,
     maximumAge: 0
 };
+var coordinates = {};
 
 function success (pos) {
     var crd = pos.coords;
     console.log("Latitude: " + crd.latitude);
     console.log("Longiude: " + crd.longitude);
     console.log("Within: " + crd.accuracy + "meters");
-    foursquare_call(crd);
+    coordinates.latitude = crd.latitude;
+    coordinates.longitude = crd.longitude;
     return crd;
 }
 
@@ -32,8 +34,8 @@ function foursquare_call(crd){
         " KNMJ3JKCNBI4AUWZNHPLZBQZSMEQTURPQW0EGS4AKOO2TM3X&v=20130815&ll=33.64,-117.74&venuePhotos=1&query=burgers",
         method: "GET",
         data: {
-            latitude: crd.latitude,
-            longitude: crd.longitude,
+            latitude: coordinates.latitude,
+            longitude: coordinates.longitude,
             radius: 100000,
             user_id: 555,
             search_option: {
@@ -70,11 +72,12 @@ function fourSquareReturn(response){
             fourSquareObj.zip = response.response.groups[0].items[x].venue.location.postalCode;
             fourSquareObj.lat = response.response.groups[0].items[x].venue.location.lat;
             fourSquareObj.lng = response.response.groups[0].items[x].venue.location.lng;
-		if( response.response.groups[0].items[x].venue.price.message.hasOwnProperty("message") ){
-			fourSquareObj.price = response.response.groups[0].items[x].venue.price.message;
-			} else {
-				fourSquareObj.price = " Not Found";
-				}
+		          if(response.response.groups[0].items[x].venue.price.message.hasOwnProperty('message')){
+			          fourSquareObj.price = response.response.groups[0].items[x].venue.price.message;
+			        }
+              else {
+				        fourSquareObj.price = " Not Found";
+				      }
             //fourSquareObj.price = response.response.groups[0].items[x].venue.price.message;
             fourSquareObj.rating = response.response.groups[0].items[x].venue.rating;
             fourSquareObj.tips = response.response.groups[0].items[x].tips[0].text;
@@ -337,28 +340,6 @@ function distance_sort(array) {
     while (swapped)
     return array;
 }
- 
-function click_circle(){
-
-$('.circle').on('click', function() {
-        var $this = $(this);
-        $this.css('z-index', 2).removeClass('expanded').css('z-index', 1);
-        $this.animate(
-            {expansion: 10 },
-            {
-                step: function(now,fx) {
-                    $(this).css('-webkit-transform','scale('+now+')');
-                },
-                complete:function() {
-                    window.location.href = "#results";
-                    $("body").css('background-color', '#ffaa00 ');
-                }
-            }, 300).addClass('expanded');
-    });
-
-
-
-}//end click_cirlcle
 
 $(document).ready(function(){
     navigator.geolocation.getCurrentPosition(success,error, options);
