@@ -264,7 +264,8 @@ function results_to_DOM (array) {
       });
       //closure for making the navigation button link to the maps application
       nav_button.on("click", function(){
-        window.location.href = "#selection"
+        console.log("Navigation Clicked");
+        window.open("https://www.google.com/maps/search/food/" + array[i].lat + ',' + array[i].lng + ',14z');
       });
       //appending various elements to their parent elements
       i_hours_container.append(i_hours, i_hours_tag);
@@ -296,7 +297,7 @@ function results_to_DOM (array) {
       $("#results-page").append(div.attr("id","card" + i).css({
         //the top position is set for each card so that each card is slightly lower than the previous.
         //The cards start off below the viewable area by adding the window_height to the top position value, so they can slide up later for the page transition
-        top: 70 + top_position + window_height + "px",
+        top: 90 + top_position + window_height + "px",
         //the z-index is set for each card is set beginning at 10, so the the top most card will display on top of the other cards and so on for the subsequent cards
         'z-index': "+"+z_index
       }));

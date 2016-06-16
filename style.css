@@ -6,17 +6,22 @@
     font-family: 'Open Sans'
 }
 
-html {
-    height: 100%;
+body {
+  position: relative;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%,-25%);
+  background-color: #00aaff;
+  height: 100vh;
+  width: 100vw;
+  max-width: 414px;
+  max-height: 736px;
+  overflow: hidden;
 }
 
-body {
-    background-color: #00aaff;
-    height: 100vh;
-    max-width: 414px;
-    max-height: 736px
-    /*width: 100vw;*/
-    overflow: hidden;
+.container {
+  margin-top: 10px;
+  max-width: 414px;
 }
 
 button:focus {
@@ -24,7 +29,7 @@ button:focus {
 }
 
 #lunch_heading {
-    font-size: 12vh;
+    font-size: 30px;
     color: white;
     text-shadow: 0 5px 8px black;
     padding: 1vh 0 3vh 0;
@@ -110,6 +115,17 @@ button:focus {
 
 .modal-dialog {
     margin-top: 50%;
+}
+
+.info-container {
+    display: inline-block;
+    height: 45px;
+    margin-top: 5px;
+    padding: 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    background-color: rgba(255,255,255,0.9);
+    overflow:hidden;
+    word-wrap: break-word;
 }
 
 /**************************************  CAROUSEL   **************************************************/
@@ -277,7 +293,7 @@ button:focus {
 
 
 /**************************************  MEDIA QUERY   **************************************************/
-@media screen and (max-width: 800px) {
+/*@media screen and (max-width: 800px) {*/
 
     #lunch_heading {
         font-size: 5vh;
@@ -444,4 +460,4 @@ button:focus {
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }
 
-}
+/*}*/
