@@ -197,15 +197,15 @@ function results_to_DOM (array) {
       var city_state_zip = $('<p>').text(array[i].city + ", " + array[i].state + " " + array[i].zip);
       var phone = $('<p>').text(array[i].phone);
       /** RATING **/
-      var rating_container = $('<div>').addClass("info-container col-xs-3");
+      var rating_container = $('<div>').addClass("info-container col-xs-4");
       var i_rating = $("<i>").addClass("fa fa-star");
       var rating = $("<p>").text(array[i].rating);
       /** DISTANCE **/
-      var distance_container = $('<div>').addClass("info-container col-xs-3");
+      var distance_container = $('<div>').addClass("info-container col-xs-4");
       var i_distance = $("<i>").addClass("fa fa-car");
       var distance = $("<p>").text(convert_to_miles(array[i].distance) + " mi.");
       /** PRICING **/
-      var price_container = $("<div>").addClass("info-container col-xs-3");
+      var price_container = $("<div>").addClass("info-container col-xs-4");
       var i_price = $("<i>").addClass("fa fa-usd");
       var price = $("<p>").text(array[i].price);
       /** HOURS **/
