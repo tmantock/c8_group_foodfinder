@@ -1,4 +1,5 @@
 var current_location;
+var current_card = "card0";
 var options = {
     enableHighAccuracy: true,
     maximumAge: 0
@@ -42,7 +43,7 @@ function foursquare_call(options){
         error: function(response){
             console.log(response);
         }
-    })
+    });
 }
 //function for stripping the foursquare object and adding them to a more compact object for easier use later on
 //this function also serves to validate data that may not be present in each object in the foursquare return
@@ -65,7 +66,7 @@ function fourSquareReturn(response){
         fourSquareObj.hours = fourSquareResponse.venue.hours.status;
       }
       else{
-        fourSquareObj.hours = "Time Unknown"
+        fourSquareObj.hours = "Time Unknown";
       }
       fourSquareObj.website = fourSquareResponse.venue.url;
       fourSquareObj.phone = fourSquareResponse.venue.contact.formattedPhone;
@@ -117,7 +118,7 @@ function distance_sort(array) {
             }
         }
     }
-    while (swapped)
+    while (swapped);
     price_replacement(array);
     return array;
 }
@@ -162,7 +163,7 @@ function price_sort(array) {
             }
           }
         }
-    }while (swapped)
+    }while (swapped);
     results_to_DOM(array);
     return array;
 }
@@ -264,7 +265,7 @@ function results_to_DOM (array) {
       });
       //closure for making the navigation button link to the maps application
       nav_button.on("click", function(){
-        window.location.href = "#selection"
+        window.location.href = "#selection";
       });
       //appending various elements to their parent elements
       i_hours_container.append(i_hours, i_hours_tag);
@@ -302,11 +303,17 @@ function results_to_DOM (array) {
       }));
 
       // adding swipe on each result-card div
-      $('body').on('swipeleft', function(e){
-          console.log('swipeL (prev_card) triggered', i);
-      });
-      $('body').on('swiperight', function(e){
-          console.log('swipeR (next_card) triggered', i);
+      $(div).on('swipe', function (e) {
+        console.log('swipe triggered on', this);
+      }).swipeend(function (e, touch) {
+        var this_card = this;
+        var card_id = $(this_card).attr("id");
+        console.log("swipe ended", touch.direction, touch.xAmount, this);
+          if (touch.direction == "left" && touch.xAmount > 100){ // this defines a minimum swipe distance
+            console.log("previous card");
+          } else if (touch.direction == "right" && touch.xAmount > 100){
+            next_card(this_card, card_id, 1);
+        }
       });
 
       //top_position is incrementend to lower each card
@@ -339,32 +346,35 @@ function stack_up (array, height) {
   }
 }
 //function for moving the card in view to outside of the viewable window
-function next_card (element , direction) {
+function next_card (this_card, card_id , direction) {
   //The current index of cards is found via an attribute that was appended to the button during it's creation
-  var card = $(element).attr("data-position");
+  var card_num = card_id.slice(4);
+  console.log(card_num);
   //Conditional for determing if there are no more cards in the stack
-  if (parseInt(card) !== 9){
-    //Parent is set to the id value of the button's parent card
-    var parent = $("#card"+card);
+  if (parseInt(card_num) !== 9){
+      //Parent is set to the id value of the button's parent card
+      //var parent = card_id;
     //current_position is set to the current position of the parent's top px value
-    var current_position = parent.position().top;
+    var current_position = $(this_card).css("top");
+    console.log(current_position);
     //next_child_position is set to the px value of the next card in the stack
     //variable currently unused. Plan to be used for optimizations later on.
-    var next_child_position = $("#card" + (parseInt(card) + 1)).position().top;
+    var next_child_position = $("#card" + (parseInt(card_num) + 1)).css("top");
     //distance is set to 0. This will be distance each card must move up in the stack when one card is moved
     var distance = 0;
     //current_width is set to the parent card's width px value
-    var current_width = parent.width();
+    var current_width = $(this_card).css("width");
+    console.log(current_width);
     //parent card animates of the screen by taking its width value and multiplying it by 2 with an animation speed pf 300 miliseconds
-    parent.animate({left: current_width * 2 + "px"},400, function(){
-      parent.hide();
+    this_card.animate({left: current_width.slice(0, current_width.length - 2) * 2 + "px"}, 400, function(){
+      this_card.hide();
     });
     //card is then incremented
-    card = parseInt(card) + 1;
+    card_num = parseInt(card_num) + 1;
     //length is set to ten for the amount of cards in the stack
     var length = 10;
     //for loop for iterating throught each card in the stack
-    for(var i = card; i<=length; i++){
+    for(var i = card_num; i<=length; i++){
       //child is set to the card
       var child = $("#card" + i);
       //the card will animate from its current position + the distance at a speed of 500 miliseconds
@@ -382,6 +392,7 @@ function next_card (element , direction) {
 function prev_card (element , direction) {
   //The current index of cards is found via an attribute that was appended to the button during it's creation
     var card = $(element).attr("data-position");
+    console.log("data-position");
     //condition for determining if the top of the stack has been reached
     if (parseInt(card) !== 0){
       //Conditional for determining if there are no more cards in the stack

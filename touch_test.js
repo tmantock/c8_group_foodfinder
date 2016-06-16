@@ -25,7 +25,7 @@
  *
  */
 
-"use strict";
+
 
 (function ($) {
     $.attrFn = $.attrFn || {};

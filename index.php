@@ -45,7 +45,7 @@ $fb = new Facebook\Facebook([
   <link rel="stylesheet" type="text/css" href="style.css">
 
   <!-- jQuery Touch Events -->
-  <script src="touch_test.js">console.log("touch_test script loaded");</script>
+  <script src="touch_test.js"></script>
 
   <!--Javascript-->
   <script src = "script.js"></script>
