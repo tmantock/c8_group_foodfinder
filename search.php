@@ -14,9 +14,9 @@ $_POST['search_option']['category'] = 'sushi';
 $_POST["latitude"] = 33.532029;
 $_POST["longitude"] = -117.702148;
 $_POST['radius'] = '5000';
-$_SESSION['id'] = '484';
 $search_radius = $_POST['radius'];
 $id = $_SESSION['id'];
+print($id);
 ////   Set fourSquare  client key and secret
 	$client_key = FOURSQUARE_CLIENT_ID;
 	$client_secret = FOURSQUARE_SECRET_ID;

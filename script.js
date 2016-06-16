@@ -438,20 +438,21 @@ function final_array(array,fav) {
         for (var j=0; j<array.length;j++){
             if(fav[f].selected_restaurant == array[j].name){
                 found_favorite_restautant.push(array.splice(j,1));
-		console.log("found a match",j);
+		//console.log("found a match",j);
             }///if
         }//for j
     }//for fav
     array = array.splice(0,(array.length/2)+5);
     array = shuffle(array);   
-    array = array.splice(0,7);
+    array = array.splice(0,10-(found_favorite_restautant.length-1));
     console.log("fav: ",found_favorite_restautant );
-    //for(var k=0; k<found_favorite_restautant.length-1 ; k++){ 
-    //array.unshift(found_favorite_restautant[k]);
-     //}
+    for(var k=0; k<found_favorite_restautant.length ; k++){ 
+    array.unshift(found_favorite_restautant[k][0]);
+     }
+    //console.log("array of 10 before shuffle",array);
     array = shuffle(array);
-    console.log("result inside last arrange: ",array);
-    console.log("favorite res: ",fav);
+    //console.log("result inside last arrange: ",array);
+    //console.log("favorite res: ",fav);
     return array;
 }///fiinal array
 function shuffle (array) {
