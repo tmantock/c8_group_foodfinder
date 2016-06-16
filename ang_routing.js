@@ -7,7 +7,7 @@ app.config(function($routeProvider){
            controller: 'landingCtrl'
        })
        .when('/index',{
-           templateUrl: 'landing.html',
+           templateUrl: 'landing.php',
            controller: 'landingCtrl'
        })
        .when('/results', {
@@ -28,6 +28,8 @@ app.controller('mainCtrl', function($scope){
 });
 app.controller('landingCtrl', function($scope){
    // $scope.message = ("Hellow from landing Crtl");
+	click_cirle();
+
 });
 
 app.controller('resultsCtrl', function($scope){

@@ -70,7 +70,12 @@ function fourSquareReturn(response){
             fourSquareObj.zip = response.response.groups[0].items[x].venue.location.postalCode;
             fourSquareObj.lat = response.response.groups[0].items[x].venue.location.lat;
             fourSquareObj.lng = response.response.groups[0].items[x].venue.location.lng;
-            fourSquareObj.price = response.response.groups[0].items[x].venue.price.message;
+		if( response.response.groups[0].items[x].venue.price.message.hasOwnProperty("message") ){
+			fourSquareObj.price = response.response.groups[0].items[x].venue.price.message;
+			} else {
+				fourSquareObj.price = " Not Found";
+				}
+            //fourSquareObj.price = response.response.groups[0].items[x].venue.price.message;
             fourSquareObj.rating = response.response.groups[0].items[x].venue.rating;
             fourSquareObj.tips = response.response.groups[0].items[x].tips[0].text;
             fourSquareObj.user_first_name = response.response.groups[0].items[x].tips[0].user.firstName;
@@ -332,11 +337,10 @@ function distance_sort(array) {
     while (swapped)
     return array;
 }
+ 
+function click_circle(){
 
-$(document).ready(function(){
-    navigator.geolocation.getCurrentPosition(success,error, options);
-
-    $('.circle').on('click', function() {
+$('.circle').on('click', function() {
         var $this = $(this);
         $this.css('z-index', 2).removeClass('expanded').css('z-index', 1);
         $this.animate(
@@ -351,6 +355,13 @@ $(document).ready(function(){
                 }
             }, 300).addClass('expanded');
     });
+
+
+
+}//end click_cirlcle
+
+$(document).ready(function(){
+    navigator.geolocation.getCurrentPosition(success,error, options);
 
     $("#more-info").click(function () {
         console.log("#more-info button has been clicked");
