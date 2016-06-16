@@ -219,7 +219,7 @@ function results_to_DOM (array) {
       var i_url_tag = $("<p>").text("Web");
       var url_container = $('<div>').addClass("info-container col-xs-9");
       var url = $("<a>").text(array[i].website).addClass("info-content");
-      // var url = $("<a>").attr("href", "array[i].website").addClass("info-content");
+      // var url = $("<a>").attr("href", '"' + array[i].website + '"').addClass("info-content");
       /** POPULARITY **/
       var i_popularity_container = $('<div>').addClass("info-container col-xs-3");
       var i_popularity = $("<i>").addClass("fa fa-foursquare");
