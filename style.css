@@ -43,18 +43,17 @@ button:focus {
 
 .login-link{
     color: white;
+    background-color: #4C72A0;
     text-decoration: none;
-    text-shadow: 0 1px 3px black;
 }
 
 .login-link:hover{
     color: white;
     text-decoration: none;
-    text-shadow: 0 1px 3px black;
 }
 
 .facebook-icon {
-    color: #3b5998;
+    color: white;
 }
 
 #random {
@@ -103,17 +102,19 @@ button:focus {
 
 #login-button {
     color: #fff;
-    background-color: #ffaa00;
-    border-color: #ffaa00;
+    background-color: #4C72A0;
+    /*border-color: #ffaa00;*/
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
-#login-button:hover {
-    background-color: rgb(255, 196, 15);
+#login-button:hover{
+    border: 1px solid #5fa7e8;
+    /*background-color: #4f84b5;*/
 }
 
-#login-button:active{
-    background-color: rgb(255, 152, 0);
+#login-button:active,
+.login-link:active {
+    background-color: #64a3e6;
 }
 
 .submit {

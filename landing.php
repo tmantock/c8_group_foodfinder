@@ -32,10 +32,9 @@ $loginUrl = $helper->getLoginUrl(SERVER_LANDING, $permissions);
          <?php $url = htmlspecialchars($loginUrl);
 if(empty($_SESSION["name"])){
 
-      echo "<button type='button' class='btn btn-lg' id='login-button' > 
-<a  href='". $url ."'  class='login-link'>Log in with Facebook! </a><i 
-class='fa fa-facebook-official facebook-icon' 
-aria-hidden='true'></i></button>";
+      echo "<button type='button' class='btn btn-lg' id='login-button' > <i 
+class='fa fa-facebook-official fa-lg facebook-icon' aria-hidden='true'></i>
+<a  href='". $url ."'  class='login-link'>   Log in with Facebook </a></button>";
 }//if name is empty
 else {
 echo "<div id='welcome_user'>Welcome ".$_SESSION["name"]."</div>";

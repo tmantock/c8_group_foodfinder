@@ -265,7 +265,7 @@ function results_to_DOM (array) {
       });
       //closure for making the navigation button link to the maps application
       nav_button.on("click", function(){
-        window.location.href = "#selection"
+          window.open("https://www.google.com/maps/place/" + array[i].name + ",/@" + array[i].lat + ',' + array[i].lng + ',14z');
       });
       //appending various elements to their parent elements
       i_hours_container.append(i_hours, i_hours_tag);
