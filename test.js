@@ -8,13 +8,15 @@ var options = {
     enableHighAccuracy: true,
     maximumAge: 0
 };
+var coordinates = {}
 
 function success (pos) {
   var crd = pos.coords;
   console.log("Latitude: " + crd.latitude);
   console.log("Longiude: " + crd.longitude);
   console.log("Within: " + crd.accuracy + "meters");
-  foursquare_call(crd);
+  coordinates.latitude = crd.latitude;
+  coordinates.longitude = crd.longitude;
   return crd;
 }
 
@@ -25,10 +27,8 @@ function error(err) {
 function foursquare_call(crd){
  $.ajax({
    dataType: "JSON",
-  url: "https://api.foursquare.com/v2/venues/explore?client_id=" +
-  " BJ55LPF34FXTMHV4VOW0L0VMAUV4MYG2VK3JC33ELWU2KOXZ&client_secret=" +
-  " KNMJ3JKCNBI4AUWZNHPLZBQZSMEQTURPQW0EGS4AKOO2TM3X&v=20130815&ll=33.64,-117.74&venuePhotos=1&query=burgers",
-  method: "GET",
+  url: "search.php",
+  method: "POST",
   data: {
     latitude: crd.latitude,
     longitude: crd.longitude,
@@ -41,7 +41,7 @@ function foursquare_call(crd){
   },
   success: function (response){
     fourSquareReturn(response);
-    console.log(response.response);
+    console.log(response);
   },
   error: function(response){
   console.log(response);
@@ -50,27 +50,54 @@ function foursquare_call(crd){
 }
 
 function fourSquareReturn(response){
-    var fourSquareResponse = response.response.groups[0].items;
-    for(var x = 0; x < fourSquareResponse.length; x++){
-        var fourSquareObj = {};
-        if (response.response.groups[0].items[x].venue.photos.count >= 1){
-        fourSquareObj.name = response.response.groups[0].items[x].venue.name;
-        fourSquareObj.distance = response.response.groups[0].items[x].venue.location.distance;
-        fourSquareObj.photo = response.response.groups[0].items[x].venue.photos.groups[0].items[0].prefix + "300x200"+ response.response.groups[0].items[x].venue.photos.groups[0].items[0].suffix;
-        fourSquareObj.hours = response.response.groups[0].items[x].venue.hours.status;
-        fourSquareObj.website =  response.response.groups[0].items[x].venue.url;
-        fourSquareObj.phone = response.response.groups[0].items[x].venue.contact.formattedPhone;
-        fourSquareObj.venueid = response.response.groups[0].items[x].venue.id;
-        fourSquareObj.street =  response.response.groups[0].items[x].venue.location.address;
-        fourSquareObj.city = response.response.groups[0].items[x].venue.location.city;
-        fourSquareObj.state =   response.response.groups[0].items[x].venue.location.state;
-        fourSquareObj.zip = response.response.groups[0].items[x].venue.location.postalCode;
-        fourSquareObj.lat = response.response.groups[0].items[x].venue.location.lat;
-        fourSquareObj.lng = response.response.groups[0].items[x].venue.location.lng;
-        fourSquareObj.price = response.response.groups[0].items[x].venue.price.message;
-        fourSquareObj.rating = response.response.groups[0].items[x].venue.rating;
+    for(var x = 0; x < response.length; x++){
+      var fourSquareResponse = response[x];
+      var fourSquareObj = {};
+        fourSquareObj.name = fourSquareResponse.response.venue.name;
+        //fourSquareObj.distance = response.response.groups[0].items[x].venue.location.distance;
+        fourSquareObj.photo = fourSquareResponse.response.venue.bestPhoto.prefix + "300x200"+ fourSquareResponse.response.venue.bestPhoto.suffix;
+        if(fourSquareResponse.response.venue.popular.timeframes.length == 0 || fourSquareResponse.response.venue.popular.timeframes.length == 0){
+        fourSquareObj.hours = fourSquareResponse.response.venue.popular.timeframes[0].open[0].renderedTime + fourSquareResponse.response.venue.popular.timeframes[0].open[1].renderedTime;
+        }
+        else{
+          fourSquareObj.hours = "Hours are unlisted."
+        }
+        fourSquareObj.description = fourSquareResponse.response.venue.description;
+        fourSquareObj.website = fourSquareResponse.response.venue.url;
+        fourSquareObj.phone = fourSquareResponse.response.venue.contact.formattedPhone;
+        fourSquareObj.street =  fourSquareResponse.response.venue.location.address;
+        fourSquareObj.city = fourSquareResponse.response.venue.location.city;
+        fourSquareObj.state = fourSquareResponse.response.venue.location.state;
+        fourSquareObj.zip = fourSquareResponse.response.venue.location.postalCode;
+        fourSquareObj.lat = fourSquareResponse.response.venue.location.lat;
+        fourSquareObj.lng = fourSquareResponse.response.venue.location.lng;
+        if(fourSquareResponse.response.venue.hasOwnProperty('price')){
+          fourSquareObj.price = fourSquareResponse.response.venue.price.message;
+        }
+        else{
+          fourSquareObj.price = "Not Found";
+        }
+        if(fourSquareResponse.response.venue.attributes.groups[1].hasOwnProperty('summary')){
+        fourSquareObj.payment = fourSquareResponse.response.venue.attributes.groups[1].summary;
+        }
+        else{
+          fourSquareObj.payment = "No Information";
+        }
+        if(fourSquareResponse.response.venue.attributes.groups[2].hasOwnProperty('summary')){
+          fourSquareObj.seating = fourSquareResponse.response.venue.attributes.groups[2].summary;
+        }
+        else{
+          fourSquareObj.seating = "No Information";
+        }
+        if(fourSquareResponse.response.venue.attributes.groups[3].hasOwnProperty('summary')){
+          fourSquareObj.menu = fourSquareResponse.response.venue.attributes.groups[3].summary;
+        }
+        else{
+          fourSquareObj.menu = "Not Available";
+        }
+        fourSquareObj.rating = fourSquareResponse.response.venue.rating;
         restauraunts.push(fourSquareObj);
-      }
+
     }//for loop
     results_to_DOM(restauraunts);
     console.log("fourSquareReturn",restauraunts);
@@ -93,7 +120,6 @@ function results_to_DOM (array) {
       'background-repeat': 'no-repeat',
       'background-position': 'center center'
     });
-      
     var addressDiv = $("<div>").addClass("address-text-holder container-fluid");
     /** ADDRESS CONTAINER**/
     var name = $("<h3>").text(array[i].name);
@@ -135,7 +161,7 @@ function results_to_DOM (array) {
     // var i_eta = $("<i>").addClass("fa fa-clock-o");
     // var eta = $("<p>");
     /** MORE INFO **/
-    var moreInfoDiv = $("<div>").addClass("more-info-holder container-fluid");  
+    var moreInfoDiv = $("<div>").addClass("more-info-holder container-fluid");
 
 
     var btn_div = $("<div>").addClass("button-holder");
@@ -181,9 +207,9 @@ function results_to_DOM (array) {
     nav_div.append(nav_button);
     btn_div.append(prev_div,nav_div,next_div);
     addressDiv.append(street, city_state_zip, phone);
-    
+
     moreInfoDiv.append(rating_container, distance_container, price_container, i_hours_container, hours_container, i_cc_container, cc_container, i_url_container, url_container, i_url_container, url_container, i_url_container, url_container);
-      
+
     div.append (name, img, addressDiv, moreInfoDiv, btn_div);
     $("#results-page").append(div.attr("id","card" + i).css({
       top: 100 + top_position + window_height + "px",
@@ -304,27 +330,38 @@ function distance_sort(array) {
     return array;
 }
 
+function click_circle () {
+  $('.circle').on('click', function() {
+      foursquare_call(coordinates);
+       var $this = $(this);
+       $this.css('z-index', 2).removeClass('expanded').css('z-index', 1);
+       $this.animate(
+           {expansion: 5 },
+           {
+               step: function(now,fx) {
+                   $(this).css('-webkit-transform','scale('+now+')');
+               },
+               complete:function() {
+                   window.location.href = "#results";
+                   $("body").css('background-color', '#ffaa00 ');
+               }
+           }, 300).addClass('expanded');
+     });
+}
+
 $(document).ready(function(){
   navigator.geolocation.getCurrentPosition(success,error, options);
+  $("#more-info").click(function () {
+    console.log("#more-info button has been clicked");
+    $("#result-div").addClass("flip-card");
+  });
 
-    $('.circle').on('click', function() {
-         var $this = $(this);
-         $this.css('z-index', 2).removeClass('expanded').css('z-index', 1);
-         $this.animate(
-             {expansion: 5 },
-             {
-                 step: function(now,fx) {
-                     $(this).css('-webkit-transform','scale('+now+')');
-                 },
-                 complete:function() {
-                     window.location.href = "#results";
-                     $("body").css('background-color', '#ffaa00 ');
-                 }
-             }, 300).addClass('expanded');
-       });
-
-    $("#more-info").click(function () {
-        console.log("#more-info button has been clicked");
-        $("#result-div").addClass("flip-card");
-    });
+  $.ajax({
+    url: "search.php",
+    dataType: "JSON",
+    method: "POST",
+    success: function(response){
+      console.log(response);
+    }
+  })
 });

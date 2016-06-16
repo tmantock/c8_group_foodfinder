@@ -91,10 +91,12 @@ require_once("credentials.php");
 //      }
 
     $params = array(
-                "ll"=> $_POST['latitude'].",".$_POST['longitude'],
+                "ll"=> 33.63.",".-117.74,
                 "intent"=>"browse",
                 "radius"=>5000,
-                "query"=> "lunch"
+								"limit"=>10,
+								"price"=>2,3,
+                "section"=> "sushi"
             );
 
 	// Perform a request to a public resource
@@ -104,5 +106,31 @@ require_once("credentials.php");
 	// $POST defaults to false
 	$venues = $foursquare->GetPublic($endpoint , $params, $POST=false);
 
-  print($venues);
+  $venues = json_decode($venues);
+
+ 	$venue = $venues -> response -> groups[0] -> items;
+
+	$venue_id = [];
+	$index = 1;
+
+	foreach ($venue as $key => $value) {
+		$venue_id[$index] = $value -> venue -> id;
+		$index++;
+	}
+
+	$output = [];
+
+	foreach ($venue_id as $key => $value) {
+	$foursquare = new FoursquareApi($client_key, $client_secret);
+	// Searching for tips specific to location
+	$endpoint = "venues/".$value;
+	// Perform a request to a public resource
+	$response = $foursquare->GetPublic($endpoint);
+	// Returns a list of tips
+	// $POST defaults to false
+	$venue = $foursquare->GetPublic($endpoint , $POST=false);
+	//print tips object
+	array_push($output, json_decode($venue));
+	}
+	print(json_encode($output));
 ?>
