@@ -372,9 +372,9 @@ function next_card (element , direction) {
 function prev_card (element , direction) {
   //The current index of cards is found via an attribute that was appended to the button during it's creation
     var card = $(element).attr("data-position");
-    //condition for determing if the top of the stack has been reached
+    //condition for determining if the top of the stack has been reached
     if (parseInt(card) !== 0){
-      //Conditional for determing if there are no more cards in the stack
+      //Conditional for determining if there are no more cards in the stack
       var parent = $("#card"+card);
       //prev_child_position is set to the jQuery selector for the previous card in the stack
       var prev_card = $("#card" + (parseInt(card) - 1));
