@@ -1,93 +1,93 @@
 <?php
-
-require_once("fs_lib/src/FoursquareApi.php");
-require_once("credentials.php");
-  //require_once("mysqli_connect.php");
-//
-
-  session_start();
-	require_once("fs_lib/src/FoursquareApi.php");
+session_start();
+  require_once("fs_lib/src/FoursquareApi.php");
   require_once("credentials.php");
+if (empty($_SESSION["id"])) {   //   session id = facebook id , if not in session, is guest,insert into db, get unique id
+    $insert_query = "INSERT INTO `users` (`fb_login`) VALUES ('false')";
+    $resultOfInsert = mysqli_query($conn, $insert_query);
+    $guest_id = mysqli_insert_id($conn);
+    echo "<br>guest id: ";
+    echo $guest_id;
+    $_SESSION["id"] = $guest_id;
+    echo "<br>session with guest id : ";
+    var_dump($_SESSION);
+}
+echo "session after checking for empty id: ";
+print_r($_SESSION);
 
- // require_once("mysqli_connect.php");
+        $_POST['search_option']['option'] = 'chinese';
+        $_POST['search_option']['category'] = 'category';
+        $_POST['radius'] = '5000';
+        $_SESSION['id'] = '484';
 
+  $user_information = [];
+  $user_category_information = [];
+  $user_restaurant_information = [];
 
-//  $user_information = [];
-//  $user_category_information = [];
-//  $user_restaurant_information = [];
-//
-//  //Get search option from POST
-//  $search_option = $_POST['search_option']['option'];
-//  //$search_category = $_POST['search_option']['category'];
-//  //Get search radius option from POST
-//  $search_radius = $_POST['radius'];
-//  //Get the user ID from SESSION
-//  $user_id = $_POST['user_id'];
-//  //Get the users information from database
-//  $user = $db -> query("SELECT `drop_dwn_choice`,`selected_rstaurnt`,`category_id`,`restaurant_distance`,`radius_selector`,`price_selector`, `usr_uniq_assigned_id` FROM `user_interaction` WHERE `usr_uniq_assigned_id`='$user_id'");
-//  if($user->num_rows>0){
-//    while($user_row = $user->fetch_assoc()){
-//      array_push($user_information , $user_row);
-//    }
-//    //print_r($user_information);print("<br><br>");
-//  }
-//  //Get the number of times the user selected a certain category
-//  $user_category_count = $db -> query("SELECT `user_interaction`.`usr_uniq_assigned_id` , `categories`.`food_cat` , COUNT(`user_interaction`.`category_id`) AS `count_category` FROM `user_interaction` JOIN `categories` WHERE `categories`.`category_id` = `user_interaction`.`category_id` ORDER BY `count_category` DESC");
-//  if($user_category_count->num_rows>0){
-//    while($user_cat_row = $user_category_count -> fetch_assoc()){
-//      array_push($user_category_information,$user_cat_row);
-//    }
-//  //  print_r($user_category_information);print("<br><br>");
-//  }
-//  //Get the number of times the user picks a certain restaurant
-//  $user_restaurant_choice = $db -> query("SELECT `usr_uniq_assigned_id` , `selected_rstaurnt` , COUNT(`selected_rstaurnt`) AS `restaurant_count` FROM `user_interaction` ORDER BY `restaurant_count` DESC");
-//  if($user_restaurant_choice->num_rows>0){
-//    while($user_restaurant_row = $user_restaurant_choice -> fetch_assoc()){
-//      array_push($user_restaurant_information,$user_restaurant_row);
-//    }
-//  //  print_r($user_restaurant_information);
-//  }
-//  if(isset($_POST['user_id'])){
-//    if($search_option === "random"){
-//      if($user_category_information[0]['count_category'] >= 5){
-//      // Prepare parameters
-//       $params = array(
-//        "ll"=> $_POST['latitude'].",".$_POST['longitude'],
-//        "intent"=>"browse",
-//        "radius"=>$search_radius,
-//        "query"=> $user_category_information[0]['food_cat']
-//       );
-//      }
-//      else{
-//        // Prepare parameters
-//         $params = array(
-//          "ll"=> $_POST['latitude'].",".$_POST['longitude'],
-//          "intent"=>"browse",
-//          "radius"=>$search_radius,
-//          "query"=> $_POST['search_option']['category']
-//         );
-//      }
-//    }
-//    else if($search_option === "menu"){
-//	    // Prepare parameters
-//	    $params = array(
-//		    "ll"=> $_POST['latitude'].",".$_POST['longitude'],
-//		    "intent"=>"browse",
-//		    "radius"=>$search_radius,
-//		    "query"=> $seacrh_category
-//	    );
-//    }
-//  }
-$params = array(
-    "ll"=> $_POST['latitude'].",".$_POST['longitude'],
-    "intent"=>"browse",
-    "radius"=>5000,
-    "query"=> "sushi"
-);
+            //Get search option from POST
+  $search_option = $_POST['search_option']['option'];  //$SESSION
+  $search_category = $_POST['search_option']['category'];
+            //Get search radius option from POST
+  $search_radius = $_POST['radius'];
+            //Get the user ID from SESSION
+  $user_id = $_SESSION['id'];
+
+    $drop_dwn_choice;
+    $selected_rstaurnt;
+    $category_id;
+    $restaurant_distance;
+    $radius_selector;
+    $price_selector;
+    $usr_uniq_assigned_id;
+
+            //Get the user's information (all user interactions) from database @ table = `user_interaction`
+
+$query = "SELECT `drop_down_choice`,`selected_restaurant`,`category_id`,`restaurant_distance`,`radius_selector`,`price_selector`, `unique_assigned_id` FROM `user_interaction` WHERE `unique_assigned_id`='$user_id'";
+
+  $user = $db -> query($query);
+echo "\query1 = ".$query;
+
+  if($user->num_rows>0){                                        //USER EXISTS IN DB
+    while($user_row = $user->fetch_assoc()){
+      array_push($user_information , $user_row);
+        print("USER EXISTS <br>");
+        print("$user_row");
+        print("<br>");
+
+ 
+   }
+            print_r($user_information);print("<br><br>");
+  }//USER EXISTS IN DB
+
+            //Get the number of times the user selected a certain category
+$query = "SELECT `user_interaction`.`unique_assigned_id` , `categories`.`food_category` , COUNT(`user_interaction`.`category_id`) AS `count_category` FROM `user_interaction` JOIN `categories` WHERE `categories`.`category_id` = `user_interaction`.`category_id` ORDER BY `count_category` DESC";
+print("<br>query 2 : $query");
+  $user_category_count = $db -> query($query);
+
+  if($user_category_count->num_rows>0) {        //USER HAS SELECTED A RES CATEGORY BEFORE
+      while ($user_cat_row = $user_category_count->fetch_assoc()) {
+          array_push($user_category_information, $user_cat_row);
+      } //while
+  }//if($user
+    print("<br>user_category_count array = <br>");
+    print_r($user_category_information);
+    print("<br><br>");
+
+        //Get the number of times the user picks a certain restaurant
+
+  $user_restaurant_choice = $db -> query("SELECT `unique_assigned_id` , `selected_restaurant` , COUNT(`selected_restaurant`) AS `restaurant_count` FROM `user_interaction` ORDER BY `restaurant_count` DESC");
+
+  if($user_restaurant_choice->num_rows>0){        //USER HAS SELECTED A RES name BEFORE
+    while($user_restaurant_row = $user_restaurant_choice -> fetch_assoc()){
+      array_push($user_restaurant_information,$user_restaurant_row);
+    }
+    print("<br>user_restaurant_information array = <br>");
+    print_r($user_restaurant_information);
+  }// if($user
 
 
   if(isset($_POST['user_id'])){
-    if($search_option === "random"){
+    if($search_option === "random"){          //and search = random, set search params, send search info to db
       if($user_category_information[0]['count_category'] >= 5){
       // Prepare parameters
        $params = array(
@@ -96,8 +96,8 @@ $params = array(
         "radius"=>$search_radius,
         "query"=> $user_category_information[0]['food_cat']
        );
-      }
-      else{
+      }//if($user_category
+      else{                                 //else if search = selected food category , set search params, send search info to db
         // Prepare parameters
          $params = array(
           "ll"=> $_POST['latitude'].",".$_POST['longitude'],
@@ -106,8 +106,8 @@ $params = array(
           "query"=> $_POST['search_option']['category']
          );
       }
-    }
-    else if($search_option === "menu"){
+    }//if($search_option
+    else if($search_option === "menu"){    //if previous user and selected food category , set search params, send search info to db
 	    // Prepare parameters
 	    $params = array(
 		    "ll"=> $_POST['latitude'].",".$_POST['longitude'],
@@ -115,29 +115,16 @@ $params = array(
 		    "radius"=>$search_radius,
 		    "query"=> $search_category
 	    );
-    }
-  }
-else{
-    $params = array(
-        "ll"=> $_POST['latitude'].",".$_POST['longitude'],
-        "intent"=>"browse",
-        "radius"=>5000,
-        "query"=> "sushi"
-    );
-}
-    $params = array(
-                "ll"=> $_POST['latitude'].",".$_POST['longitude'],
-                "intent"=>"browse",
-                "radius"=>5000,
-                "query"=> "lunch"
-            );
+    }//else if
+  }//if(isset(
+
+
+    //endpoint = foursquare library - combines some stuffs in the url, $endpoint + $params = query string url.
 	// Perform a request to a public resource
 	$response = $foursquare->GetPublic($endpoint,$params);
 
 	// Returns a list of Venues
 	// $POST defaults to false
 	$venues = $foursquare->GetPublic($endpoint , $params, $POST=false);
-
   print($venues);
-
-?>
+// insert to db new inf

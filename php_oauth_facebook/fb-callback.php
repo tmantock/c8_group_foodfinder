@@ -67,9 +67,10 @@ $tokenMetadata->validateExpiration();
     var_dump($accessToken->getValue());
 $_SESSION['fb_access_token'] = (string) $accessToken;
 echo '<h5 style="color: red;">access token in callback page: </h5>';
-print_r($_SESSION['fb_access_token']);
+//print_r($_SESSION['fb_access_token']);
 /*store the token for later use*/
 // User is logged in with a long-lived access token.
-// You can redirect them to a members-only page.
-header('location : SERVER_REDIRECT');
+// You can redirect them to a me
+//mbers-only page.
+header('location: show_data.php');
 ?>
