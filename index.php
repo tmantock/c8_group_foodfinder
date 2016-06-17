@@ -39,6 +39,10 @@ $fb = new Facebook\Facebook([
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
   <!--Stylesheet-->
   <link rel="stylesheet" type="text/css" href="style.css">
+
+  <!-- jQuery Touch Events -->
+  <script src="touch_test.js"></script>
+
   <!--Javascript-->
   <script src = "script.js"></script>
   <script src="ang_routing.js"></script>
