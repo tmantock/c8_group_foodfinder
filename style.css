@@ -31,41 +31,25 @@ button:focus {
 #lunch_heading {
     font-size: 30px;
     color: white;
-    text-shadow: 1px 3px 4px black;
+    text-shadow: 0 5px 8px black;
     padding: 1vh 0 3vh 0;
     font-family: 'Pacifico';
-    width: 100vw;
+}
+
+#description {
+    color: white;
+    text-shadow: 0 1px 1px black;
 }
 
 .landing-heading {
     color: white;
     text-shadow: 0px 1px 3px black;
-    width: 100vw;
-}
-
-.landing-container {
-    width: 100vw;
-}
-
-.login-link{
-    color: white;
-    background-color: #4C72A0;
-    text-decoration: none;
-}
-
-.login-link:hover{
-    color: white;
-    text-decoration: none;
-}
-
-.facebook-icon {
-    color: white;
 }
 
 #random {
     position: absolute;
     left: 0;
-    top: 47%;
+    top: 50%;
     height: 100%;
     width: 100%;
     text-align: center;
@@ -78,7 +62,7 @@ button:focus {
 .circle {
     position: absolute;
     left: 33%;
-    top: 56%;
+    top: 50%;
     height: 175px;
     width: 175px;
     margin: -25px 0 0 -25px;
@@ -98,14 +82,6 @@ button:focus {
     display: none;
 }
 
-.circle:hover, .lets-go:hover {
-    background-color: rgb(255, 196, 15);
-}
-
-.circle:active, .lets-go:active {
-    background-color: rgb(255, 152, 0);
-}
-
 #login-button {
     color: #fff;
     background-color: #4C72A0;
@@ -121,6 +97,11 @@ button:focus {
 #login-button:active,
 .login-link:active {
     background-color: #64a3e6;
+}
+
+#login-button a {
+  text-decoration: none;
+  color: white;
 }
 
 .submit {
@@ -148,124 +129,7 @@ button:focus {
 }
 
 .modal-dialog {
-    margin-top: 40%;
-}
-
-.dropdown-container {
-    height: 13%;
-    margin-top: 8vh;
-}
-
-.dropdown-container > .dropdown {
-    margin: 0 3px;
-    vertical-align: top;
-}
-
-.dropdown {
-    display: inline-block;
-    position: relative;
-    overflow: hidden;
-    height: 28px;
-    margin: 0;
-    width: 100px;
-    background: #f2f2f2;
-    border: 1px solid;
-    border-color: white #f7f7f7 whitesmoke;
-    border-radius: 3px;
-    background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
-    background-image: -moz-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
-    background-image: -o-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
-    background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.06));
-    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
-    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.75);
-}
-
-.dropdown:before, .dropdown:after {
-    content: '';
-    position: absolute;
-    z-index: 2;
-    top: 9px;
-    right: 10px;
-    width: 0;
-    height: 0;
-    border: 4px dashed;
-    border-color: #888888 transparent;
-    pointer-events: none;
-}
-
-.dropdown:before {
-    border-bottom-style: solid;
-    border-top: none;
-}
-
-.dropdown:after {
-    margin-top: 7px;
-    border-top-style: solid;
-    border-bottom: none;
-}
-
-.dropdown-select {
-    position: relative;
-    width: 100px;
-    margin: 0;
-    padding: 6px 8px 6px 10px;
-    height: 28px;
-    line-height: 14px;
-    font-size: 12px;
-    color: #62717a;
-    text-shadow: 0 1px white;
-    background: #f2f2f2; /* Fallback for IE 8 */
-    background: rgba(0, 0, 0, 0) !important; /* "transparent" doesn't work with Opera */
-    border: 0;
-    border-radius: 0;
-    -webkit-appearance: none;
-}
-
-.dropdown-select:focus {
-    z-index: 3;
-    width: 100%;
-    color: #394349;
-    outline: 2px solid #49aff2;
-    outline: 2px solid -webkit-focus-ring-color;
-    outline-offset: -2px;
-}
-
-.dropdown-select > option {
-    margin: 3px;
-    padding: 6px 8px;
-    text-shadow: none;
-    background: #f2f2f2;
-    border-radius: 3px;
-    cursor: pointer;
-}
-
-.zip-input {
-    padding: 5px;
-    border-radius: 5px;
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
-    margin-top: 69%;
-    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.75);
-}
-
-.lets-go{
-    color: white;
-    width: 43%;
-    background-color: #ffaa00;
-    margin-top: 4%;
-    position: relative;
-    left: 29%;
-    height: 35px;
-    border-radius: 5px;
-    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.75);
-}
-
-#lets-go-text {
-    font-family: 'Pacifico';
-    text-shadow: 0 2px 1px black;
-    font-size: 3vh;
-    transform: translateY(10%);
+    margin-top: 50%;
 }
 
 .info-container {
@@ -408,7 +272,7 @@ button:focus {
     transform: translate(-50%,-50%);
     height: 100%;
     width: 58%;
-    /*border-radius: 50%;*/
+    border-radius: 50%;
     cursor: pointer;
     z-index: 0;
     background: #00cbff;
@@ -435,9 +299,8 @@ button:focus {
 
 .navigation-button p {
     text-align: center;
-    padding-top: 4%;
-    padding-left: 1%;
-    font-size: 3vh;
+    padding-top: 7%;
+    padding-left: 5%;
     font-family: "Pacifico";
     text-shadow: 0px 1px 1px black;
 }
@@ -456,6 +319,27 @@ button:focus {
         font-size: 2.5vh;
     }
 
+    #image-carousel {
+        height: 35%;
+        width: 93%;
+        overflow: hidden;
+        transform: translate(4%,-27%);
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    }
+
+    #carousel-images  {
+        height: 100%;
+    }
+
+    #result-div {
+        width: 93%;
+        height: 87vh;
+        transform: translate(4%, 12%);
+        background-color: white;
+        /* background-color: rgba(0,0,0,0.33); */
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    }
+
     #image-holder {
         height: 37%;
         width: 93%;
@@ -471,6 +355,22 @@ button:focus {
         width: 80%;
         left: 0;
         transform: translate(13%,2%);
+    }
+
+    #results-info-div {
+        background-color: rgba(0,0,0,0.50);
+        height: 57%;
+        width: 93%;
+        transform: translate(4%,-19%);
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    }
+
+    #selection-info-div {
+        background-color: rgba(0,0,0,0.50);
+        height: 59%;
+        width: 93%;
+        transform: translate(0%,-13%);
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }
 
     .info-container {
@@ -493,11 +393,86 @@ button:focus {
         padding-top: 6px;
     }
 
+    .restaurant-info {
+        float: left;
+        height: 35%;
+        width: 20%;
+        margin: 18px 0 0 13px;
+        background-color: rgba(0,0,0,0.5);
+        padding-top: 12px;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        color: white;
+    }
+
+    .restaurant-info > i {
+        padding-bottom: 5px;
+    }
+
+    /*.info-content {*/
+    /*margin-top: 6%;*/
+    /*}*/
+
     .landing-heading {
         margin-top: 3px;
         font-size: 2vh;
     }
+    .animate {
+        transition: all 0.1s;
+        -webkit-transition: all 0.1s;
+    }
 
+    .action-button {
+        position: relative;
+        padding: 8px 20px;
+        margin: 0px 10px 10px 0px;
+        border-radius: 5px;
+        font-family: 'Pacifico';
+        font-size: 20px;
+        color: #FFF;
+        text-decoration: none;
+        background-color: red;
+        border-bottom: 5px solid #ce0010;
+        text-shadow: 0px 2px 3px #3b3b3b;
+        top: 5vh;
+        transform: translate(5%,0%);
+    }
+
+    .action-button:active {
+        transform: translate(0px,5px);
+        -webkit-transform: translate(0px,5px);
+        border-bottom: 1px solid;
+    }
+
+    #more-info {
+        font-family: 'Pacifico';
+        background-color: rgba(0,0,0,0.5);
+        height: 26%;
+        width: 26%;
+        border-radius: 50%;
+        background-color: red;
+        font-size: 15px;
+        text-shadow: 0 2px 4px black;
+        transform: translate(1%,23%);
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    }
+
+    .restaurant-info-back {
+        height: 44px;
+        padding: 0;
+        background-color: whitesmoke;
+        margin-bottom: 6px;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    }
+
+    .info-aside {
+        background-color: white;
+        color: black;
+        height: 44px;
+        padding: 0;
+        margin-bottom: 6px;
+        text-shadow: none;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    }
 
 /*}*/
 

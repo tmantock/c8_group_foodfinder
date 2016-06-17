@@ -24,6 +24,8 @@ $permissions = ['email','user_posts'];
 $loginUrl = $helper->getLoginUrl(SERVER_LANDING, $permissions);
 //echo '<a href="' . htmlspecialchars($loginUrl) . '">Log in with Facebook!</a>';
 ?>
+<div class = "header">
+
 
     <h1 id="lunch_heading" class="col-xs-12">What's For Lunch?</h1>
     <h3 class="landing-heading">Food Search That's Truly Simple</h3>
@@ -40,9 +42,11 @@ class='fa fa-facebook-official fa-lg facebook-icon' aria-hidden='true'></i>
 else {
 echo "<div id='welcome_user'>Welcome ".$_SESSION["name"]."</div>";
 }//else to welcome the user
-?>
 
-        <div class="modal fade" id="login" role="dialog">
+?>
+</div>
+
+        <!-- <div class="modal fade" id="login" role="dialog">
             <div class="modal-dialog">
 
                 <div class="modal-content">
@@ -96,17 +100,14 @@ echo "<div id='welcome_user'>Welcome ".$_SESSION["name"]."</div>";
         <div id="lets-go-text">Let's Go!</div>
     </div>
 </section>
-<!--     Random Selection Button-->
-    <div class="circle">
-      <div id="random">Pick For Me!</div>
-    </div>
+<!     Random Selection Button-->
 
-    <input type="text" placeholder="Please Enter ZIP Code" class="zip-input">
-    <form>
+    <!-- <input type="text" placeholder="Please Enter ZIP Code" class="zip-input">
+    <form>  -->
     <!-- Random Selection Button -->
     <div class="circle">
       <div id="random">Pick For Me!</div>
     </div>
-    <input type = "text" id = "zip" placeholder="Please Enter Your ZIP Code" required>
+    <!-- <input type = "text" id = "zip" placeholder="Please Enter Your ZIP Code" required>
   </form>
-    </select>
+    </select> -->

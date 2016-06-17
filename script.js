@@ -33,8 +33,8 @@ function foursquare_call(options){
         method: "POST",
         data: {
             //Geolocation restricted due to server being hosted on http
-            //latitude: coordinates.latitude,
-            //longitude: coordinates.longitude,
+            latitude: coordinates.latitude,
+            longitude: coordinates.longitude,
             near: options,
             radius: 100000,
             search_option: {
