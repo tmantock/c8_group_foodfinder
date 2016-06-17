@@ -240,6 +240,7 @@ button:focus {
     font-size: inherit;
     line-height: inherit;
     margin-top: 69%;
+    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.75);
 }
 
 .lets-go{
@@ -256,7 +257,7 @@ button:focus {
 
 #lets-go-text {
     font-family: 'Pacifico';
-    text-shadow: 0 1px 1px black;
+    text-shadow: 0 2px 1px black;
     font-size: 3vh;
     transform: translateY(10%);
 }
