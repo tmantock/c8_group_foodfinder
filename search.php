@@ -11,9 +11,6 @@ if (empty($_SESSION["id"])) {
 }
 $_POST['search_option']['option'] = 'random';
 $_POST['search_option']['category'] = 'sushi';
-$_POST["latitude"] = 33.532029;
-$_POST["longitude"] = -117.702148;
-$_POST['radius'] = '5000';
 $_SESSION['id'] = '484';
 $search_radius = $_POST['radius'];
 $id = $_SESSION['id'];
@@ -26,8 +23,8 @@ $id = $_SESSION['id'];
 	$endpoint = "venues/explore";
 ////  Conditionals for determining choice
    $params = [
-
-       "ll"=> $_POST['latitude'].",".$_POST['longitude'],
+      //  "ll"=> $_POST['latitude'].",".$_POST['longitude'],
+       "near" => $_POST['near'],
        "intent"=>"browse",
        "radius"=>$search_radius,
        "venuePhotos"=>1

@@ -3,6 +3,7 @@ session_start();
 //start your session
 //make sure to include your facebook credentials!
 require_once('credentials.php');
+require_once('category_retrieve.php');
 //then you'll need to include the facebook sdk
 //require_once('php_oauth_facebook/libraries/facebook-php-sdk-v4-5.0.0/src/Facebook/autoload.php');
 
@@ -63,8 +64,11 @@ echo "<div id='welcome_user'>Welcome ".$_SESSION["name"]."</div>";
             </div>
         </div>
     </div>
-
+    <form>
     <!-- Random Selection Button -->
     <div class="circle">
       <div id="random">Pick For Me!</div>
     </div>
+    <input type = "text" id = "zip" placeholder="Please Enter Your ZIP Code" required>
+  </form>
+    </select>
