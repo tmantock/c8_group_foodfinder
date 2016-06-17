@@ -5,6 +5,9 @@ var options = {
     maximumAge: 0
 };
 var coordinates = {};
+var zip;
+
+//navigator.geolocation.getCurrentPosition(success,error, options);
 //function for acquiring the latitude and longitude on succesful geolocation call
 function success (pos) {
     //set accessible variable to to the coordinates of the position object returned from the geolocation
@@ -19,7 +22,8 @@ function success (pos) {
 }
 //function for displaying the error in the console for an unsuccesful geolocation call
 function error(err) {
-    console.warn("Error(" + err.code + "):" + err.message);
+  $("#login").modal('show');
+  console.warn("Error(" + err.code + "):" + err.message);
 }
 //function for calling the php page which returns the modified foursquare data
 function foursquare_call(options){
@@ -28,8 +32,10 @@ function foursquare_call(options){
         url: "search.php",
         method: "POST",
         data: {
-            latitude: coordinates.latitude,
-            longitude: coordinates.longitude,
+            //Geolocation restricted due to server being hosted on http
+            //latitude: coordinates.latitude,
+            //longitude: coordinates.longitude,
+            near: options,
             radius: 100000,
             search_option: {
                 option: options,
@@ -38,7 +44,8 @@ function foursquare_call(options){
         },
         success: function (response){
           //call the fourSquareReturn function with the response as a parameter to grab key object values for later use
-          fourSquareReturn(response.fourSquare_search_results);
+          console.log("fav after success: ",response.favorite_restaurants);
+          fourSquareReturn(response.fourSquare_search_results, response.favorite_restaurants);
         },
         error: function(response){
             console.log(response);
@@ -47,7 +54,8 @@ function foursquare_call(options){
 }
 //function for stripping the foursquare object and adding them to a more compact object for easier use later on
 //this function also serves to validate data that may not be present in each object in the foursquare return
-function fourSquareReturn(response){
+function fourSquareReturn(response,fav){
+  console.log("fav inside ajax call: ", fav);
   //local variable declared for holding the truncated foursquare objects
   var restauraunts = [];
   //loop through each object in the response array of venues
@@ -82,7 +90,7 @@ function fourSquareReturn(response){
 			  fourSquareObj.price = fourSquareResponse.venue.price.message;
 			}
       else {
-			  fourSquareObj.price = "not found";
+			  fourSquareObj.price = "Not Found";
 			}
       fourSquareObj.rating = fourSquareResponse.venue.rating;
       fourSquareObj.tips = fourSquareResponse.tips[0].text;
@@ -97,7 +105,8 @@ function fourSquareReturn(response){
     }
   }//for loop
   //call distance_sort with the array as the parameter to sort all locations b distance
-  distance_sort(restauraunts);
+  console.log("restaurants array: ",restauraunts);
+  distance_sort(restauraunts,fav);
 }
 //function for converting meters to miles
 function convert_to_miles(meters) {
@@ -105,7 +114,7 @@ function convert_to_miles(meters) {
     return (meters * 0.000621371192).toFixed(2);
 }
 
-function distance_sort(array) {
+function distance_sort(array,fav) {
     var swapped ;
     do {
         swapped = false;
@@ -118,12 +127,12 @@ function distance_sort(array) {
             }
         }
     }
-    while (swapped);
-    price_replacement(array);
+    while (swapped)
+    price_replacement(array,fav);
     return array;
 }
 
-function price_replacement(array) {
+function price_replacement(array,fav) {
     for (var i=0;i<array.length; i++){
         switch(array[i].price.toLocaleLowerCase()){
             case "cheap":
@@ -143,10 +152,11 @@ function price_replacement(array) {
               break;
         }
     }///end of for loop
-    price_sort(array);
+    price_sort(array,fav);
     return array;
 }
-function price_sort(array) {
+
+function price_sort(array,fav) {
     var swapped ;
     do {
         swapped = false;
@@ -155,7 +165,7 @@ function price_sort(array) {
             array.splice(array[i],1);
           }
           else{
-            if (array[i].price.message > array[i+1].price.message) {
+            if (array[i].price.message < array[i+1].price.message) {
                 var temp = array[i];
                 array[i] = array[i + 1];
                 array[i + 1] = temp;
@@ -163,14 +173,16 @@ function price_sort(array) {
             }
           }
         }
-    }while (swapped);
-    results_to_DOM(array);
+    }while (swapped)
+    results_to_DOM(array,fav);
     return array;
 }
+
 //function for creating and appending elements to the dom for dynamic creation of display cards
-function results_to_DOM (array) {
+function results_to_DOM (array,fav) {
     //an array of colors for changing the color of each card
-    var color_array = ["#E0F7FA","#B2EBF2","#80DEEA","#4DD0E1","#26C6DA","#00BCD4","#00ACC1","#0097A7","#00838F","#006064"];
+    // var color_array = ["#E0F7FA","#B2EBF2","#80DEEA","#4DD0E1","#26C6DA","#00BCD4","#00ACC1","#0097A7","#00838F","#006064"];
+    var color_array = ["#E1F5FE","#B3E5FC","#81D4FA","#4FC3F7","#29B6F6","#03A9F4","#039BE5","#0288D1","#0277BD","#01579B"];
     //declare card_array for later use
     var card_array = [];
     //declare the the top_position value for setting the top key / value of the position object for each card
@@ -180,6 +192,7 @@ function results_to_DOM (array) {
     //find the height of the window/body
     var window_height = $('body').height();
     //loop through the appending and creation 10 times
+    array = final_array(array,fav);
     for(var i = 0; i<10; i++){
       //creation of the various elements necessary for each card and adding the information from foursquare object array that has been sorted
       //div element changes it color per each iteration by iterating throught the color array and adding that specific color
@@ -220,7 +233,7 @@ function results_to_DOM (array) {
       var i_url_tag = $("<p>").text("Web");
       var url_container = $('<div>').addClass("info-container col-xs-9");
       var url = $("<a>").text(array[i].website).addClass("info-content");
-      // var url = $("<a>").attr("href", "array[i].website").addClass("info-content");
+      // var url = $("<a>").attr("href", '"' + array[i].website + '"').addClass("info-content");
       /** POPULARITY **/
       var i_popularity_container = $('<div>').addClass("info-container col-xs-3");
       var i_popularity = $("<i>").addClass("fa fa-foursquare");
@@ -239,34 +252,37 @@ function results_to_DOM (array) {
       var i_category_tag= $("<p>").text("Category");
       var category_container = $('<div>').addClass("info-container col-xs-9");
       var category = $("<p>").text(array[i].category_1 + ", " + array[i].category_2).addClass("info-content");
-      // /** ETA **/
+      /** ETA **/
       // var eta_container = $("<div>").addClass("col-xs-3 info-container");
-      // var i_eta = $("<i>").addClass("fa fa-clock-o");
+      // var i_eta = $("<i>").addClass("fa fa-dot-circle-o");
       // var eta = $("<p>");
       /** MORE INFO **/
       var moreInfoDiv = $("<div>").addClass("more-info-holder container-fluid");
       var btn_div = $("<div>").addClass("button-holder");
-      var i_left = $("<i>").addClass("fa fa-arrow-left");
-      var i_right = $("<i>").addClass("fa fa-arrow-right");
-      var prev_div = $("<div>").addClass("col-xs-4 result-button");
-      var next_div = $("<div>").addClass("col-xs-4 result-button");
-      var nav_div = $("<div>").addClass("col-xs-4 result-button");
-      var nav_text = $("<p>").text("Go!");
-      var next_btn = $("<div>").addClass("next-button").attr("data-position",i);
-      var prev_btn = $("<div>").addClass("prev-button").attr("data-position",i);
+      // var i_left = $("<i>").addClass("fa fa-arrow-left");
+      // var i_right = $("<i>").addClass("fa fa-arrow-right");
+      // var prev_div = $("<div>").addClass("col-xs-4 result-button");
+      // var next_div = $("<div>").addClass("col-xs-4 result-button");
+      var nav_div = $("<div>").addClass("col-xs-12 result-button");
+      var nav_text = $("<p>").text("Let's Go!");
+      // var next_btn = $("<div>").addClass("next-button").attr("data-position",i);
+      // var prev_btn = $("<div>").addClass("prev-button").attr("data-position",i);
       var nav_button = $("<div>").addClass("navigation-button");
       //closure for the next button to call the next_card function for moving to the next card
-      next_btn.on("click", function (){
-        next_card(this , 1);
-      });
+      // next_btn.on("click", function (){
+      //   next_card(this , 1);
+      // });
       //closure for the prev button to call the prev_card function for moving back to the previous card
-      prev_btn.on("click", function (){
-        prev_card(this , 1);
-      });
+      // prev_btn.on("click", function (){
+      //   prev_card(this , 1);
+      // });
       //closure for making the navigation button link to the maps application
-      nav_button.on("click", function(){
-        window.location.href = "#selection";
-      });
+      (function(){
+          var inner_i = i;
+          nav_button.on("click", function(){
+              window.open("https://www.google.com/maps/dir/"+ 'Current+Location/' + array[inner_i].name + ",+" + array[inner_i].street + "+" + array[inner_i].city);
+            });
+      })();
       //appending various elements to their parent elements
       i_hours_container.append(i_hours, i_hours_tag);
       hours_container.append(hours);
@@ -282,13 +298,13 @@ function results_to_DOM (array) {
       distance_container.append(i_distance, distance);
       rating_container.append(i_rating, rating);
       price_container.append(i_price, price);
-      prev_btn.append(i_left);
-      next_btn.append(i_right);
+      // prev_btn.append(i_left);
+      // next_btn.append(i_right);
       nav_button.append(nav_text);
-      prev_div.append(prev_btn);
-      next_div.append(next_btn);
+      // prev_div.append(prev_btn);
+      // next_div.append(next_btn);
       nav_div.append(nav_button);
-      btn_div.append(prev_div,nav_div,next_div);
+      btn_div.append(nav_div);
       addressDiv.append(street, city_state_zip, phone);
       moreInfoDiv.append(rating_container, distance_container, price_container, i_hours_container, hours_container, i_category_container, category_container, i_tips_container, tips_container, i_popularity_container, popularity_container, i_url_container, url_container);
       //appending all elements to the card
@@ -432,7 +448,6 @@ function prev_card (this_card, card_id, direction) {
 }
 
 function click_circle() {
-
   //click handler that triggers the expanding circle animation on the landing page
   $('.circle').on('click', function() {
     //foursquare_call function is called and random is inserted into the query
@@ -462,9 +477,53 @@ function click_circle() {
   });
 }//end click_cirlcle
 
+function final_array(array,fav) {
+    var found_favorite_restautant  = [];
+    for(var f=0; f<fav.length;f++){
+        for (var j=0; j<array.length;j++){
+            if(fav[f].selected_restaurant == array[j].name){
+                found_favorite_restautant.push(array.splice(j,1));
+		//console.log("found a match",j);
+            }///if
+        }//for j
+    }//for fav
+    array = array.splice(0,(array.length/2)+5);
+    array = shuffle(array);
+    array = array.splice(0,10-(found_favorite_restautant.length-1));
+    console.log("fav: ",found_favorite_restautant );
+    for(var k=0; k<found_favorite_restautant.length ; k++){
+    array.unshift(found_favorite_restautant[k][0]);
+     }
+    //console.log("array of 10 before shuffle",array);
+    array = shuffle(array);
+    //console.log("result inside last arrange: ",array);
+    //console.log("favorite res: ",fav);
+    return array;
+}///fiinal array
+function shuffle (array) {
+    //i set a number (0)
+    var i = 0;
+    //j set to a number (0)
+    var j = 0;
+    //temp set to null
+    var temp = null;
+    //loops through the array starting at its last index and decrements down until it reaches the lfirst index
+    for (i = array.length - 1; i > 0; i -= 1) {
+        //j set to a random number
+        j = Math.floor(Math.random() * (i + 1));
+        //temp set to an index in the array
+        temp = array[i];
+        //index of the array is set to another index in the array
+        array[i] = array[j];
+        //index of the array is set the temp value (null)
+        array[j] = temp;
+    }
+    //array is returned
+    return array;
+}
+
 $(document).ready(function(){
     navigator.geolocation.getCurrentPosition(success,error, options);
-
     $("#more-info").click(function () {
         console.log("#more-info button has been clicked");
         $("#result-div").addClass("flip-card");

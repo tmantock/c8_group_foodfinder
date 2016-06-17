@@ -1,0 +1,3 @@
+guest id: ";    echo $guest_id;    $_SESSION["id"] = $guest_id;    echo "
+session with guest id : ";    var_dump($_SESSION); } $_POST['search_option']['option'] = 'random'; $_POST["latitude"] = 123.12443688; $_POST["longitude"] = -123.12434532; $_POST['radius'] = '5000'; $_SESSION['id'] = '12'; $search_radius = $_POST['radius']; /////////random search if ($_POST["search_option"]["option"] == "random"){    $params = array(        "ll"=> $_POST['latitude'].",".$_POST['longitude'],        "intent"=>"browse",        "radius"=>$search_radius,        "query"=> "lunch"    );    $responseFromFoursquare = $foursquare->GetPublic($endpoint,$params);    $venues = $foursquare->GetPublic($endpoint , $params, $POST=false);    echo "
+random search results: ";    print($venues); }
