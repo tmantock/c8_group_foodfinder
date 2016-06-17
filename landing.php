@@ -3,6 +3,7 @@ session_start();
 //start your session
 //make sure to include your facebook credentials!
 require_once('credentials.php');
+require_once('category_retrieve.php');
 //then you'll need to include the facebook sdk
 //require_once('php_oauth_facebook/libraries/facebook-php-sdk-v4-5.0.0/src/Facebook/autoload.php');
 
@@ -32,7 +33,7 @@ $loginUrl = $helper->getLoginUrl(SERVER_LANDING, $permissions);
          <?php $url = htmlspecialchars($loginUrl);
 if(empty($_SESSION["name"])){
 
-      echo "<button type='button' class='btn btn-lg' id='login-button' > <i 
+      echo "<button type='button' class='btn btn-lg' id='login-button' > <i
 class='fa fa-facebook-official fa-lg facebook-icon' aria-hidden='true'></i>
 <a  href='". $url ."'  class='login-link'> Log in with Facebook </a></button>";
 }//if name is empty
@@ -65,7 +66,6 @@ echo "<div id='welcome_user'>Welcome ".$_SESSION["name"]."</div>";
             </div>
         </div>
     </div>
-
 <section class="dropdown-container">
     <div class="dropdown">
         <select name="one" class="dropdown-select">
@@ -102,3 +102,11 @@ echo "<div id='welcome_user'>Welcome ".$_SESSION["name"]."</div>";
     </div>
 
     <input type="text" placeholder="Please Enter ZIP Code" class="zip-input">
+    <form>
+    <!-- Random Selection Button -->
+    <div class="circle">
+      <div id="random">Pick For Me!</div>
+    </div>
+    <input type = "text" id = "zip" placeholder="Please Enter Your ZIP Code" required>
+  </form>
+    </select>

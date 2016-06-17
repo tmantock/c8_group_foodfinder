@@ -9,12 +9,11 @@ if (empty($_SESSION["id"])) {
    $guest_id = mysqli_insert_id($conn);
    $_SESSION["id"] = $guest_id;
 }
-$_POST['search_option']['option'] = 'random';
-$_POST['search_option']['category'] = 'sushi';
-//$_POST["latitude"] = 33.532029;
-//$_POST["longitude"] = -117.702148;
-//$_POST['radius'] = '5000';
-////   Set fourSquare  client key and secret
+
+$_SESSION['id'] = '484';
+$search_radius = $_POST['radius'];
+$id = $_SESSION['id'];
+////   Set client key and secret
 	$client_key = FOURSQUARE_CLIENT_ID;
 	$client_secret = FOURSQUARE_SECRET_ID;
 ////  declare new foursquare class with client key and client secret
@@ -23,8 +22,8 @@ $_POST['search_option']['category'] = 'sushi';
 	$endpoint = "venues/explore";
 ////  Search parameters to send to foursquare
    $params = [
-
-       "ll"=> $_POST['latitude'].",".$_POST['longitude'],
+      //  "ll"=> $_POST['latitude'].",".$_POST['longitude'],
+       "near" => $_POST['near'],
        "intent"=>"browse",
        "radius"=>$_POST['radius'],
        "venuePhotos"=>1

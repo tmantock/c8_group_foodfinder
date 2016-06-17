@@ -4,6 +4,9 @@ var options = {
     maximumAge: 0
 };
 var coordinates = {};
+var zip;
+
+//navigator.geolocation.getCurrentPosition(success,error, options);
 //function for acquiring the latitude and longitude on succesful geolocation call
 function success (pos) {
     //set accessible variable to to the coordinates of the position object returned from the geolocation
@@ -18,7 +21,8 @@ function success (pos) {
 }
 //function for displaying the error in the console for an unsuccesful geolocation call
 function error(err) {
-    console.warn("Error(" + err.code + "):" + err.message);
+  $("#login").modal('show');
+  console.warn("Error(" + err.code + "):" + err.message);
 }
 //function for calling the php page which returns the modified foursquare data
 function foursquare_call(options){
@@ -27,8 +31,10 @@ function foursquare_call(options){
         url: "search.php",
         method: "POST",
         data: {
-            latitude: coordinates.latitude,
-            longitude: coordinates.longitude,
+            //Geolocation restricted due to server being hosted on http
+            //latitude: coordinates.latitude,
+            //longitude: coordinates.longitude,
+            near: options,
             radius: 100000,
             search_option: {
                 option: options,
@@ -83,7 +89,7 @@ function fourSquareReturn(response,fav){
 			  fourSquareObj.price = fourSquareResponse.venue.price.message;
 			}
       else {
-			  fourSquareObj.price = "not found";
+			  fourSquareObj.price = "Not Found";
 			}
       fourSquareObj.rating = fourSquareResponse.venue.rating;
       fourSquareObj.tips = fourSquareResponse.tips[0].text;
@@ -494,7 +500,6 @@ function shuffle (array) {
 
 $(document).ready(function(){
     navigator.geolocation.getCurrentPosition(success,error, options);
-
     $("#more-info").click(function () {
         console.log("#more-info button has been clicked");
         $("#result-div").addClass("flip-card");
