@@ -310,7 +310,7 @@ function results_to_DOM (array) {
         var card_id = $(this_card).attr("id");
         console.log("swipe ended", touch.direction, touch.xAmount, this);
           if (touch.direction == "left" && touch.xAmount > 100){ // this defines a minimum swipe distance
-            console.log("previous card");
+            prev_card(this_card, card_id, 1);
           } else if (touch.direction == "right" && touch.xAmount > 100){
             next_card(this_card, card_id, 1);
         }
@@ -363,22 +363,25 @@ function next_card (this_card, card_id , direction) {
     //distance is set to 0. This will be distance each card must move up in the stack when one card is moved
     var distance = 0;
     //current_width is set to the parent card's width px value
-    var current_width = $(this_card).css("width");
+    var current_width_px = $(this_card).css("width");
+    var current_width = current_width_px.slice(0, current_width_px.length - 2);
     console.log(current_width);
     //parent card animates of the screen by taking its width value and multiplying it by 2 with an animation speed pf 300 miliseconds
-    this_card.animate({left: current_width.slice(0, current_width.length - 2) * 2 + "px"}, 400, function(){
-      this_card.hide();
+    $(this_card).animate({left: current_width * 2}, 400, function(){
+      $(this_card).hide();
     });
     //card is then incremented
     card_num = parseInt(card_num) + 1;
     //length is set to ten for the amount of cards in the stack
-    var length = 10;
+    var length = 9;
     //for loop for iterating throught each card in the stack
-    for(var i = card_num; i<=length; i++){
+    for(var i = parseInt(card_num); i<=length; i++){
       //child is set to the card
       var child = $("#card" + i);
+      var position_raw = parseInt(current_position.slice(0, current_width_px.length - 3));
+      console.log(child, position_raw, distance);
       //the card will animate from its current position + the distance at a speed of 500 miliseconds
-      child.animate({top: (current_position + distance) + "px"},500);
+      $(child).animate({top: position_raw + parseInt(distance) + "px"}, 500);
       //distnace is incremented so each card moves further up the stack
       distance += 25;
     }
@@ -389,31 +392,31 @@ function next_card (this_card, card_id , direction) {
   }
 }
 //function for moving the card back into the viewable window
-function prev_card (element , direction) {
+function prev_card (this_card, card_id, direction) {
   //The current index of cards is found via an attribute that was appended to the button during it's creation
-    var card = $(element).attr("data-position");
-    console.log("data-position");
+    var card_num = parseInt(card_id.slice(4));
+    console.log(card_num);
     //condition for determining if the top of the stack has been reached
-    if (parseInt(card) !== 0){
-      //Conditional for determining if there are no more cards in the stack
-      var parent = $("#card"+card);
+    if (parseInt(card_num) !== 0){
+        //Conditional for determining if there are no more cards in the stack
+        //var parent = $("#card"+card);
       //prev_child_position is set to the jQuery selector for the previous card in the stack
-      var prev_card = $("#card" + (parseInt(card) - 1));
+      var prev_card = $("#card" + (parseInt(card_num) - 1));
       //card_width is set to the prev_card's width
       var card_width = prev_card.width();
       //current_position is set to the position of the of current card in view(parent of the button)
       //This will return the position object of the card which contains the top and left key / value pairs
-      var current_position = parent.position();
+      var current_position = $(this_card).position();
       //distance is set to 25. This is the distance each card will have to move down the stack
       var distance = 25;
       //prev_card animates to the current card in view's left position value plus the card out view's width (this is divided by two to overcome the transform translate CSS property for each card).
       prev_card.show().animate({left: current_position.left + (card_width/2) + "px"},400);
       //card is set to the number value of the button's data-position value
-      card = parseInt(card);
+      card = parseInt(card_num);
       //length is set to the number of cards in the stack
       var length = 10;
       //for loop to iterate through the stack of cards
-      for(var i = card; i<=length; i++){
+      for(var i = card_num; i<=length; i++){
         //child is set to the jQuery selector of the card
         var child = $("#card" + i);
         //the child animates down the the stack by taking the top px value of the card in view's position plus the distance
