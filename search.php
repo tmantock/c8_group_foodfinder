@@ -26,7 +26,7 @@ $_POST['search_option']['category'] = 'sushi';
 
        "ll"=> $_POST['latitude'].",".$_POST['longitude'],
        "intent"=>"browse",
-       "radius"=>$search_radius,
+       "radius"=>$_POST['radius'],
        "venuePhotos"=>1
    ];
 /////////    If client chooses a  random search, add 'food' to $param and send query to fourSquare
