@@ -25,7 +25,7 @@ button:focus {
 #lunch_heading {
     font-size: 12vh;
     color: white;
-    text-shadow: 0 5px 8px black;
+    text-shadow: 1px 3px 4px black;
     padding: 1vh 0 3vh 0;
     font-family: 'Pacifico';
     width: 100vw;
@@ -59,7 +59,7 @@ button:focus {
 #random {
     position: absolute;
     left: 0;
-    top: 50%;
+    top: 47%;
     height: 100%;
     width: 100%;
     text-align: center;
@@ -72,7 +72,7 @@ button:focus {
 .circle {
     position: absolute;
     left: 33%;
-    top: 50%;
+    top: 56%;
     height: 175px;
     width: 175px;
     margin: -25px 0 0 -25px;
@@ -92,11 +92,11 @@ button:focus {
     display: none;
 }
 
-.circle:hover {
+.circle:hover, .lets-go:hover {
     background-color: rgb(255, 196, 15);
 }
 
-.circle:active {
+.circle:active, .lets-go:active {
     background-color: rgb(255, 152, 0);
 }
 
@@ -143,6 +143,123 @@ button:focus {
 
 .modal-dialog {
     margin-top: 40%;
+}
+
+.dropdown-container {
+    height: 13%;
+    margin-top: 8vh;
+}
+
+.dropdown-container > .dropdown {
+    margin: 0 3px;
+    vertical-align: top;
+}
+
+.dropdown {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    height: 28px;
+    margin: 0;
+    width: 100px;
+    background: #f2f2f2;
+    border: 1px solid;
+    border-color: white #f7f7f7 whitesmoke;
+    border-radius: 3px;
+    background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
+    background-image: -moz-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
+    background-image: -o-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
+    background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.06));
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.75);
+}
+
+.dropdown:before, .dropdown:after {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    top: 9px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border: 4px dashed;
+    border-color: #888888 transparent;
+    pointer-events: none;
+}
+
+.dropdown:before {
+    border-bottom-style: solid;
+    border-top: none;
+}
+
+.dropdown:after {
+    margin-top: 7px;
+    border-top-style: solid;
+    border-bottom: none;
+}
+
+.dropdown-select {
+    position: relative;
+    width: 100px;
+    margin: 0;
+    padding: 6px 8px 6px 10px;
+    height: 28px;
+    line-height: 14px;
+    font-size: 12px;
+    color: #62717a;
+    text-shadow: 0 1px white;
+    background: #f2f2f2; /* Fallback for IE 8 */
+    background: rgba(0, 0, 0, 0) !important; /* "transparent" doesn't work with Opera */
+    border: 0;
+    border-radius: 0;
+    -webkit-appearance: none;
+}
+
+.dropdown-select:focus {
+    z-index: 3;
+    width: 100%;
+    color: #394349;
+    outline: 2px solid #49aff2;
+    outline: 2px solid -webkit-focus-ring-color;
+    outline-offset: -2px;
+}
+
+.dropdown-select > option {
+    margin: 3px;
+    padding: 6px 8px;
+    text-shadow: none;
+    background: #f2f2f2;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.zip-input {
+    padding: 5px;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    margin-top: 69%;
+    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.75);
+}
+
+.lets-go{
+    color: white;
+    width: 43%;
+    background-color: #ffaa00;
+    margin-top: 4%;
+    position: relative;
+    left: 29%;
+    height: 35px;
+    border-radius: 5px;
+    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.75);
+}
+
+#lets-go-text {
+    font-family: 'Pacifico';
+    text-shadow: 0 2px 1px black;
+    font-size: 3vh;
+    transform: translateY(10%);
 }
 
 /**************************************  CAROUSEL   **************************************************/

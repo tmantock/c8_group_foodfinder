@@ -148,6 +148,7 @@ function price_replacement(array,fav) {
     price_sort(array,fav);
     return array;
 }
+
 function price_sort(array,fav) {
     var swapped ;
     do {
@@ -169,6 +170,7 @@ function price_sort(array,fav) {
     results_to_DOM(array,fav);
     return array;
 }
+
 //function for creating and appending elements to the dom for dynamic creation of display cards
 function results_to_DOM (array,fav) {
     //an array of colors for changing the color of each card
@@ -271,7 +273,7 @@ function results_to_DOM (array,fav) {
       (function(){
           var inner_i = i;
           nav_button.on("click", function(){
-              window.open("https://www.google.com/maps/place/" + array[inner_i].name + "/@" + array[inner_i].lat + ',' + array[inner_i].lng + ',14z');
+              window.open("https://www.google.com/maps/dir/"+ 'Current+Location/' + array[inner_i].name + ",+" + array[inner_i].street + "+" + array[inner_i].city);
             });
       })();
       //appending various elements to their parent elements
@@ -416,7 +418,6 @@ function prev_card (element , direction) {
 }
 
 function click_circle() {
-
   //click handler that triggers the expanding circle animation on the landing page
   $('.circle').on('click', function() {
     //foursquare_call function is called and random is inserted into the query
@@ -429,16 +430,16 @@ function click_circle() {
       //below key can be any name, insignificant to code. The number 10 does have direct correlation to the animation of the expansion of the circle
       {expansion: 10 },
       {
-        //step is a callback function that is to be called after each step of the animation. The parameter 'now contains the value being animated.    
+        //step is a callback function that is to be called after each step of the animation. The parameter 'now contains the value being animated.
         step: function(now) {
-          //adds css styling 'webkit-transform: scale and passes in the value 10 from above. 
+          //adds css styling 'webkit-transform: scale and passes in the value 10 from above.
           $(this).css('-webkit-transform','scale('+now+')');
         },
-        //the below function is executed once the animation is complete.  
+        //the below function is executed once the animation is complete.
         complete:function() {
-        //page is routed to the results page via Angular routing.    
+        //page is routed to the results page via Angular routing.
             window.location.href = "#results";
-        //the below jquery method applies 'background-color' to the entire body of the HTML        
+        //the below jquery method applies 'background-color' to the entire body of the HTML
             $("body").css('background-color', '#ffaa00 ');
         }
       //The 'expanded' class is added after 300 milliseconds.
@@ -457,10 +458,10 @@ function final_array(array,fav) {
         }//for j
     }//for fav
     array = array.splice(0,(array.length/2)+5);
-    array = shuffle(array);   
+    array = shuffle(array);
     array = array.splice(0,10-(found_favorite_restautant.length-1));
     console.log("fav: ",found_favorite_restautant );
-    for(var k=0; k<found_favorite_restautant.length ; k++){ 
+    for(var k=0; k<found_favorite_restautant.length ; k++){
     array.unshift(found_favorite_restautant[k][0]);
      }
     //console.log("array of 10 before shuffle",array);
